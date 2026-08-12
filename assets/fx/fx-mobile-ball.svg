@@ -1,0 +1,35 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="162" height="162" viewBox="0 0 162 162" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ball Element">
+<rect id="Rectangle 9263" x="4.45054" y="4.45055" width="153.099" height="153.099" stroke="#595959" stroke-width="0.89011" stroke-dasharray="1.78 1.78"/>
+<g id="Ellipse 1055" filter="url(#filter0_n_0_5)">
+<circle cx="81" cy="81" r="76.5495" fill="url(#paint0_radial_0_5)"/>
+</g>
+<rect id="Rectangle 9264" x="0.445055" y="0.445055" width="8.01099" height="8.01099" fill="white" stroke="#595959" stroke-width="0.89011"/>
+<rect id="Rectangle 9265" x="153.544" y="0.445055" width="8.01099" height="8.01099" fill="white" stroke="#595959" stroke-width="0.89011"/>
+<rect id="Rectangle 9266" x="153.544" y="153.544" width="8.01099" height="8.01099" fill="white" stroke="#595959" stroke-width="0.89011"/>
+<rect id="Rectangle 9267" x="0.445055" y="153.544" width="8.01099" height="8.01099" fill="white" stroke="#595959" stroke-width="0.89011"/>
+</g>
+<defs>
+<filter id="filter0_n_0_5" x="4.45054" y="4.45055" width="153.099" height="153.099" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="inf inf" stitchTiles="stitch" numOctaves="3" result="noise" seed="9224" />
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
+<feFlood flood-color="rgba(0, 0, 0, 0.25)" result="color1Flood" />
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
+<feMerge result="effect1_noise_0_5">
+<feMergeNode in="shape" />
+<feMergeNode in="color1" />
+</feMerge>
+</filter>
+<radialGradient id="paint0_radial_0_5" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(58.3863 20.8119) rotate(71.7637) scale(163.486)">
+<stop stop-color="#FFFF00"/>
+<stop offset="0.597325" stop-color="#E88C00"/>
+<stop offset="0.850434" stop-color="#FFAB36"/>
+</radialGradient>
+</defs>
+</svg>
