@@ -592,9 +592,7 @@
     }
     .mobile-vector img{position:absolute;left:50%;top:50%;width:1220px;height:540px;transform:translate(-50%,-50%) rotate(90deg) scaleY(-1);}
 
-    /* ===== EXPERIENCE SECTION (manual-scroll image strip) ===== */
-    /* mInfo is 798px wide anchored at left:-198px, so the visible 393px band starts at x=198.
-       Anchor this section there so nothing is cropped off the left. */
+    /* ===== EXPERIENCE SECTION (manual scroll + magnet snap) ===== */
     .mobile-experience{
       position:absolute;top:35px;left:198px;width:393px;
     }
@@ -609,25 +607,23 @@
       color:var(--default-black);letter-spacing:-0.4987px;line-height:1.2;
     }
     .mobile-exp-scrub{
-      position:relative;width:108px;height:3px;margin:14px auto 18px;
+      position:relative;width:108px;height:3px;margin:14px auto 14px;
       border-radius:2px;background:rgba(0,0,0,0.10);overflow:hidden;
     }
     .mobile-exp-scrub-fill{
       position:absolute;left:0;top:0;height:100%;width:10%;
       border-radius:2px;background:#177006;transition:width .05s linear;
     }
-    /* Horizontal manual scroller */
     .mobile-exp-strip{
       width:393px;overflow-x:auto;overflow-y:hidden;
-      display:flex;gap:0;
+      display:flex;
       scrollbar-width:none;-ms-overflow-style:none;
       -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity;
     }
     .mobile-exp-strip::-webkit-scrollbar{display:none;}
-    /* image height fixed; width auto keeps 1217:528 aspect. One PNG holds all 3 cards. */
+    /* SVG at 90% of native (528 -> 475px tall) */
     .mexp-img{
-      height:528px;width:auto;flex-shrink:0;display:block;
+      height:475px;width:auto;flex-shrink:0;display:block;
       user-select:none;-webkit-user-drag:none;pointer-events:none;
     }
 

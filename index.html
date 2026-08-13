@@ -311,14 +311,13 @@
         <img src="assets/fx/fx-mobile-logo-lip.svg" alt="SC">
       </div>
 
-      <!-- Experience Section (manual scroll, image strip) -->
+      <!-- Experience Section (manual scroll + magnet snap) -->
       <div class="mobile-experience">
         <div class="mobile-exp-label">MY EXPERIENCES</div>
         <div class="mobile-exp-heading">Where I've Been<br>Employed</div>
         <div class="mobile-exp-scrub"><div class="mobile-exp-scrub-fill" id="mExpScrubFill"></div></div>
         <div class="mobile-exp-strip" id="mExpStrip">
-          <img class="mexp-img" src="assets/fx/fx-experiences.png" alt="Experience cards">
-          <img class="mexp-img" src="assets/fx/fx-experiences.png" alt="" aria-hidden="true">
+          <img class="mexp-img" src="assets/fx/fx-experiences.svg" alt="Experience cards">
         </div>
       </div>
 
@@ -784,14 +783,23 @@
     if(window.innerWidth>768)return;
     var strip=document.getElementById('mExpStrip'),fill=document.getElementById('mExpScrubFill');
     if(!strip)return;
-    var half=0;
-    function measure(){half=strip.scrollWidth/2;}
-    setTimeout(measure,120);setTimeout(measure,700);window.addEventListener('resize',measure);
+    function maxScroll(){return strip.scrollWidth-strip.clientWidth;}
+    // update scrubber on scroll
     strip.addEventListener('scroll',function(){
-      if(!half)return;
-      if(strip.scrollLeft>=half){strip.scrollLeft-=half;}
-      var p=(strip.scrollLeft%half)/half;
-      if(fill)fill.style.width=(10+p*90)+'%';
+      var m=maxScroll();
+      if(fill)fill.style.width=(10+(m?strip.scrollLeft/m:0)*90)+'%';
+    },{passive:true});
+    // magnet snap: settle to nearest card centre after scroll stops
+    var CARD=406.3; // 1217/3 * scale, recalculated from actual layout
+    function cardWidth(){var img=strip.querySelector('.mexp-img');return img?img.getBoundingClientRect().width/3:CARD;}
+    var t;
+    strip.addEventListener('scroll',function(){
+      clearTimeout(t);
+      t=setTimeout(function(){
+        var w=cardWidth();
+        var idx=Math.round(strip.scrollLeft/w);
+        strip.scrollTo({left:idx*w,behavior:'smooth'});
+      },90);
     },{passive:true});
   })();
   </script>
