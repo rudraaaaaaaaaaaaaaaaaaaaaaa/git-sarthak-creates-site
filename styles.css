@@ -493,9 +493,9 @@
       transition:transform .45s cubic-bezier(0.22,1,0.36,1);will-change:transform;
     }
     body.m-show-work .nav-toggle-pill{transform:translateX(64px);}
-    body.m-show-work{background:#000;}
-    body.m-show-work .mobile-logo-text{color:#fff;}
-    body.m-show-work .mobile-logo img{filter:invert(1);}
+    body.m-show-work{background:#fff;}
+    body.m-show-work .mobile-logo-text{color:#000;}
+    body.m-show-work .mobile-logo img{filter:none;}
     .nt-item{position:absolute;transition:opacity .3s ease .1s;}
     /* State A: person icon in pill + WORK text */
     .nt-icon-person{left:24.39px;top:8.56px;width:13.333px;height:15.833px;} /* 26.39/10.56 incl 2px border */
@@ -801,7 +801,7 @@
     }
 
     /* ===== MOBILE WORK PAGE — folder containers ===== */
-    .mobile-work-page{display:none;position:relative;width:393px;min-height:100vh;background:#000;}
+    .mobile-work-page{display:none;position:relative;width:393px;min-height:100vh;background:#fff;}
     .mobile-work-page.visible{display:block;}
     .m-folder-outer{
       position:relative;width:396px;height:743px;margin:85px 0 30px -1.5px;
@@ -1060,7 +1060,7 @@
 /* PAGE TOGGLE */
     .about-page { display: block; }
     .work-page { display: none; }
-    body.show-work { background: #000 !important; }
+    body.show-work { background: #fff !important; }
     body.show-work .about-page { display: none !important; }
     body.show-work .work-page { display: block !important; }
     body.show-work .desktop-view .blur-layer {
