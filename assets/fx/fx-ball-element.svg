@@ -1,16 +1,14 @@
-<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="237" height="237" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Ball Element">
-<rect id="Rectangle 9263" x="6.51098" y="6.51093" width="223.978" height="223.978" stroke="#595959" stroke-width="1.3022" stroke-dasharray="2.6 2.6"/>
-<g id="Ellipse 1055" filter="url(#filter0_n_0_13)">
-<circle cx="118.5" cy="118.5" r="111.989" fill="url(#paint0_radial_0_13)"/>
+<svg width="237" height="237" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.51099" y="6.51099" width="223.978" height="223.978" stroke="#595959" stroke-width="1.3022" stroke-dasharray="2.6 2.6"/>
+<g filter="url(#filter0_n_387_44884)">
+<circle cx="118.5" cy="118.5" r="111.989" fill="url(#paint0_radial_387_44884)"/>
 </g>
-<rect id="Rectangle 9264" x="0.651099" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
-<rect id="Rectangle 9265" x="224.629" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
-<rect id="Rectangle 9266" x="224.629" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
-<rect id="Rectangle 9267" x="0.651099" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
-</g>
+<rect x="0.651099" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="224.629" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="224.629" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="0.651099" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
 <defs>
-<filter id="filter0_n_0_13" x="6.51098" y="6.51093" width="223.978" height="223.978" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_n_387_44884" x="6.51099" y="6.51099" width="223.978" height="223.978" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="inf inf" stitchTiles="stitch" numOctaves="3" result="noise" seed="9224" />
@@ -21,15 +19,15 @@
 <feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
 <feFlood flood-color="rgba(0, 0, 0, 0.25)" result="color1Flood" />
 <feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
-<feMerge result="effect1_noise_0_13">
+<feMerge result="effect1_noise_387_44884">
 <feMergeNode in="shape" />
 <feMergeNode in="color1" />
 </feMerge>
 </filter>
-<radialGradient id="paint0_radial_0_13" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(85.417 30.4469) rotate(71.7637) scale(239.174)">
-<stop stop-color="#FFFF00"/>
-<stop offset="0.597325" stop-color="#E88C00"/>
-<stop offset="0.850434" stop-color="#FFAB36"/>
+<radialGradient id="paint0_radial_387_44884" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(85.417 30.447) rotate(71.7637) scale(239.174)">
+<stop stop-color="#FFF0A3"/>
+<stop offset="0.584177" stop-color="#FFAB36"/>
+<stop offset="0.899038" stop-color="#F5B65B"/>
 </radialGradient>
 </defs>
 </svg>

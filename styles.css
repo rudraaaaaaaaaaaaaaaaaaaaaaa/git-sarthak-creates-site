@@ -224,7 +224,7 @@
     .experience-entries { flex:1; display:flex; flex-direction:column; gap:41px; padding-top:11px; }
     .experience-entry { display:flex; gap:52px; align-items:flex-start; }
     .entry-data { width:290px; flex-shrink:0; }
-    .entry-role { font-family:'Manrope',sans-serif; font-weight:600; font-size:18px; color:#fff; line-height:1; margin-bottom:16px; }
+    .entry-role { font-family:'Manrope',sans-serif; font-weight:500; font-size:18px; color:#fff; line-height:1; margin-bottom:16px; }
     .entry-role .highlight { color:var(--main-color); }
     .entry-role .gradient-text {
       background:linear-gradient(159deg, #c6fca6 0%, rgba(167,252,238,0.74) 99%);
@@ -253,7 +253,7 @@
     /* Services Fan */
   /* ===== NEW SERVICES FAN (glass + selector + mouse follow) ===== */
   .services-fan{
-    position:absolute; top:520px; right:40px; width:237px; height:248px;
+    position:absolute; top:548px; right:68px; width:237px; height:248px;
     z-index:5; transform:scale(0.9); transform-origin:top right;
   }
   .sf-base{
@@ -315,7 +315,7 @@
     .work-btn {
       position:relative; border:1.107px solid rgba(198,252,166,0.5);
       border-radius:17.71px; padding:26px 38px;
-      font-family:'Manrope',sans-serif; font-weight:600;
+      font-family:'Manrope',sans-serif; font-weight:500;
       font-size:20px; color:var(--default-white); line-height:30.45px;
       white-space:nowrap; background:transparent; cursor:pointer;
       overflow:hidden; transition: border-color 0.4s ease;
