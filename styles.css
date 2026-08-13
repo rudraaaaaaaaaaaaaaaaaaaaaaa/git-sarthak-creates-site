@@ -28,7 +28,7 @@
 
     .page-wrapper {
       width: 1728px; margin: 0 auto;
-      position: relative; min-height: 2600px; max-height: 2600px; overflow: hidden;
+      position: relative; min-height: 2600px; overflow-x: hidden;
     }
 
     /* ===================== LOADER ===================== */
