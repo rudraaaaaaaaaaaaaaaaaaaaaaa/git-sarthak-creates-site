@@ -592,11 +592,11 @@
     }
     .mobile-vector img{position:absolute;left:50%;top:50%;width:1220px;height:540px;transform:translate(-50%,-50%) rotate(90deg) scaleY(-1);}
 
-    /* ===== EXPERIENCE SECTION (horizontal auto-drift cards) ===== */
-    /* Keeps the SAME vertical band as before: label+heading on top, card strip fills down to the
-       offering marquee at top:790px. Nothing below this section moves. */
+    /* ===== EXPERIENCE SECTION (manual-scroll image strip) ===== */
+    /* mInfo is 798px wide anchored at left:-198px, so the visible 393px band starts at x=198.
+       Anchor this section there so nothing is cropped off the left. */
     .mobile-experience{
-      position:absolute;top:17px;left:0;width:393px;height:760px;
+      position:absolute;top:35px;left:198px;width:393px;
     }
     .mobile-exp-label{
       text-align:center;
@@ -607,59 +607,29 @@
       text-align:center;
       font-family:'Poppins',sans-serif;font-weight:500;font-size:24.937px;
       color:var(--default-black);letter-spacing:-0.4987px;line-height:1.2;
-      margin-bottom:0;
     }
-    /* Scrubber under the heading — fill reflects drift position */
     .mobile-exp-scrub{
-      position:relative;width:108px;height:3px;margin:14px auto 0;
+      position:relative;width:108px;height:3px;margin:14px auto 18px;
       border-radius:2px;background:rgba(0,0,0,0.10);overflow:hidden;
     }
     .mobile-exp-scrub-fill{
-      position:absolute;left:0;top:0;height:100%;width:33%;
-      border-radius:2px;background:#177006;
+      position:absolute;left:0;top:0;height:100%;width:10%;
+      border-radius:2px;background:#177006;transition:width .05s linear;
     }
-    /* Horizontal strip — masks card overflow, cards drift inside */
+    /* Horizontal manual scroller */
     .mobile-exp-strip{
-      position:absolute;top:107px;left:0;width:393px;bottom:0;
-      overflow:hidden;
+      width:393px;overflow-x:auto;overflow-y:hidden;
+      display:flex;gap:0;
+      scrollbar-width:none;-ms-overflow-style:none;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
     }
-    .mobile-exp-track{
-      display:flex;align-items:flex-start;gap:16px;
-      width:max-content;height:100%;
-      padding:11px 0 11px 14px;
-      will-change:transform;
+    .mobile-exp-strip::-webkit-scrollbar{display:none;}
+    /* image height fixed; width auto keeps 1217:528 aspect. One PNG holds all 3 cards. */
+    .mexp-img{
+      height:528px;width:auto;flex-shrink:0;display:block;
+      user-select:none;-webkit-user-drag:none;pointer-events:none;
     }
-    /* Card — Figma: 366.662 x 492, white 8.927px border, r17.296, soft shadow */
-    .mexp-card{
-      position:relative;flex-shrink:0;
-      width:366px;height:492px;border-radius:17.296px;
-      border:8.927px solid #fff;
-      background:linear-gradient(198.69deg, #faf8f8 10.07%, #ededed 168.27%);
-      box-shadow:-0.992px -0.992px 9.027px 0 rgba(0,0,0,0.25);
-      overflow:hidden;
-    }
-    .mexp-logo{position:absolute;top:19px;left:16px;z-index:2;}
-    .mexp-logo img{display:block;height:auto;}
-    .mexp-body{
-      position:absolute;left:4px;right:9px;bottom:22px;
-      text-align:right;
-    }
-    .mexp-role{
-      font-family:'Manrope',sans-serif;font-weight:600;font-size:18px;
-      color:var(--default-black);line-height:1.15;margin-bottom:16px;
-    }
-    .mexp-role .highlight{color:#177006;}
-    .mexp-meta{
-      font-family:'Inter',sans-serif;font-weight:400;font-style:italic;
-      font-size:14px;color:var(--default-black);opacity:0.85;line-height:1.15;
-      margin-bottom:16px;
-    }
-    .mexp-desc{
-      font-family:'Inter',sans-serif;font-weight:400;font-size:14px;
-      color:var(--default-black);line-height:22px;margin-left:auto;
-      width:308.89px;
-    }
-    .mexp-desc strong{font-weight:700;}
 
     /* ===== OFFERING SCROLL (marquee) ===== */
     .mobile-offering{
@@ -1255,13 +1225,3 @@
     .mc-modal-close { position:absolute; top:22px; right:26px; width:36px; height:36px; border-radius:50%; border:1px solid rgba(198,252,166,0.35); background:rgba(0,0,0,0.55); cursor:pointer; color:#c6fca6; font-size:16px; display:flex; align-items:center; justify-content:center; }
     .mc-modal-close:hover { background:rgba(198,252,166,0.12); }
     .wk-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; letter-spacing:4px; color:rgba(255,255,255,0.18); text-transform:uppercase; }
-
-    /* mexp card logos */
-    .mexp-logo-ft{display:flex;align-items:center;gap:8px;}
-    .mexp-logo-ft .ft-mark{width:26px;height:26px;flex-shrink:0;
-      background:conic-gradient(from 90deg,#177006,#2fa30f,#177006);
-      clip-path:polygon(38% 0,100% 0,62% 48%,100% 48%,20% 100%,44% 55%,0 55%);}
-    .mexp-logo-ft .ft-text{font-family:'Space Grotesk',sans-serif;font-weight:700;
-      font-size:12px;line-height:1;color:#595959;letter-spacing:0.5px;}
-    .mexp-logo-text{font-family:'Manrope',sans-serif;font-weight:800;font-size:19px;
-      color:#177006;letter-spacing:-0.3px;}

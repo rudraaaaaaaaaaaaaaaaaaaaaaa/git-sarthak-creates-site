@@ -311,48 +311,14 @@
         <img src="assets/fx/fx-mobile-logo-lip.svg" alt="SC">
       </div>
 
-      <!-- Experience Section (horizontal auto-drift cards) -->
+      <!-- Experience Section (manual scroll, image strip) -->
       <div class="mobile-experience">
         <div class="mobile-exp-label">MY EXPERIENCES</div>
         <div class="mobile-exp-heading">Where I've Been<br>Employed</div>
         <div class="mobile-exp-scrub"><div class="mobile-exp-scrub-fill" id="mExpScrubFill"></div></div>
         <div class="mobile-exp-strip" id="mExpStrip">
-          <div class="mobile-exp-track" id="mExpTrack">
-
-            <!-- Card: Flash Trade -->
-            <div class="mexp-card">
-              <div class="mexp-logo mexp-logo-ft">
-                <span class="ft-mark"></span>
-                <span class="ft-text">FLASH<br>TRADE</span>
-              </div>
-              <div class="mexp-body">
-                <div class="mexp-role">Chief Creative Officer<br><span class="highlight">Flash Trade</span></div>
-                <div class="mexp-meta">Design, UI/UX, Promo Videos<br><br>Feb 2023 - Aug 2026</div>
-                <div class="mexp-desc">Worked as <strong>Chief Creative Officer</strong> (CCO), overseeing the entire creative direction across NFTs, brand identity, promotional videos, product (UI/UX) design, merchandise, and more. Built the company's visual identity and IP from the ground up, shaping its creative vision from day one through its final days.</div>
-              </div>
-            </div>
-
-            <!-- Card: Spotify -->
-            <div class="mexp-card">
-              <div class="mexp-logo mexp-logo-text">Spotify</div>
-              <div class="mexp-body">
-                <div class="mexp-role">Freelance Designer<br><span class="highlight">Spotify</span></div>
-                <div class="mexp-meta">Design &amp; Videos<br><br>May 2020 - Feb 2023</div>
-                <div class="mexp-desc">Worked with multiple artists to create custom album covers and music videos.</div>
-              </div>
-            </div>
-
-            <!-- Card: Asia Art Festival -->
-            <div class="mexp-card">
-              <div class="mexp-logo mexp-logo-text">Asia Art Festival</div>
-              <div class="mexp-body">
-                <div class="mexp-role">Creative Head<br><span class="highlight">Asia Art Festival</span></div>
-                <div class="mexp-meta">Design<br><br>Jan 2022 - May 2022</div>
-                <div class="mexp-desc">Designed brand identity and event creative direction for the event.</div>
-              </div>
-            </div>
-
-          </div>
+          <img class="mexp-img" src="assets/fx/fx-experiences.png" alt="Experience cards">
+          <img class="mexp-img" src="assets/fx/fx-experiences.png" alt="" aria-hidden="true">
         </div>
       </div>
 
@@ -816,20 +782,17 @@
   <script>
   (function(){
     if(window.innerWidth>768)return;
-    var strip=document.getElementById('mExpStrip'),track=document.getElementById('mExpTrack'),fill=document.getElementById('mExpScrubFill');
-    if(!track)return;
-    var SPEED=42,single=0,offset=0,last=0;
-    function measure(){var full=track.scrollWidth;single=full/2;}
-    // duplicate cards for seamless loop
-    track.innerHTML=track.innerHTML+track.innerHTML;
-    setTimeout(measure,100);setTimeout(measure,600);window.addEventListener('resize',measure);
-    function tick(ts){if(!last)last=ts;var dt=(ts-last)/1000;last=ts;
-      if(single){offset-=SPEED*dt;if(-offset>=single)offset+=single;
-        track.style.transform='translateX('+offset+'px)';
-        if(fill){var p=(-offset/single);fill.style.width=(20+p*80)+'%';}
-      }
-      requestAnimationFrame(tick);}
-    requestAnimationFrame(tick);
+    var strip=document.getElementById('mExpStrip'),fill=document.getElementById('mExpScrubFill');
+    if(!strip)return;
+    var half=0;
+    function measure(){half=strip.scrollWidth/2;}
+    setTimeout(measure,120);setTimeout(measure,700);window.addEventListener('resize',measure);
+    strip.addEventListener('scroll',function(){
+      if(!half)return;
+      if(strip.scrollLeft>=half){strip.scrollLeft-=half;}
+      var p=(strip.scrollLeft%half)/half;
+      if(fill)fill.style.width=(10+p*90)+'%';
+    },{passive:true});
   })();
   </script>
   <script src="script.js"></script>
