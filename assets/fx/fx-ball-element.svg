@@ -1,5 +1,10 @@
 <svg width="237" height="237" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.51099" y="6.51099" width="223.978" height="223.978" stroke="#595959" stroke-width="1.3022" stroke-dasharray="2.6 2.6"/>
 <circle cx="118.5" cy="118.5" r="111.989" fill="url(#ballGrad)"/>
+<rect x="0.651099" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="224.629" y="0.651099" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="224.629" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
+<rect x="0.651099" y="224.629" width="11.7198" height="11.7198" fill="white" stroke="#595959" stroke-width="1.3022"/>
 <defs>
 <radialGradient id="ballGrad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(85.417 30.447) rotate(71.7637) scale(239.174)">
 <stop stop-color="#FFF0A3"/>
