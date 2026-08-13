@@ -1,5 +1,24 @@
 function isMobile() { return window.innerWidth <= 768; }
 
+/* ===== Fit the fixed-width canvases to any screen size (zoom-to-fit) =====
+   Desktop is a 1728px absolute canvas; mobile is built to a 393px reference.
+   Scale each visible view down to fit the viewport (never up past its native
+   size, so the 1728 / 393 designs stay pixel-identical at reference width).
+   zoom scales the whole subtree incl. the fixed header, and keeps scrollY /
+   offsetWidth math consistent, so no locked position or animation is touched. */
+(function(){
+  function fit(){
+    var vw=document.documentElement.clientWidth;
+    var dv=document.querySelector('.desktop-view');
+    var mv=document.querySelector('.mobile-view');
+    if(dv) dv.style.zoom = vw>768 ? Math.min(1, vw/1728) : '';
+    if(mv) mv.style.zoom = vw<=768 ? Math.min(1, vw/393) : '';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+})();
+
     /* ===== PAGE TOGGLE: ABOUT ↔ WORK ===== */
     (function(){
       var loaderDismissed = false;
