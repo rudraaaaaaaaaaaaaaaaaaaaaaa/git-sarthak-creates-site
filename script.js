@@ -9,10 +9,10 @@ function isMobile() { return window.innerWidth <= 768; }
 (function(){
   function fit(){
     var vw=document.documentElement.clientWidth;
-    var dv=document.querySelector('.desktop-view');
-    var mv=document.querySelector('.mobile-view');
-    if(dv) dv.style.zoom = vw>768 ? Math.min(1, vw/1728) : '';
-    if(mv) mv.style.zoom = vw<=768 ? Math.min(1, vw/393) : '';
+    var dz = vw>768 ? Math.min(1, vw/1728) : '';
+    var mz = vw<=768 ? Math.min(1, vw/393) : '';
+    document.querySelectorAll('.desktop-view').forEach(function(el){ el.style.zoom = dz; });
+    document.querySelectorAll('.mobile-view').forEach(function(el){ el.style.zoom = mz; });
   }
   fit();
   window.addEventListener('resize', fit);
