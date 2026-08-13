@@ -242,7 +242,7 @@
     /* Ball Element */
     .ball-element {
       position:absolute; top:508px; right:1286px;
-      width:237px; height:237px; z-index:3;
+      width:237px; height:237px; z-index:6;
     }
     .ball-element img {
       width:100%; height:100%;
