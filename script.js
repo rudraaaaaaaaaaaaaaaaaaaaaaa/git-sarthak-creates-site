@@ -21,9 +21,10 @@ function isMobile() { return window.innerWidth <= 768; }
       }
       // Desktop nav click
       function resetToProduct() {
+        var pc = document.getElementById('productContainer');
+        if (window.__activateContainer && pc) { window.__activateContainer(pc, true); return; }
         var all = document.querySelectorAll('.folder-svg');
         all.forEach(function(s){ s.classList.remove('active'); });
-        var pc = document.getElementById('productContainer');
         if (pc) pc.classList.add('active');
       }
       var navEl = document.querySelector('.desktop-view .navigation');
@@ -104,8 +105,8 @@ function isMobile() { return window.innerWidth <= 768; }
 
       var folderBody = document.querySelector('.folder-body');
 
-      function activateContainer(target) {
-        if (target.classList.contains('active')) return;
+      function activateContainer(target, force) {
+        if (!force && target.classList.contains('active')) return;
         allContainers.forEach(function(c){ c.classList.remove('active','bounce'); });
         target.classList.add('active');
         // Show marquee body for design AND product tabs
@@ -146,6 +147,7 @@ function isMobile() { return window.innerWidth <= 768; }
       motionText.addEventListener('click', function(){ activateContainer(motionContainer); });
       productText.addEventListener('click', function(){ activateContainer(productContainer); });
       merchText.addEventListener('click', function(){ activateContainer(merchContainer); });
+      window.__activateContainer = activateContainer;
 
       /* Device toggle: desktop <-> mobile marquee switch */
       var deviceToggle=document.getElementById('deviceToggle');
@@ -384,6 +386,7 @@ function isMobile() { return window.innerWidth <= 768; }
           var tr=document.getElementById('mDesignTrack');if(tr)tr.classList.toggle('active',onD);
           if(onD)setTimeout(function(){if(window.__mDesignUpd)window.__mDesignUpd();},50);
           if(onD&&!wasD){
+            mDesignView.classList.remove('bounce');void mDesignView.offsetWidth;
             mDesignView.classList.add('bounce');
             mDesignView.addEventListener('animationend',function hD(){mDesignView.classList.remove('bounce');mDesignView.removeEventListener('animationend',hD);});
           }
@@ -401,6 +404,7 @@ function isMobile() { return window.innerWidth <= 768; }
           var was=mDeck.classList.contains('active');
           mDeck.classList.toggle('active',deckOn);
           if(deckOn&&!was){
+            mDeck.classList.remove('bounce');void mDeck.offsetWidth;
             mDeck.classList.add('bounce');
             mDeck.addEventListener('animationend',function h2(){mDeck.classList.remove('bounce');mDeck.removeEventListener('animationend',h2);});
           }
@@ -422,7 +426,7 @@ function isMobile() { return window.innerWidth <= 768; }
           var svg=document.getElementById(mMap[k]);
           var lbl=document.querySelector('.m-tab-'+(k==='design'?'design':k));
           if(!svg)return;
-          if(k===tab){svg.classList.add('active','bounce');svg.addEventListener('animationend',function h2(){svg.classList.remove('bounce');svg.removeEventListener('animationend',h2);});}
+          if(k===tab){svg.classList.remove('bounce');void svg.offsetWidth;svg.classList.add('active','bounce');svg.addEventListener('animationend',function h2(){svg.classList.remove('bounce');svg.removeEventListener('animationend',h2);});}
           else{svg.classList.remove('active','bounce');}
           if(lbl)lbl.classList.toggle('active',k===tab);
         });
@@ -432,6 +436,9 @@ function isMobile() { return window.innerWidth <= 768; }
         if(mWorkPage)mWorkPage.classList.add('visible');
         document.body.classList.add('m-show-work');
         window.scrollTo(0,0);
+        /* Clear stale states so the entry bounce always retriggers */
+        if(mDeck)mDeck.classList.remove('active','bounce');
+        if(mDesignView)mDesignView.classList.remove('active','bounce');
         activateM(tab||'product');
       };
       window.__closeMobileWork=function(){
@@ -576,4 +583,58 @@ function isMobile() { return window.innerWidth <= 768; }
       window.__mDesignUpd=upd;
       var im=v.querySelector('img');
       if(im&&!im.complete)im.addEventListener('load',upd);
+    })();
+
+    /* ===== MOBILE EXPERIENCE STRIP: manual scroll + magnet snap (restored) ===== */
+    (function(){
+      if(!isMobile())return;
+      var strip=document.getElementById('mExpStrip'),fill=document.getElementById('mExpScrubFill');
+      if(!strip)return;
+      var img=strip.querySelector('.mexp-img');
+      var cardW=0,holding=false,snapping=false,idleTimer=null,snapRAF=0;
+      function measure(){
+        var total=strip.scrollWidth,vw=strip.clientWidth;
+        if(total<=0||vw<=0){cardW=0;return;}
+        var n=Math.max(1,Math.round(total/vw));
+        cardW=total/n;
+      }
+      function updateFill(){
+        if(!fill)return;
+        var max=strip.scrollWidth-strip.clientWidth;
+        var p=max>0?Math.max(0,Math.min(1,strip.scrollLeft/max)):0;
+        fill.style.width=(10+p*90)+'%';
+      }
+      function snap(){
+        if(holding)return;
+        if(cardW<=0)measure();
+        if(cardW<=0)return;
+        var max=strip.scrollWidth-strip.clientWidth;
+        var target=Math.round(strip.scrollLeft/cardW)*cardW;
+        if(target>max)target=max;if(target<0)target=0;
+        cancelAnimationFrame(snapRAF);
+        snapping=true;
+        (function step(){
+          var d=target-strip.scrollLeft;
+          if(Math.abs(d)<0.5){strip.scrollLeft=target;updateFill();snapping=false;return;}
+          strip.scrollLeft+=d*0.18; /* magnet pull */
+          updateFill();
+          snapRAF=requestAnimationFrame(step);
+        })();
+      }
+      strip.addEventListener('scroll',function(){
+        updateFill();
+        if(snapping)return;
+        clearTimeout(idleTimer);
+        idleTimer=setTimeout(snap,120);
+      },{passive:true});
+      function hold(){holding=true;snapping=false;cancelAnimationFrame(snapRAF);clearTimeout(idleTimer);}
+      function release(){if(!holding)return;holding=false;clearTimeout(idleTimer);idleTimer=setTimeout(snap,120);}
+      strip.addEventListener('touchstart',hold,{passive:true});
+      strip.addEventListener('touchend',release,{passive:true});
+      strip.addEventListener('touchcancel',release,{passive:true});
+      strip.addEventListener('pointerdown',hold);
+      window.addEventListener('pointerup',release);
+      if(img&&!img.complete)img.addEventListener('load',function(){measure();updateFill();});
+      measure();updateFill();
+      window.addEventListener('resize',function(){measure();updateFill();});
     })();
