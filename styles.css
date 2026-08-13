@@ -1245,3 +1245,40 @@
     /* logo was inverted to survive the black bg — put it back */
     body.m-show-work .mobile-logo-text { color: #000; }
     body.m-show-work .mobile-logo img { filter: none; }
+
+
+    /* ===== WORK PAGE: container entrance animation ===== */
+    @keyframes workAreaIn {
+      0%   { opacity:0; transform:translateY(30px) scale(0.985); }
+      60%  { opacity:1; }
+      100% { opacity:1; transform:translateY(0) scale(1); }
+    }
+    @keyframes workBodyIn {
+      0%   { opacity:0; transform:translateY(14px); }
+      100% { opacity:1; transform:translateY(0); }
+    }
+    /* whole folder stack rises + fades in when WORK opens */
+    body.show-work .work-area {
+      animation: workAreaIn 0.62s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    /* panel contents follow a beat later */
+    body.show-work .folder-body.visible {
+      animation: workBodyIn 0.55s cubic-bezier(0.22,1,0.36,1) 0.18s both;
+    }
+    body.show-work .device-toggle.visible {
+      animation: workBodyIn 0.5s cubic-bezier(0.22,1,0.36,1) 0.26s both;
+    }
+    /* mobile WORK page */
+    @keyframes mWorkIn {
+      0%   { opacity:0; transform:translateY(26px); }
+      100% { opacity:1; transform:translateY(0); }
+    }
+    .mobile-work-page.visible {
+      animation: mWorkIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.show-work .work-area,
+      body.show-work .folder-body.visible,
+      body.show-work .device-toggle.visible,
+      .mobile-work-page.visible { animation: none; }
+    }
