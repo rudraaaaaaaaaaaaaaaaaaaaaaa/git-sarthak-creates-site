@@ -1284,10 +1284,10 @@
     }
 
 
-    /* ===== MOTION + DESIGN: COMING SOON (delete this block when content lands) ===== */
+    /* ===== MOTION + MERCH: COMING SOON (delete this block when content lands) ===== */
     /* Desktop — overlay sits above the folder, content underneath is untouched */
     .work-area:has(#motionContainer.active)::after,
-    .work-area:has(#designContainer.active)::after {
+    .work-area:has(#merchContainer.active)::after {
       content:'COMING SOON';
       position:absolute; left:11px; right:11px; top:70px; bottom:11px;
       display:flex; align-items:center; justify-content:center;
@@ -1295,23 +1295,14 @@
       letter-spacing:4.2px; color:#177006; text-transform:uppercase;
       pointer-events:none; z-index:6;
     }
-    /* hide the DESIGN marquee + its scrubber while it says coming soon */
-    .work-area:has(#designContainer.active) .folder-body,
-    .work-area:has(#designContainer.active) .design-scrubber {
-      display:none !important;
-    }
 
     /* Mobile */
     .m-folder-outer:has(#mMotionC.active)::after,
-    .m-folder-outer:has(#mDesignC.active)::after {
+    .m-folder-outer:has(#mMerchC.active)::after {
       content:'COMING SOON';
       position:absolute; left:12px; right:12px; top:60px; bottom:20px;
       display:flex; align-items:center; justify-content:center;
       font-family:'Manrope',sans-serif; font-weight:800; font-size:11px;
       letter-spacing:3.2px; color:#177006; text-transform:uppercase;
       pointer-events:none; z-index:7;
-    }
-    .m-folder-outer:has(#mDesignC.active) .m-design-view,
-    .m-folder-outer:has(#mDesignC.active) .m-design-track {
-      display:none !important;
     }
