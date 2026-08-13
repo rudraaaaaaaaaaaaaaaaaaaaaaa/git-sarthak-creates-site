@@ -1236,3 +1236,12 @@
     .mc-modal-close { position:absolute; top:22px; right:26px; width:36px; height:36px; border-radius:50%; border:1px solid rgba(198,252,166,0.35); background:rgba(0,0,0,0.55); cursor:pointer; color:#c6fca6; font-size:16px; display:flex; align-items:center; justify-content:center; }
     .mc-modal-close:hover { background:rgba(198,252,166,0.12); }
     .wk-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; letter-spacing:4px; color:rgba(255,255,255,0.18); text-transform:uppercase; }
+
+
+    /* ===== EXPERIMENT: white WORK page (delete this block to revert) ===== */
+    body.show-work { background: #fff !important; }
+    body.m-show-work { background: #fff; }
+    .mobile-work-page { background: #fff; }
+    /* logo was inverted to survive the black bg — put it back */
+    body.m-show-work .mobile-logo-text { color: #000; }
+    body.m-show-work .mobile-logo img { filter: none; }
