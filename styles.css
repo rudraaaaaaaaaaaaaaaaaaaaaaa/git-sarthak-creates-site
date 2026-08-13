@@ -592,55 +592,74 @@
     }
     .mobile-vector img{position:absolute;left:50%;top:50%;width:1220px;height:540px;transform:translate(-50%,-50%) rotate(90deg) scaleY(-1);}
 
-    /* ===== EXPERIENCE SECTION ===== */
+    /* ===== EXPERIENCE SECTION (horizontal auto-drift cards) ===== */
+    /* Keeps the SAME vertical band as before: label+heading on top, card strip fills down to the
+       offering marquee at top:790px. Nothing below this section moves. */
     .mobile-experience{
-      position:absolute;top:17px;left:232px;width:334px;
+      position:absolute;top:17px;left:0;width:393px;height:760px;
     }
     .mobile-exp-label{
+      text-align:center;
       font-family:'Inter',sans-serif;font-weight:600;font-size:12.468px;
-      color:#177006;text-transform:uppercase;line-height:1.3;margin-bottom:6px;
+      color:#177006;text-transform:uppercase;line-height:1.3;margin-bottom:8px;
     }
     .mobile-exp-heading{
+      text-align:center;
       font-family:'Poppins',sans-serif;font-weight:500;font-size:24.937px;
       color:var(--default-black);letter-spacing:-0.4987px;line-height:1.2;
-      margin-bottom:6px;
+      margin-bottom:0;
     }
-    .mobile-exp-entries{position:relative;width:100%;height:770px;}
-
-    .mobile-exp-entry{position:absolute;left:0;width:345px;}
-    
-
-    .mobile-entry-role{
-      text-align:right;padding-right:14px;
+    /* Scrubber under the heading — fill reflects drift position */
+    .mobile-exp-scrub{
+      position:relative;width:108px;height:3px;margin:14px auto 0;
+      border-radius:2px;background:rgba(0,0,0,0.10);overflow:hidden;
+    }
+    .mobile-exp-scrub-fill{
+      position:absolute;left:0;top:0;height:100%;width:33%;
+      border-radius:2px;background:#177006;
+    }
+    /* Horizontal strip — masks card overflow, cards drift inside */
+    .mobile-exp-strip{
+      position:absolute;top:107px;left:0;width:393px;bottom:0;
+      overflow:hidden;
+    }
+    .mobile-exp-track{
+      display:flex;align-items:flex-start;gap:16px;
+      width:max-content;height:100%;
+      padding:11px 0 11px 14px;
+      will-change:transform;
+    }
+    /* Card — Figma: 366.662 x 492, white 8.927px border, r17.296, soft shadow */
+    .mexp-card{
+      position:relative;flex-shrink:0;
+      width:366px;height:492px;border-radius:17.296px;
+      border:8.927px solid #fff;
+      background:linear-gradient(198.69deg, #faf8f8 10.07%, #ededed 168.27%);
+      box-shadow:-0.992px -0.992px 9.027px 0 rgba(0,0,0,0.25);
+      overflow:hidden;
+    }
+    .mexp-logo{position:absolute;top:19px;left:16px;z-index:2;}
+    .mexp-logo img{display:block;height:auto;}
+    .mexp-body{
+      position:absolute;left:4px;right:9px;bottom:22px;
+      text-align:right;
+    }
+    .mexp-role{
       font-family:'Manrope',sans-serif;font-weight:600;font-size:18px;
-      color:var(--default-black);line-height:1;margin-bottom:6px;
+      color:var(--default-black);line-height:1.15;margin-bottom:16px;
     }
-    .mobile-entry-role .highlight{color:#177006;}
-    .mobile-entry-meta{
-      text-align:right;padding-right:11px;
+    .mexp-role .highlight{color:#177006;}
+    .mexp-meta{
       font-family:'Inter',sans-serif;font-weight:400;font-style:italic;
-      font-size:14px;color:var(--default-black);opacity:0.6;line-height:1;
-      margin-bottom:14px;
+      font-size:14px;color:var(--default-black);opacity:0.85;line-height:1.15;
+      margin-bottom:16px;
     }
-    .mobile-entry-desc{
+    .mexp-desc{
       font-family:'Inter',sans-serif;font-weight:400;font-size:14px;
-      color:var(--default-black);line-height:22px;width:308.89px;
-      text-align:right;margin-left:auto;margin-right:11.11px;
+      color:var(--default-black);line-height:22px;margin-left:auto;
+      width:308.89px;
     }
-    .mobile-entry-desc strong{font-weight:700;}
-    .mobile-exp-divider{
-      position:absolute;top:281.71px;left:0;right:7px;height:0;
-    }
-    .mobile-exp-divider img{width:100%;height:1px;}
-
-    /* Ball Element */
-    .mobile-ball{
-      position:absolute;top:252px;right:288px;width:145px;height:145px;z-index:3;
-    }
-    .mobile-ball img{
-      width:100%;height:100%;will-change:transform;
-      filter:brightness(1.35) saturate(1.6) contrast(1.1);
-    }
+    .mexp-desc strong{font-weight:700;}
 
     /* ===== OFFERING SCROLL (marquee) ===== */
     .mobile-offering{
@@ -1237,72 +1256,12 @@
     .mc-modal-close:hover { background:rgba(198,252,166,0.12); }
     .wk-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; letter-spacing:4px; color:rgba(255,255,255,0.18); text-transform:uppercase; }
 
-
-    /* ===== EXPERIMENT: white WORK page (delete this block to revert) ===== */
-    body.show-work { background: #fff !important; }
-    body.m-show-work { background: #fff; }
-    .mobile-work-page { background: #fff; }
-    /* logo was inverted to survive the black bg — put it back */
-    body.m-show-work .mobile-logo-text { color: #000; }
-    body.m-show-work .mobile-logo img { filter: none; }
-
-
-    /* ===== WORK PAGE: container entrance animation ===== */
-    @keyframes workAreaIn {
-      0%   { opacity:0; transform:translateY(30px) scale(0.985); }
-      60%  { opacity:1; }
-      100% { opacity:1; transform:translateY(0) scale(1); }
-    }
-    @keyframes workBodyIn {
-      0%   { opacity:0; transform:translateY(14px); }
-      100% { opacity:1; transform:translateY(0); }
-    }
-    /* whole folder stack rises + fades in when WORK opens */
-    body.show-work .work-area {
-      animation: workAreaIn 0.62s cubic-bezier(0.22,1,0.36,1) both;
-    }
-    /* panel contents follow a beat later */
-    body.show-work .folder-body.visible {
-      animation: workBodyIn 0.55s cubic-bezier(0.22,1,0.36,1) 0.18s both;
-    }
-    body.show-work .device-toggle.visible {
-      animation: workBodyIn 0.5s cubic-bezier(0.22,1,0.36,1) 0.26s both;
-    }
-    /* mobile WORK page */
-    @keyframes mWorkIn {
-      0%   { opacity:0; transform:translateY(26px); }
-      100% { opacity:1; transform:translateY(0); }
-    }
-    .mobile-work-page.visible {
-      animation: mWorkIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      body.show-work .work-area,
-      body.show-work .folder-body.visible,
-      body.show-work .device-toggle.visible,
-      .mobile-work-page.visible { animation: none; }
-    }
-
-
-    /* ===== MOTION + MERCH: COMING SOON (delete this block when content lands) ===== */
-    /* Desktop — overlay sits above the folder, content underneath is untouched */
-    .work-area:has(#motionContainer.active)::after,
-    .work-area:has(#merchContainer.active)::after {
-      content:'COMING SOON';
-      position:absolute; left:11px; right:11px; top:70px; bottom:11px;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Manrope',sans-serif; font-weight:800; font-size:14px;
-      letter-spacing:4.2px; color:#177006; text-transform:uppercase;
-      pointer-events:none; z-index:6;
-    }
-
-    /* Mobile */
-    .m-folder-outer:has(#mMotionC.active)::after,
-    .m-folder-outer:has(#mMerchC.active)::after {
-      content:'COMING SOON';
-      position:absolute; left:12px; right:12px; top:60px; bottom:20px;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Manrope',sans-serif; font-weight:800; font-size:11px;
-      letter-spacing:3.2px; color:#177006; text-transform:uppercase;
-      pointer-events:none; z-index:7;
-    }
+    /* mexp card logos */
+    .mexp-logo-ft{display:flex;align-items:center;gap:8px;}
+    .mexp-logo-ft .ft-mark{width:26px;height:26px;flex-shrink:0;
+      background:conic-gradient(from 90deg,#177006,#2fa30f,#177006);
+      clip-path:polygon(38% 0,100% 0,62% 48%,100% 48%,20% 100%,44% 55%,0 55%);}
+    .mexp-logo-ft .ft-text{font-family:'Space Grotesk',sans-serif;font-weight:700;
+      font-size:12px;line-height:1;color:#595959;letter-spacing:0.5px;}
+    .mexp-logo-text{font-family:'Manrope',sans-serif;font-weight:800;font-size:19px;
+      color:#177006;letter-spacing:-0.3px;}
