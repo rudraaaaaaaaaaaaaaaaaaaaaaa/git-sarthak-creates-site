@@ -54,12 +54,26 @@ function isMobile() { return window.innerWidth <= 768; }
       var ballImg=document.querySelector('.ball-element img');var ballAngle=0;var ballBaseSpeed=22.5;var ballBoost=0;var lastBallTime=performance.now();
       function animateBall(now){var dt=(now-lastBallTime)/1000;lastBallTime=now;ballBoost*=0.96;if(Math.abs(ballBoost)<0.1)ballBoost=0;ballAngle+=(ballBaseSpeed+ballBoost)*dt;if(ballImg)ballImg.style.transform='rotate('+ballAngle+'deg)';requestAnimationFrame(animateBall);}
       requestAnimationFrame(animateBall);
-      var servicePills=document.querySelectorAll('.service-pill');var fanAnimated=false;
-      var fanObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting&&!fanAnimated){fanAnimated=true;servicePills.forEach(function(pill,i){setTimeout(function(){pill.classList.add('visible');pill.style.animationDelay=(i*0.3)+'s';},i*150);});}});},{threshold:0.3});
-      var fanEl=document.querySelector('.services-fan');if(fanEl)fanObserver.observe(fanEl);
+      /* Services Fan: glass selector + cursor follow the hovered item */
+      var sfFan=document.getElementById('servicesFan');
+      var sfSel=document.getElementById('sfSelector');
+      var sfCur=document.getElementById('sfCursor');
+      var sfItems=document.querySelectorAll('.sf-item');
+      function sfFocus(i){
+        i=Math.max(0,Math.min(4,i));
+        if(sfSel)sfSel.style.top=(47*i+6)+'px';
+        if(sfCur)sfCur.style.top=(47*i+13)+'px';
+        sfItems.forEach(function(it){it.classList.toggle('focus',+it.getAttribute('data-i')===i);});
+      }
+      sfItems.forEach(function(it){it.addEventListener('mouseenter',function(){sfFocus(+it.getAttribute('data-i'));});});
+      if(sfFan)sfFan.addEventListener('mousemove',function(e){
+        var r=sfFan.getBoundingClientRect();
+        var y=(e.clientY-r.top)/0.9; /* undo scale(0.9) */
+        sfFocus(Math.round((y-26.5)/47));
+      });
       var heroBg=document.getElementById('heroBg'),heroFg=document.getElementById('heroFg'),infoBox=document.getElementById('infoBox'),bgGrid=document.querySelector('.bg-grid'),expSection=document.querySelector('.experience-section'),workSection=document.querySelector('.work-section'),beyondSection=document.querySelector('.beyond-section'),servicesFan=document.querySelector('.services-fan'),ballEl=document.querySelector('.ball-element');
       var ticking=false,lastScrollY=0;
-      function updateParallax(){var scrollY=window.scrollY;var scrollDelta=scrollY-lastScrollY;ballBoost=Math.abs(scrollDelta)*18;if(heroBg)heroBg.style.transform='translateY('+(scrollY*-0.1)+'px)';if(heroFg)heroFg.style.transform='translateY('+(scrollY*-0.3)+'px)';if(infoBox)infoBox.style.transform='translateY('+(scrollY*-0.2)+'px)';var ib=Math.max(0,scrollY-600);if(bgGrid)bgGrid.style.transform='translateY('+(ib*0.08)+'px)';var cs=ib*-0.03;if(expSection)expSection.style.transform='translateY('+cs+'px)';if(workSection)workSection.style.transform='translateY('+(cs*1.2)+'px)';if(beyondSection)beyondSection.style.transform='translateY('+(cs*1.5)+'px)';var ft=document.querySelector('.desktop-view .footer');if(ft)ft.style.transform='translateY('+(cs*1.5)+'px)';if(servicesFan)servicesFan.style.transform='translateY('+(cs*0.8)+'px)';lastScrollY=scrollY;ticking=false;}
+      function updateParallax(){var scrollY=window.scrollY;var scrollDelta=scrollY-lastScrollY;ballBoost=Math.abs(scrollDelta)*18;if(heroBg)heroBg.style.transform='translateY('+(scrollY*-0.1)+'px)';if(heroFg)heroFg.style.transform='translateY('+(scrollY*-0.3)+'px)';if(infoBox)infoBox.style.transform='translateY('+(scrollY*-0.2)+'px)';var ib=Math.max(0,scrollY-600);if(bgGrid)bgGrid.style.transform='translateY('+(ib*0.08)+'px)';var cs=ib*-0.03;if(expSection)expSection.style.transform='translateY('+cs+'px)';if(workSection)workSection.style.transform='translateY('+(cs*1.2)+'px)';if(beyondSection)beyondSection.style.transform='translateY('+(cs*1.5)+'px)';var ft=document.querySelector('.desktop-view .footer');if(ft)ft.style.transform='translateY('+(cs*1.5)+'px)';if(servicesFan)servicesFan.style.transform='translateY('+(cs*0.8)+'px) scale(0.9)';lastScrollY=scrollY;ticking=false;}
       window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(updateParallax);ticking=true;}},{passive:true});
       /* Page ends just below footer: content bottom is 2757 in layout, but info parallax
          lifts it 0.2*scrollY. Solve H = 2757 - 0.2*(H - viewport) for wrapper height. */
