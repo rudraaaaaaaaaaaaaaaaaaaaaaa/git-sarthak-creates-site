@@ -629,7 +629,7 @@
 
     /* ===== OFFERING SCROLL (marquee) ===== */
     .mobile-offering{
-      position:absolute;top:760px;left:198px;
+      position:absolute;top:735px;left:198px;
       overflow:hidden;width:780px;height:40px;
     }
     .mobile-offering-track{
@@ -652,7 +652,7 @@
 
     /* ===== WORK BOX ===== */
     .mobile-work{
-      position:absolute;top:813px;left:207px;width:387px;height:1393.5px;
+      position:absolute;top:813px;left:197px;width:387px;height:1393.5px;
       padding:31.565px 25.995px;
     }
     .mobile-work-content{position:relative;z-index:1;display:flex;flex-direction:column;gap:9.284px;align-items:center;text-align:center;}
