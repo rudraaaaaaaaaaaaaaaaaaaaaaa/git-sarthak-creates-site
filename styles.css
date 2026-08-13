@@ -247,13 +247,12 @@
     .ball-element img {
       width:100%; height:100%;
       will-change:transform;
-      filter: brightness(1.35) saturate(1.6) contrast(1.1);
     }
 
     /* Services Fan */
   /* ===== NEW SERVICES FAN (glass + selector + mouse follow) ===== */
   .services-fan{
-    position:absolute; top:548px; right:68px; width:237px; height:248px;
+    position:absolute; top:573px; right:68px; width:237px; height:248px;
     z-index:5; transform:scale(0.9); transform-origin:top right;
   }
   .sf-base{
