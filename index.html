@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- ===== WORK PAGE STYLES (injected) ===== -->
+
 </head>
 <body>
 
@@ -110,12 +111,17 @@
           </div>
 
           <!-- Services Fan -->
-          <div class="services-fan">
-            <div class="service-pill"><span>2D Animation</span></div>
-            <div class="service-pill"><span>Merch Design</span></div>
-            <div class="service-pill"><span>Product Design</span></div>
-            <div class="service-pill"><span>3D Animation</span></div>
-            <div class="service-pill"><span>Graphics</span></div>
+          <div class="services-fan" id="servicesFan">
+            <div class="sf-base"></div>
+            <div class="sf-selector" id="sfSelector"></div>
+            <div class="sf-item" data-i="0">2D Animation</div>
+            <div class="sf-item" data-i="1">Merch Design</div>
+            <div class="sf-item" data-i="2">Product Design</div>
+            <div class="sf-item" data-i="3">3D Animation</div>
+            <div class="sf-item" data-i="4">Graphics</div>
+            <div class="sf-cursor" id="sfCursor">
+              <img src="assets/fx/fx-mouse-vector.svg" alt="" width="40" height="41">
+            </div>
           </div>
 
 
@@ -311,13 +317,37 @@
         <img src="assets/fx/fx-mobile-logo-lip.svg" alt="SC">
       </div>
 
-      <!-- Experience Section (manual scroll + magnet snap) -->
+      <!-- Experience Section -->
       <div class="mobile-experience">
         <div class="mobile-exp-label">MY EXPERIENCES</div>
         <div class="mobile-exp-heading">Where I've Been<br>Employed</div>
-        <div class="mobile-exp-scrub"><div class="mobile-exp-scrub-fill" id="mExpScrubFill"></div></div>
-        <div class="mobile-exp-strip" id="mExpStrip">
-          <img class="mexp-img" src="assets/fx/fx-experiences.svg" alt="Experience cards">
+        <div class="mobile-exp-entries">
+          <!-- Entry 1 -->
+          <div class="mobile-exp-entry" style="top:0;">
+            <div class="mobile-entry-role">Chief Creative Officer<br><span class="highlight">Flash Trade</span></div>
+            <div class="mobile-entry-meta">Design, UI/UX, Promo Videos<br><br>Feb 2023 - Aug 2026</div>
+            <div class="mobile-entry-desc">Worked as <strong>Chief Creative Officer</strong> (CCO), overseeing the entire creative direction across NFTs, brand identity, promotional videos, product (UI/UX) design, merchandise, and more. Built the company's visual identity and IP from the ground up, shaping its creative vision from day one through its final days.</div>
+          </div>
+          <!-- Divider -->
+          <div class="mobile-exp-divider">
+            <img src="assets/fx/fx-mobile-exp-divider.svg" alt="">
+          </div>
+          <!-- Entry 2 -->
+          <div class="mobile-exp-entry" style="top:293px;">
+            <div class="mobile-entry-role">Freelance Designer<br><span class="highlight">Spotify</span></div>
+            <div class="mobile-entry-meta">Design &amp; Videos<br><br>May 2020 - Feb 2023</div>
+            <div class="mobile-entry-desc">Worked with multiple artist to create custom album covers and music videos.</div>
+          </div>
+          <!-- Entry 3 -->
+          <div class="mobile-exp-entry" style="top:482px;">
+            <div class="mobile-entry-role">Creative Head<br><span class="highlight">Asia Art Festival</span></div>
+            <div class="mobile-entry-meta">Design<br><br>May 2020 - Feb 2023</div>
+            <div class="mobile-entry-desc">Designed brand identity and event creative direction for the event.</div>
+          </div>
+          <!-- Ball Element -->
+          <div class="mobile-ball">
+            <img src="assets/fx/fx-mobile-ball.svg" alt="">
+          </div>
         </div>
       </div>
 
@@ -778,29 +808,30 @@
       </div>
     </div>
   </div>
+
   <script>
+  /* ===== SERVICES FAN: mouse-follow selector ===== */
   (function(){
-    if(window.innerWidth>768)return;
-    var strip=document.getElementById('mExpStrip'),fill=document.getElementById('mExpScrubFill');
-    if(!strip)return;
-    function maxScroll(){return strip.scrollWidth-strip.clientWidth;}
-    // update scrubber on scroll
-    strip.addEventListener('scroll',function(){
-      var m=maxScroll();
-      if(fill)fill.style.width=(10+(m?strip.scrollLeft/m:0)*90)+'%';
-    },{passive:true});
-    // magnet snap: settle to nearest card centre after scroll stops
-    var CARD=406.3; // 1217/3 * scale, recalculated from actual layout
-    function cardWidth(){var img=strip.querySelector('.mexp-img');return img?img.getBoundingClientRect().width/3:CARD;}
-    var t;
-    strip.addEventListener('scroll',function(){
-      clearTimeout(t);
-      t=setTimeout(function(){
-        var w=cardWidth();
-        var idx=Math.round(strip.scrollLeft/w);
-        strip.scrollTo({left:idx*w,behavior:'smooth'});
-      },90);
-    },{passive:true});
+    if(window.innerWidth<=768)return;
+    var fan=document.getElementById('servicesFan'); if(!fan)return;
+    var sel=document.getElementById('sfSelector');
+    var cur=document.getElementById('sfCursor');
+    var items=[].slice.call(fan.querySelectorAll('.sf-item'));
+    var selY=[3,50,97,144,191];
+    var curY=[8,55,102,149,196];
+    var i=1, dir=1;
+    function set(idx){
+      items.forEach(function(el,k){el.classList.toggle('focus',k===idx);});
+      sel.style.top=selY[idx]+'px';
+      cur.style.top=curY[idx]+'px';
+    }
+    set(i);
+    setInterval(function(){
+      i+=dir;
+      if(i>=items.length-1){i=items.length-1;dir=-1;}
+      else if(i<=0){i=0;dir=1;}
+      set(i);
+    },1400);
   })();
   </script>
   <script src="script.js"></script>
