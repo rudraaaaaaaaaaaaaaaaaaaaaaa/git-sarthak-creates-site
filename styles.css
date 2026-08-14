@@ -28,7 +28,7 @@
 
     .page-wrapper {
       width: 1728px; margin: 0 auto;
-      position: relative; min-height: 2600px; overflow-x: hidden;
+      position: relative; min-height: 2600px; overflow: visible;
     }
 
     /* ===================== LOADER ===================== */
@@ -1268,6 +1268,27 @@
     .mc-back:hover { background:rgba(198,252,166,0.12); }
     .mc-back svg { width:14px; height:14px; stroke:#c6fca6; stroke-width:2.4; fill:none; }
     .mc-scroll { flex:1; overflow-y:auto; overflow-x:hidden; transition:opacity .18s ease, transform .18s ease; scrollbar-width:thin; scrollbar-color:rgba(198,252,166,0.4) transparent; }
+    /* APPROACH info panel (left) */
+    .mobile-catalog .mc-topbar, .mobile-catalog .mc-scroll { margin-left:228px; }
+    .mc-approach{
+      position:absolute; left:0; top:20px; bottom:0; width:216px; z-index:9;
+      background:url(assets/fx/fx-nav.svg) center/100% 100% no-repeat;
+      padding:20px 16px 24px 16px; overflow-y:auto; scrollbar-width:none;
+    }
+    .mc-approach::-webkit-scrollbar{display:none;}
+    .mc-approach-title{
+      font-family:'Manrope',sans-serif; font-weight:800; font-size:13.09px; letter-spacing:4.19px;
+      color:var(--main-color,#c6fca6); margin:0 0 20px 12px;
+    }
+    .mc-approach-list{ list-style:none; margin:0; padding:0; }
+    .mc-approach-list li{
+      position:relative; padding-left:24px; margin-bottom:16px;
+      font-family:'Manrope',sans-serif; font-weight:500; font-size:13.09px; line-height:1.32; color:#a7a5a5;
+    }
+    .mc-approach-list li::before{
+      content:''; position:absolute; left:2px; top:6px; width:10px; height:10px; border-radius:50%;
+      background:var(--main-color,#c6fca6);
+    }
     .mc-scroll::-webkit-scrollbar { width:6px; }
     .mc-scroll::-webkit-scrollbar-thumb { background:rgba(198,252,166,0.35); border-radius:3px; }
     .mc-scroll img { display:block; width:100%; height:auto; -webkit-user-drag:none; }
