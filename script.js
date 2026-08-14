@@ -730,3 +730,4 @@ function isMobile() { return window.innerWidth <= 768; }
       measure();updateFill();
       window.addEventListener('resize',function(){measure();updateFill();});
     })();
+

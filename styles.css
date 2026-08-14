@@ -1106,7 +1106,7 @@
       width:1728px; margin:0 auto; position:relative; min-height:1117px; overflow:hidden;
     }
     /* LOCKED — do not change these positions */
-    .work-area { position:absolute; top:85px; left:44px; width:1671px; height:995px; }
+    .work-area { position:absolute; top:85px; left:64px; width:1671px; height:995px; }
     .folder-outer { position:relative; width:1642px; height:948px; margin:8px 0px; transform:scale(0.97); transform-origin:top left; overflow:visible; padding:10px; }
     .folder-svg { position:absolute; top:10px; left:4px; width:1642px; height:948px; z-index:1; overflow:visible; pointer-events:none; filter:grayscale(1) brightness(0.4); transition: filter 0.4s ease; }
     .folder-svg.active { z-index:3; filter:grayscale(0) brightness(1); }
@@ -1158,7 +1158,7 @@
 
     /* ===== DESIGN: left navigation sidebar (ALL / BRAND DESIGN / 2D / 3D) ===== */
     .design-nav {
-      position:absolute; left:0; top:0; bottom:0; width:202px; z-index:8; display:none; overflow:hidden;
+      position:absolute; left:0; top:15px; bottom:0; width:202px; z-index:8; display:none; overflow:hidden;
       background:url(assets/fx/fx-nav.svg) center/100% 100% no-repeat;
     }
     .design-nav.visible { display:block; }
