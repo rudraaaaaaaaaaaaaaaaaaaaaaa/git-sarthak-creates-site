@@ -159,6 +159,8 @@ function isMobile() { return window.innerWidth <= 768; }
         if (dtg) dtg.classList.toggle('visible', isProduct);
         // Stop + reset marquee & hide progress bar when leaving DESIGN
         if (window.__setDesignActive) window.__setDesignActive(isDesign);
+        // Show/hide the DESIGN left navigation sidebar (resets to ALL on enter)
+        if (window.__designNav) window.__designNav(isDesign);
         // Force reflow then add bounce
         void target.offsetWidth;
         target.classList.add('bounce');
@@ -402,6 +404,58 @@ function isMobile() { return window.innerWidth <= 768; }
         });
       }
       window.addEventListener('pointerup',function(){paused=false;if(marquee)marquee.classList.remove('holding');});
+    })();
+
+    /* ===== DESIGN sub-tabs: ALL (horizontal marquee) / BRAND DESIGN (vertical marquee) / 2D / 3D ===== */
+    (function(){
+      var nav=document.getElementById('designNav');
+      var sel=document.getElementById('dnSelector');
+      var items=[].slice.call(document.querySelectorAll('#designNav .dn-item'));
+      var brand=document.getElementById('brandMarquee'),bTrack=document.getElementById('brandTrack');
+      var bImg1=document.getElementById('bImg1');
+      var selTop=[32,78,124,170];
+      var singleH=0,pos=0,B_SPEED=42,bPaused=false,bLast=0,brandActive=false;
+
+      function bMeasure(){ if(bImg1&&bImg1.complete&&bImg1.naturalHeight) singleH=bImg1.offsetHeight; }
+      if(bImg1)bImg1.addEventListener('load',bMeasure);
+      window.addEventListener('resize',bMeasure);
+      /* content moves DOWN (top->bottom): translateY runs -singleH -> 0 then wraps */
+      function bRender(){ if(!singleH)return; bTrack.style.transform='translateY('+(-singleH+Math.round(pos*10)/10)+'px)'; }
+      function bTick(ts){ if(!bLast)bLast=ts; var dt=(ts-bLast)/1000; bLast=ts;
+        if(brandActive&&!bPaused&&singleH){ pos+=B_SPEED*dt; if(pos>=singleH)pos-=singleH; bRender(); }
+        requestAnimationFrame(bTick); }
+      requestAnimationFrame(bTick);
+
+      function setSub(i){
+        items.forEach(function(el){ el.classList.toggle('active',+el.getAttribute('data-i')===i); });
+        if(sel)sel.style.top=selTop[i]+'px';
+        var isAll=(i===0),isBrand=(i===1);
+        var dm=document.getElementById('designMarquee');
+        if(dm)dm.style.display=isAll?'':'none';
+        if(brand)brand.classList.toggle('visible',isBrand);
+        if(window.__setDesignActive)window.__setDesignActive(isAll); /* horizontal marquee + progress only on ALL */
+        brandActive=isBrand;
+        if(isBrand){ bLast=0; setTimeout(bMeasure,50); setTimeout(function(){bMeasure();bRender();},400); }
+      }
+      items.forEach(function(el){ el.addEventListener('click',function(){ setSub(+el.getAttribute('data-i')); }); });
+
+      /* vertical drag + wheel scroll of the brand catalogue */
+      if(brand){
+        var dragY=0;
+        brand.addEventListener('pointerdown',function(e){ bPaused=true; brand.classList.add('holding'); dragY=e.clientY; });
+        brand.addEventListener('pointermove',function(e){ if(!bPaused||!singleH)return; var dy=e.clientY-dragY; dragY=e.clientY; pos+=dy; pos=((pos%singleH)+singleH)%singleH; bRender(); });
+        brand.addEventListener('wheel',function(e){ if(!singleH)return; e.preventDefault(); pos+=e.deltaY; pos=((pos%singleH)+singleH)%singleH; bRender(); },{passive:false});
+      }
+      window.addEventListener('pointerup',function(){ bPaused=false; if(brand)brand.classList.remove('holding'); });
+
+      /* called by activateContainer on DESIGN tab enter/leave */
+      window.__designNav=function(isDesign){
+        if(nav)nav.classList.toggle('visible',isDesign);
+        if(isDesign){ setSub(0); }               /* reset to ALL each time DESIGN opens */
+        else { brandActive=false; if(brand)brand.classList.remove('visible'); }
+      };
+      var dc=document.getElementById('designContainer');
+      if(dc&&dc.classList.contains('active')) window.__designNav(true);
     })();
 
     /* ===== MOBILE WORK PAGE: containers + tab/button animation ===== */
