@@ -464,18 +464,34 @@ function isMobile() { return window.innerWidth <= 768; }
       var mBtnD=document.getElementById('mBtnDesktop'),mBtnM=document.getElementById('mBtnMobile');
       var mDevice='mobile',mTab='product';
       var mDesignView=document.getElementById('mDesignView');
+      var mSub=1; /* default BRAND */
+      function mSetSub(i){
+        mSub=i;
+        var sel=document.getElementById('mDnSel');
+        document.querySelectorAll('#mDesignNav .m-dn-item').forEach(function(el){el.classList.toggle('active',+el.getAttribute('data-i')===i);});
+        if(sel)sel.style.transform='translateX('+(i*100)+'%)';
+        var dv=document.getElementById('mDesignView'),bv=document.getElementById('mBrandView'),tr=document.getElementById('mDesignTrack');
+        var isAll=(i===0),isBrand=(i===1);
+        if(dv)dv.classList.toggle('active',isAll);
+        if(bv)bv.classList.toggle('active',isBrand);
+        if(tr)tr.classList.toggle('active',isAll);
+        var shown=isAll?dv:isBrand?bv:null;
+        if(shown){ shown.scrollTop=0; shown.classList.remove('bounce');void shown.offsetWidth;shown.classList.add('bounce');
+          shown.addEventListener('animationend',function h(){shown.classList.remove('bounce');shown.removeEventListener('animationend',h);}); }
+        if(isAll)setTimeout(function(){if(window.__mDesignUpd)window.__mDesignUpd();},50);
+      }
+      document.querySelectorAll('#mDesignNav .m-dn-item').forEach(function(el){ el.addEventListener('click',function(){ mSetSub(+el.getAttribute('data-i')); }); });
       function refreshProductViews(){
         var onProduct=(mTab==='product');
         if(mDesignView){
-          var wasD=mDesignView.classList.contains('active');
           var onD=(mTab==='design');
-          mDesignView.classList.toggle('active',onD);
-          var tr=document.getElementById('mDesignTrack');if(tr)tr.classList.toggle('active',onD);
-          if(onD)setTimeout(function(){if(window.__mDesignUpd)window.__mDesignUpd();},50);
-          if(onD&&!wasD){
-            mDesignView.classList.remove('bounce');void mDesignView.offsetWidth;
-            mDesignView.classList.add('bounce');
-            mDesignView.addEventListener('animationend',function hD(){mDesignView.classList.remove('bounce');mDesignView.removeEventListener('animationend',hD);});
+          var nav=document.getElementById('mDesignNav');
+          if(nav)nav.classList.toggle('active',onD);
+          if(onD){ mSetSub(mSub); }
+          else {
+            mDesignView.classList.remove('active','bounce');
+            var bv=document.getElementById('mBrandView'); if(bv)bv.classList.remove('active','bounce');
+            var tr=document.getElementById('mDesignTrack'); if(tr)tr.classList.remove('active');
           }
         }
         if(mTog)mTog.classList.toggle('visible',onProduct);
@@ -526,6 +542,7 @@ function isMobile() { return window.innerWidth <= 768; }
         /* Clear stale states so the entry bounce always retriggers */
         if(mDeck)mDeck.classList.remove('active','bounce');
         if(mDesignView)mDesignView.classList.remove('active','bounce');
+        var mbv=document.getElementById('mBrandView');if(mbv)mbv.classList.remove('active','bounce');
         activateM(tab||'product');
       };
       window.__closeMobileWork=function(){
