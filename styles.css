@@ -120,7 +120,7 @@
       position:absolute; top:242px; left:-5px; width:1952px; height:1668px;
       overflow:hidden; z-index:0; will-change:transform;
     }
-    .hero-bg-layer img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .hero-bg-layer img { display:block; width:100%; height:100%; object-fit:contain; object-position:center top; }
 
     .hero-fg-layer {
       position:absolute; top:149px; left:772px; width:1005px; height:859px;
