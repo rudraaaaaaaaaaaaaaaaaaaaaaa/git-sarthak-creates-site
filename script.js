@@ -414,13 +414,13 @@ function isMobile() { return window.innerWidth <= 768; }
       var brand=document.getElementById('brandMarquee'),bTrack=document.getElementById('brandTrack');
       var bImg1=document.getElementById('bImg1');
       var selTop=[32,78,124,170];
-      var singleH=0,pos=0,bPaused=false;
+      var imgH=0,maxScroll=0,pos=0,bPaused=false;
 
-      function bMeasure(){ if(bImg1&&bImg1.complete&&bImg1.naturalHeight) singleH=bImg1.offsetHeight; }
+      function bMeasure(){ if(bImg1&&bImg1.complete&&bImg1.naturalHeight){ imgH=bImg1.offsetHeight; maxScroll=Math.max(0,imgH-brand.clientHeight); if(pos>maxScroll)pos=maxScroll; bRender(); } }
       if(bImg1)bImg1.addEventListener('load',bMeasure);
       window.addEventListener('resize',bMeasure);
-      /* static: top of catalogue shown; scroll only via drag/wheel */
-      function bRender(){ if(!singleH)return; bTrack.style.transform='translateY('+(-singleH+Math.round(pos*10)/10)+'px)'; }
+      function bRender(){ bTrack.style.transform='translateY('+(-Math.round(pos*10)/10)+'px)'; }
+      function clampPos(){ if(pos<0)pos=0; else if(pos>maxScroll)pos=maxScroll; }
 
       function setSub(i){
         items.forEach(function(el){ el.classList.toggle('active',+el.getAttribute('data-i')===i); });
@@ -438,8 +438,8 @@ function isMobile() { return window.innerWidth <= 768; }
       if(brand){
         var dragY=0;
         brand.addEventListener('pointerdown',function(e){ bPaused=true; brand.classList.add('holding'); dragY=e.clientY; });
-        brand.addEventListener('pointermove',function(e){ if(!bPaused||!singleH)return; var dy=e.clientY-dragY; dragY=e.clientY; pos+=dy; pos=((pos%singleH)+singleH)%singleH; bRender(); });
-        brand.addEventListener('wheel',function(e){ if(!singleH)return; e.preventDefault(); pos+=e.deltaY; pos=((pos%singleH)+singleH)%singleH; bRender(); },{passive:false});
+        brand.addEventListener('pointermove',function(e){ if(!bPaused)return; var dy=e.clientY-dragY; dragY=e.clientY; pos-=dy; clampPos(); bRender(); });
+        brand.addEventListener('wheel',function(e){ e.preventDefault(); pos+=e.deltaY; clampPos(); bRender(); },{passive:false});
       }
       window.addEventListener('pointerup',function(){ bPaused=false; if(brand)brand.classList.remove('holding'); });
 
