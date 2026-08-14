@@ -1090,6 +1090,15 @@
 /* PAGE TOGGLE */
     .about-page { display: block; }
     .work-page { display: none; }
+    .work-blur {
+      position: fixed; top: -30px; left: 50%; transform: translateX(-50%);
+      width: 1848px; height: 180px; z-index: 99; pointer-events: none;
+      backdrop-filter: blur(44px) saturate(1.2);
+      -webkit-backdrop-filter: blur(44px) saturate(1.2);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 100%);
+    }
     body.show-work { background: #fff !important; }
     body.show-work .about-page { display: none !important; }
     body.show-work .work-page { display: block !important; }
