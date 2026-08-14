@@ -8,13 +8,15 @@ function isMobile() { return window.innerWidth <= 768; }
    offsetWidth math consistent, so no locked position or animation is touched. */
 (function(){
   function fit(){
-    var vw=document.documentElement.clientWidth;
+    var vw=document.documentElement.clientWidth||window.innerWidth||0;
+    if(vw<320) return; /* ignore transient/zero widths that would collapse the page */
     var dz = vw>768 ? Math.min(1, vw/1728) : '';
     var mz = vw<=768 ? Math.min(1, vw/393) : '';
     document.querySelectorAll('.desktop-view').forEach(function(el){ el.style.zoom = dz; });
     document.querySelectorAll('.mobile-view').forEach(function(el){ el.style.zoom = mz; });
   }
   fit();
+  window.addEventListener('load', fit);
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
 })();
@@ -743,3 +745,44 @@ function isMobile() { return window.innerWidth <= 768; }
       window.addEventListener('resize',function(){measure();updateFill();});
     })();
 
+
+    /* ===== URL routing: /, /work, /design, /motion, /merch (deep-link + history) ===== */
+    (function(){
+      var PATHS={ '/design':'design','/motion':'motion','/merch':'merch','/product':'product','/work':'product' };
+      function isAbout(p){ return p==='/'||p==='/about'||p===''; }
+      function norm(p){ if(p.length>1&&p.charAt(p.length-1)==='/')p=p.slice(0,-1); return p; }
+
+      function openDesktop(path){
+        if(isAbout(path)){ document.body.classList.remove('show-work'); return; }
+        document.body.classList.add('show-work');
+        var cat=PATHS[path]||'product';
+        var el=document.getElementById(cat+'Container');
+        if(window.__activateContainer&&el) window.__activateContainer(el,true);
+      }
+      function openMobile(path){
+        if(isAbout(path)){
+          document.body.classList.remove('m-show-work');
+          var wp=document.getElementById('mWorkPage'); if(wp)wp.classList.remove('visible');
+          var wr=document.getElementById('mWrap'); if(wr)wr.style.display='';
+          return;
+        }
+        if(window.__openMobileWork) window.__openMobileWork(PATHS[path]||'product');
+      }
+      function apply(path){ path=norm(path); (isMobile()?openMobile:openDesktop)(path); }
+
+      /* URL to write for a given category */
+      function urlFor(cat){ return cat==='product'?'/work':cat==='about'?'/':'/'+cat; }
+      window.__setRoute=function(cat){ var u=urlFor(cat); if(location.pathname!==u){ try{history.pushState({},'',u);}catch(e){} } };
+
+      /* deep-link on first load + browser back/forward */
+      apply(location.pathname);
+      window.addEventListener('popstate', function(){ apply(location.pathname); });
+
+      /* keep the URL in sync as the user navigates (desktop) */
+      function hook(id,cat){ var el=document.getElementById(id); if(el)el.addEventListener('click',function(){ window.__setRoute(cat); }); }
+      hook('designTextClick','design'); hook('productTextClick','product');
+      hook('motionTextClick','motion'); hook('merchTextClick','merch');
+      var pill=document.querySelector('.desktop-view .navigation');
+      if(pill)pill.addEventListener('click',function(){ setTimeout(function(){ window.__setRoute(document.body.classList.contains('show-work')?'product':'about'); },0); });
+      document.querySelectorAll('.work-btn').forEach(function(b){ b.addEventListener('click',function(){ window.__setRoute('product'); }); });
+    })();
