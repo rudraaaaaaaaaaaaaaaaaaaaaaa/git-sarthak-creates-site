@@ -414,17 +414,13 @@ function isMobile() { return window.innerWidth <= 768; }
       var brand=document.getElementById('brandMarquee'),bTrack=document.getElementById('brandTrack');
       var bImg1=document.getElementById('bImg1');
       var selTop=[32,78,124,170];
-      var singleH=0,pos=0,B_SPEED=42,bPaused=false,bLast=0,brandActive=false;
+      var singleH=0,pos=0,bPaused=false;
 
       function bMeasure(){ if(bImg1&&bImg1.complete&&bImg1.naturalHeight) singleH=bImg1.offsetHeight; }
       if(bImg1)bImg1.addEventListener('load',bMeasure);
       window.addEventListener('resize',bMeasure);
-      /* content moves DOWN (top->bottom): translateY runs -singleH -> 0 then wraps */
+      /* static: top of catalogue shown; scroll only via drag/wheel */
       function bRender(){ if(!singleH)return; bTrack.style.transform='translateY('+(-singleH+Math.round(pos*10)/10)+'px)'; }
-      function bTick(ts){ if(!bLast)bLast=ts; var dt=(ts-bLast)/1000; bLast=ts;
-        if(brandActive&&!bPaused&&singleH){ pos+=B_SPEED*dt; if(pos>=singleH)pos-=singleH; bRender(); }
-        requestAnimationFrame(bTick); }
-      requestAnimationFrame(bTick);
 
       function setSub(i){
         items.forEach(function(el){ el.classList.toggle('active',+el.getAttribute('data-i')===i); });
@@ -434,8 +430,7 @@ function isMobile() { return window.innerWidth <= 768; }
         if(dm)dm.style.display=isAll?'':'none';
         if(brand)brand.classList.toggle('visible',isBrand);
         if(window.__setDesignActive)window.__setDesignActive(isAll); /* horizontal marquee + progress only on ALL */
-        brandActive=isBrand;
-        if(isBrand){ bLast=0; setTimeout(bMeasure,50); setTimeout(function(){bMeasure();bRender();},400); }
+        if(isBrand){ setTimeout(bMeasure,50); setTimeout(function(){bMeasure();bRender();},400); }
       }
       items.forEach(function(el){ el.addEventListener('click',function(){ setSub(+el.getAttribute('data-i')); }); });
 
@@ -451,8 +446,8 @@ function isMobile() { return window.innerWidth <= 768; }
       /* called by activateContainer on DESIGN tab enter/leave */
       window.__designNav=function(isDesign){
         if(nav)nav.classList.toggle('visible',isDesign);
-        if(isDesign){ setSub(0); }               /* reset to ALL each time DESIGN opens */
-        else { brandActive=false; if(brand)brand.classList.remove('visible'); }
+        if(isDesign){ setSub(1); }               /* default to BRAND DESIGN each time DESIGN opens */
+        else { if(brand)brand.classList.remove('visible'); }
       };
       var dc=document.getElementById('designContainer');
       if(dc&&dc.classList.contains('active')) window.__designNav(true);
