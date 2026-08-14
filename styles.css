@@ -117,16 +117,16 @@
     .hero-container { position:relative; width:100%; height:1020px; overflow:visible; }
 
     .hero-bg-layer {
-      position:absolute; top:300px; left:-5px; width:1733px; height:796px;
+      position:absolute; top:422px; left:-5px; width:1952px; height:1668px;
       overflow:hidden; z-index:0; will-change:transform;
     }
-    .hero-bg-layer img { position:absolute; top:0; left:0; width:100%; height:186%; }
+    .hero-bg-layer img { position:absolute; top:0; left:0; width:100%; height:100%; }
 
     .hero-fg-layer {
-      position:absolute; top:-48px; left:574px; width:1396px; height:1165px;
+      position:absolute; top:186px; left:651px; width:1248px; height:1066px;
       z-index:1; will-change:transform;
     }
-    .hero-fg-layer img { width:100%; height:102.39%; transform:rotate(180deg) scaleY(-1); }
+    .hero-fg-layer img { width:100%; height:100%; }
 
     .hero-text {
       position:absolute; top:186px; left:-10px; width:969px;
