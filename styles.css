@@ -117,13 +117,13 @@
     .hero-container { position:relative; width:100%; height:1020px; overflow:visible; }
 
     .hero-bg-layer {
-      position:absolute; top:422px; left:-5px; width:1952px; height:1668px;
+      position:absolute; top:242px; left:-5px; width:1952px; height:1668px;
       overflow:hidden; z-index:0; will-change:transform;
     }
     .hero-bg-layer img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
 
     .hero-fg-layer {
-      position:absolute; top:186px; left:651px; width:1248px; height:1066px;
+      position:absolute; top:149px; left:772px; width:1005px; height:859px;
       overflow:hidden; z-index:1; will-change:transform;
     }
     .hero-fg-layer img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
