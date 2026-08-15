@@ -40,11 +40,28 @@ function isMobile() { return window.innerWidth <= 768; }
     document.documentElement.style.setProperty('--s', ds);  /* desktop: transform scale (Lenis-safe) */
     var mz = vw<=768 ? Math.min(1, vw/393) : '';
     document.querySelectorAll('.mobile-view').forEach(function(el){ el.style.zoom = mz; }); /* mobile keeps zoom */
+    sizeAboutPage(ds);
+    if(window.__lenis){ try{window.__lenis.resize();}catch(e){} }
+  }
+  /* Size the About page so the footer (which the info-section parallax lifts by 0.2*scroll)
+     lands at the viewport bottom instead of scrolling out of view. */
+  function sizeAboutPage(s){
+    var about=document.querySelector('.about-page'); if(!about) return;
+    var pw=about.querySelector('.page-wrapper');
+    var infoBox=document.getElementById('infoBox');
+    var footer=about.querySelector('.footer');
+    if(!pw||!infoBox||!footer) return;
+    var fb=infoBox.offsetTop + footer.offsetTop + footer.offsetHeight; /* unscaled footer bottom */
+    var vh=window.innerHeight;
+    var Hr=(fb*s + 0.2*vh)/1.2;                 /* rendered page height */
+    about.style.height=Hr+'px';
+    pw.style.minHeight=(Hr/s)+'px';
   }
   fit();
   window.addEventListener('load', fit);
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
+  [200, 800, 3200].forEach(function(d){ setTimeout(fit, d); });
 })();
 
     /* ===== PAGE TOGGLE: ABOUT ↔ WORK ===== */
