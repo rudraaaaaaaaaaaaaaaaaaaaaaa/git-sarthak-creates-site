@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Geist:wght@400;500&family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css">
 
   <!-- ===== WORK PAGE STYLES (injected) ===== -->
 </head>
@@ -506,7 +507,7 @@
   </div>
 
   <!-- ===== WORK PAGE ===== -->
-  <div class="work-page desktop-view">
+  <div class="work-page desktop-view" data-lenis-prevent>
     <div class="work-blur"></div>
     <div class="work-page-wrapper">
       <div class="work-area">
@@ -679,7 +680,7 @@
               </div>
             </div>
             <!-- DESIGN: BRAND DESIGN vertical marquee (slow top->bottom, scrollable) -->
-            <div class="brand-marquee" id="brandMarquee">
+            <div class="brand-marquee" id="brandMarquee" data-lenis-prevent>
               <div class="brand-track" id="brandTrack">
                 <img src="assets/fx/fx-brand-design.png" alt="Brand design catalogue" id="bImg1">
               </div>
@@ -776,11 +777,11 @@
                     <button class="mc-btn" id="mcNext" aria-label="Next catalog"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
                   </div>
                 </div>
-                <div class="mc-approach" id="mcApproach">
+                <div class="mc-approach" id="mcApproach" data-lenis-prevent>
                   <div class="mc-approach-title">APPROACH</div>
                   <ul class="mc-approach-list" id="mcApproachList"></ul>
                 </div>
-                <div class="mc-scroll" id="mcScroll">
+                <div class="mc-scroll" id="mcScroll" data-lenis-prevent>
                   <img id="mcImgV1" src="assets/v1-catalogue.png" alt="Flash Trade V1 catalog">
                   <div id="mcImgDuel" style="display:none; position:relative;">
                     <img src="assets/duel-catalogue.png" alt="Duel catalog" style="display:block;width:100%;height:auto;">
@@ -808,6 +809,7 @@
       </div>
     </div>
   </div>
+  <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 

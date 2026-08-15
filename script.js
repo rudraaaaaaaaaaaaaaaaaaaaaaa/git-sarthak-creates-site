@@ -1,5 +1,23 @@
 function isMobile() { return window.innerWidth <= 768; }
 
+/* ===== Smooth scroll (Lenis) — desktop only; parallax reads the smoothed scroll ===== */
+(function(){
+  if (typeof Lenis === 'undefined' || isMobile()) return;
+  try {
+    var lenis = new Lenis({
+      lerp: 0.055,           /* stronger glide (lower = more gliding), stable */
+      wheelMultiplier: 1,
+      smoothWheel: true,
+      allowNestedScroll: true, /* let the catalogue/nested scrollers scroll natively */
+      autoRaf: true
+    });
+    window.__lenis = lenis;
+    /* Page height changes when switching About<->Work; keep Lenis bounds fresh to avoid jitter */
+    var rz; var mo=new MutationObserver(function(){ clearTimeout(rz); rz=setTimeout(function(){ try{lenis.resize();}catch(e){} },60); });
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+  } catch(e){}
+})();
+
 /* ===== Fit the fixed-width canvases to any screen size (zoom-to-fit) =====
    Desktop is a 1728px absolute canvas; mobile is built to a 393px reference.
    Scale each visible view down to fit the viewport (never up past its native
