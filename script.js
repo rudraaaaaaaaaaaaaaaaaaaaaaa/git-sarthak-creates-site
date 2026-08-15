@@ -1,21 +1,29 @@
 function isMobile() { return window.innerWidth <= 768; }
 
-/* ===== Smooth scroll (Lenis) — desktop only; parallax reads the smoothed scroll ===== */
+/* ===== Smooth scroll (Lenis) — desktop only; init after loader for a clean first scroll ===== */
 (function(){
   if (typeof Lenis === 'undefined' || isMobile()) return;
-  try {
-    var lenis = new Lenis({
-      lerp: 0.055,           /* stronger glide (lower = more gliding), stable */
-      wheelMultiplier: 1,
-      smoothWheel: true,
-      allowNestedScroll: true, /* let the catalogue/nested scrollers scroll natively */
-      autoRaf: true
-    });
-    window.__lenis = lenis;
-    /* Page height changes when switching About<->Work; keep Lenis bounds fresh to avoid jitter */
-    var rz; var mo=new MutationObserver(function(){ clearTimeout(rz); rz=setTimeout(function(){ try{lenis.resize();}catch(e){} },60); });
-    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
-  } catch(e){}
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  var docEl = document.documentElement;
+  docEl.style.overflowY = 'hidden';           /* lock scroll while the loader is up */
+  try { window.scrollTo(0,0); } catch(e){}
+  function start(){
+    docEl.style.overflowY = '';                /* unlock exactly as Lenis takes over */
+    try {
+      var lenis = new Lenis({
+        lerp: 0.055,
+        wheelMultiplier: 1,
+        smoothWheel: true,
+        allowNestedScroll: true,
+        autoRaf: true
+      });
+      window.__lenis = lenis;
+      var rz; var mo=new MutationObserver(function(){ clearTimeout(rz); rz=setTimeout(function(){ try{lenis.resize();}catch(e){} },60); });
+      mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+      setTimeout(function(){ try{lenis.resize();}catch(e){} }, 200);
+    } catch(e){}
+  }
+  setTimeout(start, 2900);
 })();
 
 /* ===== Fit the fixed-width canvases to any screen size (zoom-to-fit) =====
@@ -28,10 +36,10 @@ function isMobile() { return window.innerWidth <= 768; }
   function fit(){
     var vw=document.documentElement.clientWidth||window.innerWidth||0;
     if(vw<320) return; /* ignore transient/zero widths that would collapse the page */
-    var dz = vw>768 ? Math.min(1, vw/1728) : '';
+    var ds = vw>768 ? Math.min(1, vw/1728) : 1;
+    document.documentElement.style.setProperty('--s', ds);  /* desktop: transform scale (Lenis-safe) */
     var mz = vw<=768 ? Math.min(1, vw/393) : '';
-    document.querySelectorAll('.desktop-view').forEach(function(el){ el.style.zoom = dz; });
-    document.querySelectorAll('.mobile-view').forEach(function(el){ el.style.zoom = mz; });
+    document.querySelectorAll('.mobile-view').forEach(function(el){ el.style.zoom = mz; }); /* mobile keeps zoom */
   }
   fit();
   window.addEventListener('load', fit);
@@ -765,20 +773,21 @@ function isMobile() { return window.innerWidth <= 768; }
       function norm(p){ if(p.length>1&&p.charAt(p.length-1)==='/')p=p.slice(0,-1); return p; }
 
       function openDesktop(path){
-        if(isAbout(path)){ document.body.classList.remove('show-work'); return; }
+        var cat=PATHS[path];
+        if(!cat){ document.body.classList.remove('show-work'); return; } /* default = ABOUT */
         document.body.classList.add('show-work');
-        var cat=PATHS[path]||'product';
         var el=document.getElementById(cat+'Container');
         if(window.__activateContainer&&el) window.__activateContainer(el,true);
       }
       function openMobile(path){
-        if(isAbout(path)){
+        var cat=PATHS[path];
+        if(!cat){ /* default = ABOUT */
           document.body.classList.remove('m-show-work');
           var wp=document.getElementById('mWorkPage'); if(wp)wp.classList.remove('visible');
           var wr=document.getElementById('mWrap'); if(wr)wr.style.display='';
           return;
         }
-        if(window.__openMobileWork) window.__openMobileWork(PATHS[path]||'product');
+        if(window.__openMobileWork) window.__openMobileWork(cat);
       }
       function apply(path){ path=norm(path); (isMobile()?openMobile:openDesktop)(path); }
 
