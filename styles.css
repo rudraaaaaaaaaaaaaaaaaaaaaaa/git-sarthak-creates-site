@@ -294,6 +294,7 @@
     .work-section {
       position:absolute; top:737px; right:274px; width:1212px; height:319px;
       padding:76px 47px 63px; z-index:2;
+      border-radius:35px; overflow:hidden; box-shadow:0 20px 44px rgba(0,0,0,0.09);
     }
     .work-bg { position:absolute; top:0; left:0.01px; width:1212px; height:319px; }
     .work-bg img { width:1242.2px; height:349.2px; }
