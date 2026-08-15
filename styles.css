@@ -354,6 +354,7 @@
       border-radius:35px;
     }
     .beyond-inner { position:relative; z-index:1; width:100%; height:100%; }
+    .beyond-notch { position:absolute; left:50%; transform:translateX(-50%); bottom:-18px; width:250px; height:70px; background:#fdba74; border-radius:0 0 130px 130px / 0 0 60px 60px; filter:blur(3px); z-index:0; }
     .beyond-header { position:relative; height:234px; width:100%; }
     .beyond-title-text {
       position:absolute; top:38.54px; left:0; width:342px;
@@ -424,10 +425,10 @@
     .ft-meet { position:absolute; left:1319px; top:77px; width:197px; height:49px; border-radius:27.6px; border:0.5px solid rgba(86,86,86,0.4); background:#fff; font-family:'Poppins',sans-serif; font-weight:500; font-size:15.982px; letter-spacing:1.6px; color:#000; cursor:pointer; }
     .beyond-glow {
       position:absolute; left:50%; transform:translateX(-50%); bottom:-340px;
-      width:2400px; height:1150px; z-index:0; pointer-events:none;
+      width:2400px; height:1600px; z-index:0; pointer-events:none;
       background:
-        radial-gradient(ellipse 40% 34% at 50% 66%, rgba(251,146,60,0.7) 0%, rgba(251,146,60,0) 60%),
-        radial-gradient(ellipse 82% 60% at 50% 60%, rgba(253,186,116,0.6) 0%, rgba(253,186,116,0) 74%);
+        radial-gradient(ellipse 44% 40% at 50% 74%, rgba(251,146,60,0.72) 0%, rgba(251,146,60,0) 55%),
+        radial-gradient(ellipse 86% 72% at 50% 66%, rgba(253,186,116,0.62) 0%, rgba(253,186,116,0) 72%);
       filter: blur(30px);
     }
     .footer-bg img {
