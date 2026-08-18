@@ -51,6 +51,7 @@ function isMobile() { return window.innerWidth <= 768; }
     var infoBox=document.getElementById('infoBox');
     var footer=about.querySelector('.footer');
     if(!pw||!infoBox||!footer) return;
+    if(!footer.offsetHeight) return;           /* about hidden (on Work) -> don't compute a bad height */
     var fb=infoBox.offsetTop + footer.offsetTop + footer.offsetHeight; /* unscaled footer bottom */
     var vh=window.innerHeight;
     var Hr=(fb*s + 0.2*vh)/1.2;                 /* rendered page height */
@@ -62,6 +63,10 @@ function isMobile() { return window.innerWidth <= 768; }
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
   [200, 800, 3200].forEach(function(d){ setTimeout(fit, d); });
+  /* Re-fit (and reset scroll) when switching About<->Work so the page sizes correctly */
+  new MutationObserver(function(){
+    setTimeout(function(){ fit(); if(window.__lenis){ try{ window.__lenis.scrollTo(0,{immediate:true}); }catch(e){} } }, 40);
+  }).observe(document.body, { attributes:true, attributeFilter:['class'] });
 })();
 
     /* ===== PAGE TOGGLE: ABOUT ↔ WORK ===== */
@@ -813,7 +818,9 @@ function isMobile() { return window.innerWidth <= 768; }
       window.__setRoute=function(cat){ var u=urlFor(cat); if(location.pathname!==u){ try{history.pushState({},'',u);}catch(e){} } };
 
       /* deep-link on first load + browser back/forward */
-      apply(location.pathname);
+      /* Always start on About (ignore any persisted work URL); reset the URL to / */
+      apply('/');
+      try{ if(location.pathname!=='/') history.replaceState({},'','/'); }catch(e){}
       window.addEventListener('popstate', function(){ apply(location.pathname); });
 
       /* keep the URL in sync as the user navigates (desktop) */
