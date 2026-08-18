@@ -1043,8 +1043,6 @@ function isMobile() { return window.innerWidth <= 768; }
           if(active){
             if(folderBody) folderBody.classList.remove('visible');
             resetMotion();
-            layer.classList.remove('bounce'); void layer.offsetWidth; layer.classList.add('bounce');
-            layer.addEventListener('animationend', function h(){ layer.classList.remove('bounce'); layer.removeEventListener('animationend', h); });
           } else {
             pauseAll(views.slide); pauseAll(views.grid); pMedia.innerHTML = '';
           }
