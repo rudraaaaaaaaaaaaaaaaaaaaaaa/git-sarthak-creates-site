@@ -1454,7 +1454,7 @@
     .mo-g-card.empty .mo-media{ background:#595959; border-color:rgba(255,255,255,.14); }
 
     /* PLAYER */
-    .mo-player-wrap{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding-top:56px; }
+    .mo-player-wrap{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding-top:96px; }
     .mo-p-card{ position:relative; width:980px; height:551px; border-radius:32.2px; background:var(--mo-glass); flex:none; }
     .mo-p-card .mo-inner{ position:absolute; inset:11.2px; border-radius:24.3px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.16); }
     .mo-p-card iframe,.mo-p-card video{ width:100%; height:100%; display:block; border:none; object-fit:cover; background:#000; }
