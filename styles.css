@@ -1342,6 +1342,7 @@
     .mo-layer{ position:absolute; top:59px; left:11px; right:11px; bottom:11px; z-index:4;
       display:none; overflow:hidden; border-radius:22px; }
     .mo-layer.visible{ display:block; }
+    .mo-layer.bounce{ animation: tabBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; transform-origin:center; }
     .mo-view{ position:absolute; inset:0; display:none; pointer-events:none; }
     .mo-view.on{ display:block; pointer-events:auto; animation:moFade .35s ease both; }
     @keyframes moFade{ from{opacity:0} to{opacity:1} }
