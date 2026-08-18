@@ -419,6 +419,69 @@
 
       <img class="m-folder-svg active" id="mProductC" src="assets/fx/fx-folder-product.svg" alt="">
 
+      <!-- ===================== MOTION LAYER (mobile) ===================== -->
+      <div class="mo-m-layer" id="moMLayer">
+        <div class="mo-m-view on" id="moMFolders">
+          <div class="mo-m-folders">
+            <div class="mo-m-folder" data-folder="motion">
+              <div class="mo-m-fcard mo-gstroke mo-m-fc3"><div class="mo-in"><img src="assets/motion/thumbs/3.jpg" alt=""></div></div>
+              <div class="mo-m-fcard mo-gstroke mo-m-fc2"><div class="mo-in"><img src="assets/motion/thumbs/2.jpg" alt=""></div></div>
+              <div class="mo-m-fcard mo-gstroke mo-m-fc1"><div class="mo-in"><img src="assets/motion/thumbs/1.jpg" alt=""></div></div>
+              <svg class="mo-m-front" viewBox="0 0 575 310.5">
+                <defs><linearGradient id="moMFoldg" x1="0" y1="310" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#1A1D19"/><stop offset="1" stop-color="#3E3E3E"/></linearGradient></defs>
+                <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+                  fill="url(#moMFoldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+              </svg>
+              <p class="mo-m-label">MOTION</p>
+            </div>
+            <div class="mo-m-folder" data-folder="edits">
+              <div class="mo-m-fcard mo-gstroke mo-m-fc3"><div class="mo-in"></div></div>
+              <div class="mo-m-fcard mo-gstroke mo-m-fc2"><div class="mo-in"></div></div>
+              <div class="mo-m-fcard mo-gstroke mo-m-fc1"><div class="mo-in"></div></div>
+              <svg class="mo-m-front" viewBox="0 0 575 310.5">
+                <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+                  fill="url(#moMFoldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+              </svg>
+              <p class="mo-m-label">EDITS</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-m-view" id="moMSlide">
+          <div class="mo-m-slide">
+            <div class="mo-m-scard mo-gstroke"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+            <div class="mo-m-snav">
+              <button id="moMPrev" aria-label="Previous">&#8592;</button>
+              <button id="moMNext" aria-label="Next">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-m-view" id="moMGrid">
+          <div class="mo-m-grid" data-lenis-prevent><div id="moMGridwrap"></div></div>
+        </div>
+
+        <div class="mo-m-view" id="moMPlayer">
+          <div class="mo-m-player">
+            <div class="mo-m-pcard mo-gstroke"><div class="mo-inner" id="moMPmedia"></div></div>
+            <div class="mo-m-pmeta">
+              <p class="mo-m-ptitle" id="moMPtitle"></p>
+              <p class="mo-m-pdesc" id="moMPdesc"></p>
+              <button class="mo-m-pcopy" id="moMPcopy">COPY LINK</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-m-switch slide" id="moMSwitch">
+          <div class="mo-pill"></div>
+          <button class="mo-m-vs g" data-mode="grid"><span class="mo-m-igrid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+          <button class="mo-m-vs s" data-mode="slide"><span class="mo-m-islide"><i></i><i></i><i></i></span></button>
+        </div>
+        <button class="mo-m-back" id="moMBack" aria-label="Back">&#8592;</button>
+      </div>
+      <!-- ===================== END MOTION LAYER (mobile) ===================== -->
+
       <div class="m-tabs-row">
         <button class="m-tab-label m-tab-merch" data-mtab="merch">MERCH</button>
         <button class="m-tab-label m-tab-design" data-mtab="design">DESIGN</button>
@@ -681,6 +744,78 @@
             </button>
             <div class="device-pill"></div>
           </div>
+          <!-- ===================== MOTION LAYER (desktop) ===================== -->
+          <div class="mo-layer" id="moLayer">
+            <div class="mo-view on" id="moFolders">
+              <div class="mo-folder mo-folder-motion" data-folder="motion">
+                <div class="mo-fcard mo-gstroke mo-fc3"><div class="mo-in"><img src="assets/motion/thumbs/3.jpg" alt=""></div></div>
+                <div class="mo-fcard mo-gstroke mo-fc2"><div class="mo-in"><img src="assets/motion/thumbs/2.jpg" alt=""></div></div>
+                <div class="mo-fcard mo-gstroke mo-fc1"><div class="mo-in"><img src="assets/motion/thumbs/1.jpg" alt=""></div></div>
+                <svg class="mo-folder-front" viewBox="0 0 575 310.5">
+                  <defs><linearGradient id="moFoldg" x1="0" y1="310" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#1A1D19"/><stop offset="1" stop-color="#3E3E3E"/></linearGradient></defs>
+                  <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+                    fill="url(#moFoldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+                </svg>
+                <p class="mo-folder-label">MOTION</p>
+              </div>
+              <div class="mo-folder mo-folder-edits" data-folder="edits">
+                <div class="mo-fcard mo-gstroke mo-fc3"><div class="mo-in"></div></div>
+                <div class="mo-fcard mo-gstroke mo-fc2"><div class="mo-in"></div></div>
+                <div class="mo-fcard mo-gstroke mo-fc1"><div class="mo-in"></div></div>
+                <svg class="mo-folder-front" viewBox="0 0 575 310.5">
+                  <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+                    fill="url(#moFoldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+                </svg>
+                <p class="mo-folder-label">EDITS</p>
+              </div>
+            </div>
+
+            <div class="mo-view" id="moSlide">
+              <div class="mo-deck-card mo-gstroke mo-pl3"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pl2"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pr3"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pr2"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pl1"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pr1"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-deck-card mo-gstroke mo-pc"><div class="mo-media"><img class="mo-thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+              <div class="mo-sl-nav">
+                <button id="moPrev" aria-label="Previous">&#8592;</button>
+                <button id="moNext" aria-label="Next">&#8594;</button>
+              </div>
+            </div>
+
+            <div class="mo-view" id="moGrid">
+              <div class="mo-gridscroll" data-lenis-prevent><div class="mo-gridwrap" id="moGridwrap"></div></div>
+            </div>
+
+            <div class="mo-view" id="moPlayer">
+              <div class="mo-player-wrap">
+                <div class="mo-p-card mo-gstroke">
+                  <div class="mo-inner" id="moPmedia"></div>
+                  <button class="mo-p-arrow prev" id="moPprev" aria-label="Previous video"><svg viewBox="0 0 16 16"><polyline points="10.5,2.5 5,8 10.5,13.5"/></svg></button>
+                  <button class="mo-p-arrow next" id="moPnext" aria-label="Next video"><svg viewBox="0 0 16 16"><polyline points="5.5,2.5 11,8 5.5,13.5"/></svg></button>
+                </div>
+                <div class="mo-p-meta">
+                  <p class="mo-p-title" id="moPtitle"></p>
+                  <p class="mo-p-note" id="moPnote"></p>
+                  <div class="mo-p-descrow">
+                    <p class="mo-p-desc" id="moPdesc"></p>
+                    <button class="mo-p-copy" id="moPcopy">COPY LINK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mo-vswitch slide" id="moVswitch">
+              <div class="mo-pill"></div>
+              <button class="mo-vs-btn mo-vs-grid" data-mode="grid"><span class="mo-icon-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+              <button class="mo-vs-btn mo-vs-slide" data-mode="slide"><span class="mo-icon-slide"><i></i><i></i><i></i></span></button>
+            </div>
+            <button class="mo-back" id="moBack" aria-label="Back">&#8592;</button>
+          </div>
+          <!-- ===================== END MOTION LAYER (desktop) ===================== -->
+
           <div class="folder-body">
             <div class="design-marquee" id="designMarquee">
               <div class="marquee-track" id="marqueeTrack">

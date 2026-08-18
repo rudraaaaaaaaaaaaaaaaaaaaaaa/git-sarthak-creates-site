@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sarthak Creates — MOTION test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Montserrat:wght@400;600&family=Inter:wght@400&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FFCD84;
+  --nav-gray:#595959;
+  --glass-grad: radial-gradient(130% 170% at 6% -18%, #363636 0%, rgba(26,26,26,.27) 72%);
+  --deck-ease: cubic-bezier(.34,1.08,.42,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff}
+body{overflow-x:hidden}
+#stage{position:relative;width:1728px;height:1117px;transform-origin:top left;background:#fff}
+
+/* ---------- Header (test-only replica; prod keeps its own header) ---------- */
+.header{position:absolute;left:65px;top:30px;width:1619px;height:64px;background:#fff;border-radius:32px;
+  box-shadow:0 4px 16.8px rgba(0,0,0,.15);display:flex;align-items:center;gap:33px;padding-left:20px;padding-right:12px;z-index:40}
+.logo{display:flex;align-items:center;gap:8px}
+.logo .mark{font-family:'Montserrat';font-weight:600;font-style:italic;font-size:26px;letter-spacing:-2px}
+.logo .name{font-family:'Montserrat';line-height:.84;font-size:19.2px}
+.logo .name b{font-weight:600}
+.logo .name span{font-weight:400;font-size:17.4px}
+.hline{flex:1;height:0;border-top:1px solid #E0E0E0}
+.navpill{position:relative;width:196px;height:42.26px;background:#000;border-radius:23.35px;flex:none}
+.navpill .sel{position:absolute;left:106.9px;top:2.13px;width:86px;height:38px;background:#fff;border-radius:21.36px}
+.navpill p{position:absolute;top:13.6px;font-family:'Inter';font-size:12.35px;letter-spacing:3.95px}
+.navpill .about{left:24.6px;color:#fff}
+.navpill .work{left:127.4px;color:#000}
+.git{position:relative;width:159.9px;height:38.1px;border-radius:21.36px;background:#fff;border:.37px solid rgba(86,86,86,.4);
+  box-shadow:-1px 2px 6.15px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex:none}
+.git p{font-family:'Poppins';font-weight:500;font-size:12.35px;letter-spacing:1.24px}
+
+/* ---------- Folder tab strip ---------- */
+.tabstrip{position:absolute;left:43px;top:132px;width:1641.6px;height:46px;z-index:2}
+.ftab{position:absolute;top:0;height:46px;border-radius:14px 14px 0 0;background:linear-gradient(180deg,#161616,#0c0c0c);
+  border:1px solid rgba(255,205,132,.22);border-bottom:none;display:flex;align-items:center;justify-content:center}
+.ftab p{font-family:'Manrope';font-weight:800;font-size:13.09px;letter-spacing:4.19px;color:var(--nav-gray)}
+.ftab.active{background:linear-gradient(180deg,#1d1d1d,#0e0e0e);border-color:rgba(255,205,132,.55);z-index:3}
+.ftab.active p{color:var(--gold)}
+.t-merch{left:699px;width:206px}
+.t-design{left:905px;width:199px}
+.t-motion{left:1104px;width:199px}
+.t-product{left:1303px;width:338.6px;border-top-right-radius:24px}
+
+/* ---------- Black container body ---------- */
+.mbody{position:absolute;left:43px;top:177px;width:1641.6px;height:902px;border-radius:24px;border-top-right-radius:0;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 26%),
+    linear-gradient(180deg,#0b0b0b, #000 55%);
+  border:1px solid rgba(255,205,132,.4);overflow:hidden;z-index:1}
+
+.view{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.view.on{opacity:1;pointer-events:auto}
+
+
+/* gradient glass stroke (matches work tiles) */
+.gstroke{border:none !important}
+.gstroke::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.1px;
+  background:linear-gradient(135deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.28) 34%, rgba(255,255,255,.06) 62%, rgba(255,255,255,.22) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:3}
+
+/* ---------- Shared media block (thumb over video) ---------- */
+.media{position:absolute;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#1c1c1c}
+.media video,.media img.thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.media img.thumb{z-index:2;transition:opacity .35s ease}
+.media.playing img.thumb{opacity:0}
+
+/* ---------- FOLDERS view ---------- */
+.folder{position:absolute;top:192px;width:615px;height:422px;cursor:pointer;perspective:1200px}
+.folder-motion{left:159px}
+.folder-edits{left:876px}
+.fcard{position:absolute;border-radius:14px;background:var(--glass-grad);
+  transition:transform .5s var(--deck-ease)}
+.fcard .in{position:absolute;inset:5px;border-radius:10.6px;border:.6px solid rgba(255,255,255,.14);background:#2a2a2a;overflow:hidden}
+.fcard img{width:100%;height:100%;object-fit:cover;display:block}
+.fc3{left:242px;top:58px;width:360.6px;height:230.1px;z-index:1;transform:rotate(6.72deg)}
+.fc2{left:84.6px;top:0;width:455.1px;height:290.4px;border-radius:17.8px;z-index:2}
+.fc2 .in{inset:6.2px;border-radius:13.4px}
+.fc1{left:20.3px;top:35.5px;width:375.9px;height:239.8px;z-index:3;border-radius:14.7px;transform:rotate(-11.67deg)}
+.folder-front{position:absolute;left:25.6px;top:111.2px;width:574.9px;height:310.5px;z-index:4;
+  transform-origin:50% 100%;transition:transform .5s var(--deck-ease)}
+.folder-label{position:absolute;bottom:36px;z-index:5;font-family:'Manrope';font-weight:800;font-size:13.09px;
+  letter-spacing:4.19px;color:var(--gold);pointer-events:none}
+.folder-motion .folder-label{right:63px}
+.folder-edits .folder-label{right:81px}
+/* hover: folder opens a little, videos slide up + outward */
+.folder:hover .fc1{transform:translate(-18px,-30px) rotate(-15deg)}
+.folder:hover .fc2{transform:translateY(-36px)}
+.folder:hover .fc3{transform:translate(18px,-26px) rotate(9.5deg)}
+.folder:hover .folder-front{transform:rotateX(-12deg) translateY(4px)}
+/* click: opening burst before switching views */
+.folder.opening .fc1{transform:translate(-40px,-90px) rotate(-18deg)}
+.folder.opening .fc2{transform:translateY(-110px) scale(1.04)}
+.folder.opening .fc3{transform:translate(42px,-84px) rotate(12deg)}
+.folder.opening .folder-front{transform:rotateX(-28deg) translateY(10px)}
+
+/* ---------- VIEW SWITCH pill ---------- */
+.vswitch{position:absolute;left:1467px;top:13px;width:128px;height:31px;background:#000;border-radius:15px;z-index:10;display:none}
+.vswitch .pill{position:absolute;top:2.26px;width:63px;height:26.5px;border-radius:13.26px;
+  background:linear-gradient(29.4deg,#1D1B19 28.6%,#A9832A 97.6%);transition:left .3s cubic-bezier(.4,0,.2,1)}
+.vswitch.slide .pill{left:62px}
+.vswitch.grid .pill{left:3px}
+.vs-btn{position:absolute;top:0;width:64px;height:31px;cursor:pointer;display:flex;align-items:center;justify-content:center;background:none;border:none}
+.vs-grid{left:0}
+.vs-slide{right:0}
+.icon-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.83px;width:19px;height:14px}
+.icon-grid i{background:var(--nav-gray);border-radius:.83px;transition:background .3s}
+.vswitch.grid .icon-grid i{background:var(--gold)}
+.icon-slide{display:flex;align-items:center;gap:1px}
+.icon-slide i{background:var(--nav-gray);transition:background .3s}
+.icon-slide i:nth-child(1){width:5px;height:12px;border-radius:.86px 0 0 .86px}
+.icon-slide i:nth-child(2){width:18px;height:14px;border-radius:1px}
+.icon-slide i:nth-child(3){width:5px;height:12px;border-radius:0 .86px .86px 0}
+.vswitch.slide .icon-slide i{background:var(--gold)}
+
+/* ---------- Back button ---------- */
+.backbtn{position:absolute;left:47px;top:13px;width:44px;height:31px;border-radius:15px;background:#000;
+  border:1px solid rgba(255,205,132,.4);color:var(--gold);font-size:15px;cursor:pointer;z-index:10;display:none;
+  align-items:center;justify-content:center;font-family:'Manrope';transition:background .25s}
+.backbtn:hover{background:#161310}
+
+/* ---------- SLIDE deck ---------- */
+.deck-card{position:absolute;background:var(--glass-grad);cursor:pointer;
+  transition:left .55s var(--deck-ease), top .55s var(--deck-ease), width .55s var(--deck-ease),
+    height .55s var(--deck-ease), border-radius .55s var(--deck-ease), opacity .45s ease, transform .35s ease,
+    filter .45s ease}
+.deck-card .media{transition:inset .55s var(--deck-ease), border-radius .55s var(--deck-ease)}
+.deck-card.noanim, .deck-card.noanim .media{transition:none !important}
+/* center card with stacks on both sides; glass frames blur whatever sits underneath */
+.pc{left:408.4px;top:166px;width:824.7px;height:526.2px;border-radius:32.2px;z-index:8;
+  backdrop-filter:blur(5.4px);-webkit-backdrop-filter:blur(5.4px);
+  filter:drop-shadow(19.1px 5.1px 32.6px rgba(0,0,0,.25))}
+.pc .media{inset:11.2px;border-radius:24.3px}
+.pr1{left:751px;top:219px;width:674px;height:430px;border-radius:26.3px;z-index:6;
+  backdrop-filter:blur(4.4px);-webkit-backdrop-filter:blur(4.4px);
+  filter:drop-shadow(17px 5.2px 27.6px rgba(0,0,0,.25))}
+.pr1 .media{inset:9.15px;border-radius:19.8px}
+.pr2{left:988px;top:253px;width:561px;height:357.9px;border-radius:21.9px;z-index:4;
+  backdrop-filter:blur(3.7px);-webkit-backdrop-filter:blur(3.7px)}
+.pr2 .media{inset:7.6px;border-radius:16.5px}
+.pr3{left:1150px;top:283px;width:480px;height:306px;border-radius:18px;z-index:3;opacity:0;pointer-events:none}
+.pr3 .media{inset:6.5px;border-radius:14px}
+.pl1{left:216.6px;top:219px;width:674px;height:430px;border-radius:26.3px;z-index:6;
+  backdrop-filter:blur(4.4px);-webkit-backdrop-filter:blur(4.4px);
+  filter:drop-shadow(-17px 5.2px 27.6px rgba(0,0,0,.25))}
+.pl1 .media{inset:9.15px;border-radius:19.8px}
+.pl2{left:92.6px;top:253px;width:561px;height:357.9px;border-radius:21.9px;z-index:4;
+  backdrop-filter:blur(3.7px);-webkit-backdrop-filter:blur(3.7px)}
+.pl2 .media{inset:7.6px;border-radius:16.5px}
+.pl3{left:11.6px;top:283px;width:480px;height:306px;border-radius:18px;z-index:3;opacity:0;pointer-events:none}
+.pl3 .media{inset:6.5px;border-radius:14px}
+/* hover popout */
+.pc:hover{transform:translateY(-8px) scale(1.012)}
+.pr1:hover,.pr2:hover{transform:translate(-16px,-8px)}
+.pl1:hover,.pl2:hover{transform:translate(16px,-8px)}
+/* front card expanding into the player window */
+.deck-card.expanding{left:330.8px !important;top:64px !important;width:980px !important;height:551px !important;
+  border-radius:32.2px !important;z-index:20 !important;opacity:1 !important;transform:none !important}
+.sl-nav{position:absolute;left:50%;transform:translateX(-50%);top:722px;display:flex;gap:12px;z-index:8}
+.sl-nav button{width:44px;height:31px;border-radius:15px;background:#000;border:1px solid rgba(255,205,132,.4);
+  color:var(--gold);font-size:14px;cursor:pointer;transition:background .25s}
+.sl-nav button:hover{background:#161310}
+
+/* ---------- GRID view ---------- */
+.gridscroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.gridscroll::-webkit-scrollbar{display:none}
+.gridwrap{position:relative;width:100%;padding:100px 0 60px}
+.g-row{display:flex;justify-content:center;gap:53px;margin-bottom:55.8px}
+.g-card{position:relative;width:458px;height:292.2px;border-radius:17.9px;
+  background:var(--glass-grad);cursor:pointer;flex:none;
+  filter:drop-shadow(10.6px 2.8px 18.1px rgba(0,0,0,.25));transition:transform .35s ease}
+.g-card:hover{transform:translateY(-8px) scale(1.02)}
+.g-card .media{inset:6.2px;border-radius:13.5px}
+.g-card.empty{cursor:default}
+.g-card.empty:hover{transform:none}
+.g-card.empty .media{background:#595959;border-color:rgba(255,255,255,.14)}
+
+/* ---------- PLAYER view ---------- */
+#view-player{transition:opacity .25s ease}
+.player-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding-top:64px}
+.p-card{position:relative;width:980px;height:551px;border-radius:32.2px;
+  background:var(--glass-grad);flex:none}
+.p-card .inner{position:absolute;inset:11.2px;border-radius:24.3px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.16)}
+.p-card iframe,.p-card video{width:100%;height:100%;display:block;border:none;object-fit:cover;background:#000}
+
+.p-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;
+  background:rgba(0,0,0,.65);border:1px solid rgba(255,205,132,.4);color:var(--gold);cursor:pointer;z-index:6;
+  display:flex;align-items:center;justify-content:center;transition:background .25s, transform .25s}
+.p-arrow:hover{background:#161310;transform:translateY(-50%) scale(1.06)}
+.p-arrow svg{width:16px;height:16px;stroke:var(--gold);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.p-arrow.prev{left:22px}
+.p-arrow.next{right:22px}
+.p-meta{width:980px;margin-top:26px;color:#fff}
+.p-title{font-family:'Manrope';font-weight:800;font-size:18px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.p-note{font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:.5px;color:#8a8a8a;margin-top:6px}
+.p-note a{color:var(--gold);text-decoration:none}
+.p-descrow{display:flex;align-items:flex-start;gap:20px;margin-top:14px}
+.p-desc{flex:1;font-family:'Manrope';font-weight:500;font-size:14px;line-height:1.6;color:#bdbdbd}
+.p-copy{flex:none;height:31px;padding:0 20px;border-radius:15px;background:#000;border:1px solid rgba(255,205,132,.4);
+  color:var(--gold);font-family:'Manrope';font-weight:800;font-size:11px;letter-spacing:2.5px;cursor:pointer;transition:background .25s}
+.p-copy:hover{background:#161310}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <div class="header">
+    <div class="logo">
+      <div class="mark">sc</div>
+      <div class="name"><b>Sarthak</b><br><span>Creates</span></div>
+    </div>
+    <div class="hline"></div>
+    <div class="navpill"><div class="sel"></div><p class="about">ABOUT</p><p class="work">WORK</p></div>
+    <div class="git"><p>GET IN TOUCH</p></div>
+  </div>
+
+  <div class="tabstrip">
+    <div class="ftab t-merch"><p>MERCH</p></div>
+    <div class="ftab t-design"><p>DESIGN</p></div>
+    <div class="ftab t-motion active"><p>MOTION</p></div>
+    <div class="ftab t-product"><p>PRODUCT</p></div>
+  </div>
+
+  <div class="mbody" id="mbody">
+
+    <!-- FOLDERS -->
+    <div class="view on" id="view-folders">
+      <div class="folder folder-motion" data-folder="motion">
+        <div class="fcard gstroke fc3"><div class="in"><img src="assets/motion/thumbs/3.jpg" alt=""></div></div>
+        <div class="fcard gstroke fc2"><div class="in"><img src="assets/motion/thumbs/2.jpg" alt=""></div></div>
+        <div class="fcard gstroke fc1"><div class="in"><img src="assets/motion/thumbs/1.jpg" alt=""></div></div>
+        <svg class="folder-front" viewBox="0 0 575 310.5">
+          <defs>
+            <linearGradient id="foldg" x1="0" y1="310" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#1A1D19"/><stop offset="1" stop-color="#3E3E3E"/>
+            </linearGradient>
+          </defs>
+          <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+            fill="url(#foldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+        </svg>
+        <p class="folder-label">MOTION</p>
+      </div>
+
+      <div class="folder folder-edits" data-folder="edits">
+        <div class="fcard gstroke fc3"><div class="in"></div></div>
+        <div class="fcard gstroke fc2"><div class="in"></div></div>
+        <div class="fcard gstroke fc1"><div class="in"></div></div>
+        <svg class="folder-front" viewBox="0 0 575 310.5">
+          <path d="M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z"
+            fill="url(#foldg)" stroke="rgba(255,255,255,.3)" stroke-width=".77"/>
+        </svg>
+        <p class="folder-label">EDITS</p>
+      </div>
+    </div>
+
+    <!-- SLIDE deck (7 persistent cards cycling in a loop, stacks on both sides) -->
+    <div class="view" id="view-slide">
+      <div class="deck-card gstroke pl3" data-card="0"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pl2" data-card="1"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pr3" data-card="2"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pr2" data-card="3"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pl1" data-card="4"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pr1" data-card="5"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="deck-card gstroke pc" data-card="6"><div class="media"><img class="thumb" alt=""><video muted loop playsinline preload="metadata"></video></div></div>
+      <div class="sl-nav">
+        <button id="sl-prev" aria-label="Previous">&#8592;</button>
+        <button id="sl-next" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="view" id="view-grid">
+      <div class="gridscroll"><div class="gridwrap" id="gridwrap"></div></div>
+    </div>
+
+    <!-- PLAYER -->
+    <div class="view" id="view-player">
+      <div class="player-wrap">
+        <div class="p-card gstroke">
+          <div class="inner" id="p-media"></div>
+          <button class="p-arrow prev" id="p-prev" aria-label="Previous video"><svg viewBox="0 0 16 16"><polyline points="10.5,2.5 5,8 10.5,13.5"/></svg></button>
+          <button class="p-arrow next" id="p-next" aria-label="Next video"><svg viewBox="0 0 16 16"><polyline points="5.5,2.5 11,8 5.5,13.5"/></svg></button>
+        </div>
+        <div class="p-meta">
+          <p class="p-title" id="p-title"></p>
+          <p class="p-note" id="p-note"></p>
+          <div class="p-descrow">
+            <p class="p-desc" id="p-desc"></p>
+            <button class="p-copy" id="p-copy">COPY LINK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vswitch slide" id="vswitch">
+      <div class="pill"></div>
+      <button class="vs-btn vs-grid" data-mode="grid"><span class="icon-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+      <button class="vs-btn vs-slide" data-mode="slide"><span class="icon-slide"><i></i><i></i><i></i></span></button>
+    </div>
+    <button class="backbtn" id="backbtn" aria-label="Back">&#8592;</button>
+
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   MOTION DATA — mapping is by NUMBER: preview N -> YouTube video N
+   Fill "yt" with the YouTube video ID once uploaded.
+   Descriptions are placeholders; edit freely.
+   ============================================================ */
+const CHANNEL = "https://www.youtube.com/@sarthakcreates";
+const MOTION_VIDEOS = [
+  {n:1,  title:"Flash Trade V2 Explainer", yt:"9EROvt87uyk", desc:"A full walkthrough of Flash Trade V2. Built to explain the new trading flow in a way anyone can follow."},
+  {n:2,  title:"Equity Perps",             yt:"RiB74hr6eaM", desc:"Launch animation for Equity Perps on Flash Trade. Stocks meet onchain perpetuals."},
+  {n:3,  title:"Flash Trade V2 Launch",    yt:"U-souFbSLBk", desc:"The V2 launch film. A new beginning for effortless perpetuals trading."},
+  {n:4,  title:"Futarchy",                 yt:"QNMzlUXPbW0", desc:"Explaining futarchy governance and how the community steers the protocol."},
+  {n:5,  title:"FAF Mint",                 yt:"Qw5vPrCkBPE", desc:"Mint announcement for $FAF. Fully diluted, revenue share, zero team allocation."},
+  {n:6,  title:"2024 Wrapped",             yt:"N6XxhS9s6VE", desc:"A year of Flash Trade in one animation. Everything we shipped in 2024."},
+  {n:7,  title:"DUEL",                     yt:"1Fpv-570m4o", desc:"Promo for DUEL. Trade head to head and battle for the prize pool."},
+  {n:8,  title:"ORE",                      yt:"XUoqv7TwTW8", desc:"ORE listing animation. New asset, same effortless trading."},
+  {n:9,  title:"Ownership",                yt:"6U3CPdQ3Up8", desc:"What ownership means on Flash Trade. Revenue share explained in motion."},
+  {n:10, title:"RUG",                      yt:"ON9GRaFvlb4", desc:"A playful take on rugs and why Flash Trade is built different."},
+  {n:11, title:"Pengu",                    yt:"1YFM-vhgzuw", desc:"Pengu listing promo. Bringing the flock onchain."},
+  {n:12, title:"x-stocks",                 yt:"_Nwviw9ZDtU", desc:"x-stocks on Flash Trade. Trade equities with crypto rails."},
+  {n:13, title:"2025 Wrapped",             yt:"YcTLVXFasH0", desc:"The 2025 recap. Bigger numbers, faster fills, more markets."},
+  {n:14, title:"Trade on Charts",          yt:"9SCfXW7JwJ8", desc:"Feature promo for trading directly on charts. Click, drag, done."},
+  {n:15, title:"Save Charts",              yt:"pgpOYAgRqfY", desc:"Save your chart layouts and pick up right where you left off."},
+  {n:16, title:"Auto Compounding",         yt:"Zwd9Atmo7b4", desc:"Auto compounding explained. Your rewards keep working for you."},
+  {n:17, title:"Degen Mode",               yt:"-EgmznPpeRk", desc:"Degen Mode promo. 500x leverage for the ones who want it all."},
+  {n:18, title:"Promo Animation 2",        yt:"aR6cHB_Bu9Y", desc:"Brand promo animation for Flash Trade."},
+  {n:19, title:"Promo Animation 3",        yt:"A3hXcRZJQV4", desc:"Brand promo animation for Flash Trade."},
+  {n:20, title:"Promo Animation 1",        yt:"T4x0llwlsVo", desc:"Brand promo animation for Flash Trade."}
+];
+const EDITS_VIDEOS = []; // coming soon; same structure will apply
+
+const src   = n => `assets/motion/${n}.mp4`;
+const thumb = n => `assets/motion/thumbs/${n}.jpg`;
+const mod = (a, m) => ((a % m) + m) % m;
+
+/* ---------- responsive scale ---------- */
+const stage = document.getElementById('stage');
+function fit(){
+  const s = Math.min(1, window.innerWidth / 1728);
+  stage.style.transform = `scale(${s})`;
+  document.body.style.height = (1117 * s) + 'px';
+}
+window.addEventListener('resize', fit); fit();
+
+/* ---------- state ---------- */
+let currentFolder = null;
+let deckMode = 'slide';
+let slideIndex = 0;       // index of the video shown on the front card
+let animLock = false;
+
+const views = {
+  folders: document.getElementById('view-folders'),
+  slide:   document.getElementById('view-slide'),
+  grid:    document.getElementById('view-grid'),
+  player:  document.getElementById('view-player')
+};
+const vswitch = document.getElementById('vswitch');
+const backbtn = document.getElementById('backbtn');
+
+function show(name){
+  Object.entries(views).forEach(([k, el]) => el.classList.toggle('on', k === name));
+  vswitch.style.display = (name === 'slide' || name === 'grid') ? 'block' : 'none';
+  backbtn.style.display = (name === 'folders') ? 'none' : 'flex';
+  if (name !== 'slide') pauseAll(views.slide);
+  if (name !== 'grid') pauseAll(views.grid);
+  if (name !== 'player') clearPlayer();
+}
+function pauseAll(root){
+  root.querySelectorAll('video').forEach(v => v.pause());
+  root.querySelectorAll('.media.playing').forEach(m => m.classList.remove('playing'));
+}
+function list(){ return currentFolder === 'edits' ? EDITS_VIDEOS : MOTION_VIDEOS; }
+
+/* ---------- folders ---------- */
+document.querySelectorAll('.folder').forEach(f => {
+  f.addEventListener('click', () => {
+    if (f.classList.contains('opening')) return;
+    f.classList.add('opening');
+    setTimeout(() => {
+      f.classList.remove('opening');
+      currentFolder = f.dataset.folder;
+      slideIndex = 0;
+      openMode(deckMode);
+    }, 380);
+  });
+});
+
+function openMode(m){
+  deckMode = m;
+  vswitch.classList.toggle('slide', m === 'slide');
+  vswitch.classList.toggle('grid',  m === 'grid');
+  if (m === 'slide'){ deckInit(); show('slide'); }
+  else { renderGrid(); show('grid'); }
+}
+vswitch.querySelectorAll('.vs-btn').forEach(b => b.addEventListener('click', () => openMode(b.dataset.mode)));
+
+backbtn.addEventListener('click', () => {
+  if (views.player.classList.contains('on')) { openMode(deckMode); return; }
+  currentFolder = null;
+  show('folders');
+});
+
+/* ---------- SLIDE deck: 7 persistent cards, center + stacks on both sides, looping ---------- */
+const deckCards = Array.from(document.querySelectorAll('.deck-card'));
+const POS = ['pl3','pl2','pl1','pc','pr1','pr2','pr3']; // roles[i] = card at POS[i]; center = roles[3]
+const OFFSET = [-3,-2,-1,0,1,2,3];                       // video offset from slideIndex per position
+let roles = [];
+
+function setCardMedia(card, item, instant){
+  const media = card.querySelector('.media');
+  const img = card.querySelector('img.thumb');
+  const vid = card.querySelector('video');
+  media.classList.remove('playing');
+  if (instant){ card.classList.add('noanim'); }
+  if (!item){
+    img.removeAttribute('src'); vid.removeAttribute('src'); delete vid.dataset.n; vid.load();
+  } else {
+    img.src = thumb(item.n);
+    if (vid.dataset.n !== String(item.n)){
+      vid.src = src(item.n);
+      vid.dataset.n = item.n;
+      vid.load();
+    }
+  }
+  if (instant){ requestAnimationFrame(() => card.classList.remove('noanim')); }
+}
+function itemAt(offset){
+  const vids = list();
+  if (!vids.length) return null;
+  return vids[mod(slideIndex + offset, vids.length)];
+}
+function applyRoles(){
+  roles.forEach((card, i) => {
+    card.classList.remove(...POS);
+    card.classList.add(POS[i]);
+  });
+}
+function playFront(){
+  const front = roles[3];
+  const vid = front.querySelector('video');
+  const media = front.querySelector('.media');
+  if (!vid.src) return;
+  vid.currentTime = 0;
+  vid.play().then(() => media.classList.add('playing')).catch(() => {});
+}
+function stopCard(card){
+  card.querySelector('video').pause();
+  card.querySelector('.media').classList.remove('playing');
+}
+function deckInit(){
+  roles = deckCards.slice(); // DOM order matches POS order via initial classes
+  roles.forEach((card, i) => setCardMedia(card, itemAt(OFFSET[i]), true));
+  applyRoles();
+  deckCards.forEach(stopCard);
+  playFront();
+}
+function deckNext(){
+  const vids = list(); if (!vids.length || animLock) return;
+  animLock = true;
+  stopCard(roles[3]);
+  slideIndex = mod(slideIndex + 1, vids.length);
+  // everything shifts one slot to the left; far-left hidden card jumps to far-right hidden slot
+  const wrap = roles[0]; // pl3 -> pr3
+  roles = [roles[1], roles[2], roles[3], roles[4], roles[5], roles[6], wrap];
+  setCardMedia(wrap, itemAt(3), true);
+  applyRoles();
+  setTimeout(() => { playFront(); animLock = false; }, 560);
+}
+function deckPrev(){
+  const vids = list(); if (!vids.length || animLock) return;
+  animLock = true;
+  stopCard(roles[3]);
+  slideIndex = mod(slideIndex - 1, vids.length);
+  const wrap = roles[6]; // pr3 -> pl3
+  roles = [wrap, roles[0], roles[1], roles[2], roles[3], roles[4], roles[5]];
+  setCardMedia(wrap, itemAt(-3), true);
+  applyRoles();
+  setTimeout(() => { playFront(); animLock = false; }, 560);
+}
+document.getElementById('sl-next').addEventListener('click', deckNext);
+document.getElementById('sl-prev').addEventListener('click', deckPrev);
+document.addEventListener('keydown', e => {
+  if (!views.slide.classList.contains('on')) return;
+  if (e.key === 'ArrowRight') deckNext();
+  if (e.key === 'ArrowLeft') deckPrev();
+});
+deckCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const i = roles.indexOf(card);
+    const vids = list(); if (!vids.length) return;
+    if (i === 4){ deckNext(); return; }
+    if (i === 5){ deckNext(); setTimeout(deckNext, 620); return; }
+    if (i === 2){ deckPrev(); return; }
+    if (i === 1){ deckPrev(); setTimeout(deckPrev, 620); return; }
+    if (i === 3){
+      if (animLock) return;
+      animLock = true;
+      card.classList.add('expanding');
+      setTimeout(() => {
+        openPlayer(vids[slideIndex], 'slide');
+        card.classList.remove('expanding');
+        animLock = false;
+      }, 560);
+    }
+  });
+});
+
+/* ---------- GRID ---------- */
+const gridwrap = document.getElementById('gridwrap');
+function renderGrid(){
+  gridwrap.innerHTML = '';
+  const vids = list();
+  const items = vids.length ? vids : Array.from({length:6}, () => null);
+  for (let i = 0; i < items.length; i += 3){
+    const row = document.createElement('div'); row.className = 'g-row';
+    items.slice(i, i + 3).forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'g-card gstroke' + (item ? '' : ' empty');
+      const media = document.createElement('div');
+      media.className = 'media'; media.style.position = 'absolute';
+      card.appendChild(media);
+      if (item){
+        const img = document.createElement('img');
+        img.className = 'thumb'; img.src = thumb(item.n);
+        const v = document.createElement('video');
+        v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+        media.appendChild(v); media.appendChild(img);
+        card.addEventListener('mouseenter', () => {
+          if (!v.src){ v.src = src(item.n); }
+          v.currentTime = 0;
+          v.play().then(() => media.classList.add('playing')).catch(() => {});
+        });
+        card.addEventListener('mouseleave', () => {
+          v.pause(); media.classList.remove('playing');
+        });
+        card.addEventListener('click', () => openPlayer(item, 'grid'));
+      }
+      row.appendChild(card);
+    });
+    gridwrap.appendChild(row);
+  }
+}
+
+/* ---------- PLAYER ---------- */
+const pMedia = document.getElementById('p-media');
+const pTitle = document.getElementById('p-title');
+const pNote  = document.getElementById('p-note');
+const pDesc  = document.getElementById('p-desc');
+const pCopy  = document.getElementById('p-copy');
+let currentDesc = '';
+let currentLink = CHANNEL;
+
+function videoLink(item){
+  return item.yt ? `https://youtu.be/${item.yt}` : CHANNEL;
+}
+function renderPlayer(item){
+  pMedia.innerHTML = '';
+  pTitle.textContent = `${item.n}. ${item.title}`;
+  currentDesc = item.desc;
+  currentLink = videoLink(item);
+  pDesc.textContent = item.desc;
+  pCopy.textContent = 'COPY LINK';
+  if (item.yt){
+    pNote.innerHTML = '';
+    const f = document.createElement('iframe');
+    f.src = `https://www.youtube.com/embed/${item.yt}?autoplay=1&rel=0`;
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    pMedia.appendChild(f);
+  } else {
+    pNote.innerHTML = `Full video coming soon on <a href="${CHANNEL}" target="_blank" rel="noopener">YouTube</a>. Playing the preview for now.`;
+    const v = document.createElement('video');
+    v.src = src(item.n); v.poster = thumb(item.n);
+    v.controls = true; v.autoplay = true; v.loop = true; v.playsInline = true;
+    pMedia.appendChild(v);
+  }
+}
+function openPlayer(item, from){
+  renderPlayer(item);
+  show('player');
+}
+function playerStep(step){
+  const vids = list(); if (!vids.length) return;
+  slideIndex = mod(slideIndex + step, vids.length);
+  renderPlayer(vids[slideIndex]);
+}
+document.getElementById('p-prev').addEventListener('click', () => playerStep(-1));
+document.getElementById('p-next').addEventListener('click', () => playerStep(1));
+document.addEventListener('keydown', e => {
+  if (!views.player.classList.contains('on')) return;
+  if (e.key === 'ArrowRight') playerStep(1);
+  if (e.key === 'ArrowLeft') playerStep(-1);
+});
+function clearPlayer(){ pMedia.innerHTML = ''; }
+pCopy.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(currentLink); pCopy.textContent = 'COPIED'; }
+  catch(e){ pCopy.textContent = 'COPY FAILED'; }
+  setTimeout(() => pCopy.textContent = 'COPY LINK', 1600);
+});
+</script>
+</body>
+</html>

@@ -831,3 +831,332 @@ function isMobile() { return window.innerWidth <= 768; }
       if(pill)pill.addEventListener('click',function(){ setTimeout(function(){ window.__setRoute(document.body.classList.contains('show-work')?'product':'about'); },0); });
       document.querySelectorAll('.work-btn').forEach(function(b){ b.addEventListener('click',function(){ window.__setRoute('product'); }); });
     })();
+
+    /* ===================== MOTION TAB (contained) ===================== */
+    (function(){
+      var CHANNEL = "https://www.youtube.com/@sarthakcreates";
+      var MOTION_VIDEOS = [
+        {n:1,  title:"Flash Trade V2 Explainer", yt:"9EROvt87uyk", desc:"A full walkthrough of Flash Trade V2. Built to explain the new trading flow in a way anyone can follow."},
+        {n:2,  title:"Equity Perps",             yt:"RiB74hr6eaM", desc:"Launch animation for Equity Perps on Flash Trade. Stocks meet onchain perpetuals."},
+        {n:3,  title:"Flash Trade V2 Launch",    yt:"U-souFbSLBk", desc:"The V2 launch film. A new beginning for effortless perpetuals trading."},
+        {n:4,  title:"Futarchy",                 yt:"QNMzlUXPbW0", desc:"Explaining futarchy governance and how the community steers the protocol."},
+        {n:5,  title:"FAF Mint",                 yt:"Qw5vPrCkBPE", desc:"Mint announcement for $FAF. Fully diluted, revenue share, zero team allocation."},
+        {n:6,  title:"2024 Wrapped",             yt:"N6XxhS9s6VE", desc:"A year of Flash Trade in one animation. Everything we shipped in 2024."},
+        {n:7,  title:"DUEL",                     yt:"1Fpv-570m4o", desc:"Promo for DUEL. Trade head to head and battle for the prize pool."},
+        {n:8,  title:"ORE",                      yt:"XUoqv7TwTW8", desc:"ORE listing animation. New asset, same effortless trading."},
+        {n:9,  title:"Ownership",                yt:"6U3CPdQ3Up8", desc:"What ownership means on Flash Trade. Revenue share explained in motion."},
+        {n:10, title:"RUG",                      yt:"ON9GRaFvlb4", desc:"A playful take on rugs and why Flash Trade is built different."},
+        {n:11, title:"Pengu",                    yt:"1YFM-vhgzuw", desc:"Pengu listing promo. Bringing the flock onchain."},
+        {n:12, title:"x-stocks",                 yt:"_Nwviw9ZDtU", desc:"x-stocks on Flash Trade. Trade equities with crypto rails."},
+        {n:13, title:"2025 Wrapped",             yt:"YcTLVXFasH0", desc:"The 2025 recap. Bigger numbers, faster fills, more markets."},
+        {n:14, title:"Trade on Charts",          yt:"9SCfXW7JwJ8", desc:"Feature promo for trading directly on charts. Click, drag, done."},
+        {n:15, title:"Save Charts",              yt:"pgpOYAgRqfY", desc:"Save your chart layouts and pick up right where you left off."},
+        {n:16, title:"Auto Compounding",         yt:"Zwd9Atmo7b4", desc:"Auto compounding explained. Your rewards keep working for you."},
+        {n:17, title:"Degen Mode",               yt:"-EgmznPpeRk", desc:"Degen Mode promo. 500x leverage for the ones who want it all."},
+        {n:18, title:"Promo Animation 2",        yt:"aR6cHB_Bu9Y", desc:"Brand promo animation for Flash Trade."},
+        {n:19, title:"Promo Animation 3",        yt:"A3hXcRZJQV4", desc:"Brand promo animation for Flash Trade."},
+        {n:20, title:"Promo Animation 1",        yt:"T4x0llwlsVo", desc:"Brand promo animation for Flash Trade."}
+      ];
+      var EDITS_VIDEOS = [];
+
+      var src   = function(n){ return "assets/motion/" + n + ".mp4"; };
+      var thumb = function(n){ return "assets/motion/thumbs/" + n + ".jpg"; };
+      var mod   = function(a,m){ return ((a % m) + m) % m; };
+      var videoLink = function(item){ return item.yt ? ("https://youtu.be/" + item.yt) : CHANNEL; };
+      var $ = function(id){ return document.getElementById(id); };
+
+      /* ---------------- DESKTOP ---------------- */
+      (function(){
+        var layer = $('moLayer'); if(!layer) return;
+        var views = { folders:$('moFolders'), slide:$('moSlide'), grid:$('moGrid'), player:$('moPlayer') };
+        var vswitch = $('moVswitch'), back = $('moBack');
+        var deckMode = 'slide', currentFolder = null, slideIndex = 0, animLock = false;
+
+        function list(){ return currentFolder === 'edits' ? EDITS_VIDEOS : MOTION_VIDEOS; }
+        function pauseAll(root){
+          if(!root) return;
+          root.querySelectorAll('video').forEach(function(v){ v.pause(); });
+          root.querySelectorAll('.mo-media.playing').forEach(function(m){ m.classList.remove('playing'); });
+        }
+        function show(name){
+          Object.keys(views).forEach(function(k){ views[k].classList.toggle('on', k === name); });
+          vswitch.style.display = (name === 'slide' || name === 'grid') ? 'block' : 'none';
+          back.style.display = (name === 'folders') ? 'none' : 'flex';
+          if(name !== 'slide') pauseAll(views.slide);
+          if(name !== 'grid') pauseAll(views.grid);
+          if(name !== 'player') pMedia.innerHTML = '';
+        }
+
+        // folders
+        layer.querySelectorAll('#moFolders .mo-folder').forEach(function(f){
+          f.addEventListener('click', function(){
+            if(f.classList.contains('opening')) return;
+            f.classList.add('opening');
+            setTimeout(function(){
+              f.classList.remove('opening');
+              currentFolder = f.getAttribute('data-folder');
+              slideIndex = 0;
+              openMode(deckMode);
+            }, 380);
+          });
+        });
+        function openMode(m){
+          deckMode = m;
+          vswitch.classList.toggle('slide', m === 'slide');
+          vswitch.classList.toggle('grid',  m === 'grid');
+          if(m === 'slide'){ deckInit(); show('slide'); }
+          else { renderGrid(); show('grid'); }
+        }
+        vswitch.querySelectorAll('.mo-vs-btn').forEach(function(b){
+          b.addEventListener('click', function(){ openMode(b.getAttribute('data-mode')); });
+        });
+        back.addEventListener('click', function(){
+          if(views.player.classList.contains('on')){ openMode(deckMode); return; }
+          currentFolder = null; show('folders');
+        });
+
+        // slide deck (7 cards, both-side loop)
+        var deckCards = [].slice.call(views.slide.querySelectorAll('.mo-deck-card'));
+        var POS = ['mo-pl3','mo-pl2','mo-pl1','mo-pc','mo-pr1','mo-pr2','mo-pr3'];
+        var OFFSET = [-3,-2,-1,0,1,2,3];
+        var roles = [];
+        function setCardMedia(card, item, instant){
+          var media = card.querySelector('.mo-media'), img = card.querySelector('img.mo-thumb'), vid = card.querySelector('video');
+          media.classList.remove('playing');
+          if(instant) card.classList.add('noanim');
+          if(!item){ img.removeAttribute('src'); vid.removeAttribute('src'); delete vid.dataset.n; vid.load(); }
+          else {
+            img.src = thumb(item.n);
+            if(vid.dataset.n !== String(item.n)){ vid.src = src(item.n); vid.dataset.n = item.n; vid.load(); }
+          }
+          if(instant) requestAnimationFrame(function(){ card.classList.remove('noanim'); });
+        }
+        function itemAt(off){ var v = list(); return v.length ? v[mod(slideIndex + off, v.length)] : null; }
+        function applyRoles(){ roles.forEach(function(card,i){ POS.forEach(function(c){ card.classList.remove(c); }); card.classList.add(POS[i]); }); }
+        function playFront(){
+          var f = roles[3], vid = f.querySelector('video'), media = f.querySelector('.mo-media');
+          if(!vid.src) return; vid.currentTime = 0;
+          vid.play().then(function(){ media.classList.add('playing'); }).catch(function(){});
+        }
+        function stopCard(card){ card.querySelector('video').pause(); card.querySelector('.mo-media').classList.remove('playing'); }
+        function deckInit(){
+          roles = deckCards.slice();
+          roles.forEach(function(card,i){ setCardMedia(card, itemAt(OFFSET[i]), true); });
+          applyRoles(); deckCards.forEach(stopCard); playFront();
+        }
+        function deckNext(){
+          var v = list(); if(!v.length || animLock) return; animLock = true;
+          stopCard(roles[3]); slideIndex = mod(slideIndex + 1, v.length);
+          var wrap = roles[0]; roles = [roles[1],roles[2],roles[3],roles[4],roles[5],roles[6],wrap];
+          setCardMedia(wrap, itemAt(3), true); applyRoles();
+          setTimeout(function(){ playFront(); animLock = false; }, 560);
+        }
+        function deckPrev(){
+          var v = list(); if(!v.length || animLock) return; animLock = true;
+          stopCard(roles[3]); slideIndex = mod(slideIndex - 1, v.length);
+          var wrap = roles[6]; roles = [wrap,roles[0],roles[1],roles[2],roles[3],roles[4],roles[5]];
+          setCardMedia(wrap, itemAt(-3), true); applyRoles();
+          setTimeout(function(){ playFront(); animLock = false; }, 560);
+        }
+        $('moNext').addEventListener('click', deckNext);
+        $('moPrev').addEventListener('click', deckPrev);
+        deckCards.forEach(function(card){
+          card.addEventListener('click', function(){
+            var i = roles.indexOf(card), v = list(); if(!v.length) return;
+            if(i === 4){ deckNext(); return; }
+            if(i === 5){ deckNext(); setTimeout(deckNext, 620); return; }
+            if(i === 2){ deckPrev(); return; }
+            if(i === 1){ deckPrev(); setTimeout(deckPrev, 620); return; }
+            if(i === 3){
+              if(animLock) return; animLock = true;
+              card.classList.add('expanding');
+              setTimeout(function(){ openPlayer(v[slideIndex]); card.classList.remove('expanding'); animLock = false; }, 560);
+            }
+          });
+        });
+
+        // grid
+        var gridwrap = $('moGridwrap');
+        function renderGrid(){
+          gridwrap.innerHTML = '';
+          var v = list(), items = v.length ? v : [null,null,null,null,null,null];
+          for(var i=0;i<items.length;i+=3){
+            var row = document.createElement('div'); row.className = 'mo-g-row';
+            items.slice(i,i+3).forEach(function(item){
+              var card = document.createElement('div');
+              card.className = 'mo-g-card mo-gstroke' + (item ? '' : ' empty');
+              var media = document.createElement('div'); media.className = 'mo-media'; media.style.position = 'absolute';
+              card.appendChild(media);
+              if(item){
+                var img = document.createElement('img'); img.className = 'mo-thumb'; img.src = thumb(item.n);
+                var vd = document.createElement('video'); vd.muted = true; vd.loop = true; vd.playsInline = true; vd.preload = 'none';
+                media.appendChild(vd); media.appendChild(img);
+                card.addEventListener('mouseenter', function(){ if(!vd.src) vd.src = src(item.n); vd.currentTime = 0; vd.play().then(function(){ media.classList.add('playing'); }).catch(function(){}); });
+                card.addEventListener('mouseleave', function(){ vd.pause(); media.classList.remove('playing'); });
+                card.addEventListener('click', function(){ openPlayer(item); });
+              }
+              row.appendChild(card);
+            });
+            gridwrap.appendChild(row);
+          }
+        }
+
+        // player
+        var pMedia = $('moPmedia'), pTitle = $('moPtitle'), pNote = $('moPnote'), pDesc = $('moPdesc'), pCopy = $('moPcopy');
+        var currentDesc = '', currentLink = CHANNEL;
+        function renderPlayer(item){
+          pMedia.innerHTML = '';
+          pTitle.textContent = item.n + '. ' + item.title;
+          currentDesc = item.desc; currentLink = videoLink(item);
+          pDesc.textContent = item.desc; pCopy.textContent = 'COPY LINK';
+          if(item.yt){
+            pNote.innerHTML = '';
+            var f = document.createElement('iframe');
+            f.src = 'https://www.youtube.com/embed/' + item.yt + '?autoplay=1&rel=0';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
+            pMedia.appendChild(f);
+          } else {
+            pNote.innerHTML = 'Full video coming soon on <a href="' + CHANNEL + '" target="_blank" rel="noopener">YouTube</a>. Playing the preview for now.';
+            var vd = document.createElement('video'); vd.src = src(item.n); vd.poster = thumb(item.n);
+            vd.controls = true; vd.autoplay = true; vd.loop = true; vd.playsInline = true; pMedia.appendChild(vd);
+          }
+        }
+        function openPlayer(item){ renderPlayer(item); show('player'); }
+        function playerStep(step){ var v = list(); if(!v.length) return; slideIndex = mod(slideIndex + step, v.length); renderPlayer(v[slideIndex]); }
+        $('moPprev').addEventListener('click', function(){ playerStep(-1); });
+        $('moPnext').addEventListener('click', function(){ playerStep(1); });
+        pCopy.addEventListener('click', function(){
+          navigator.clipboard.writeText(currentLink).then(function(){ pCopy.textContent = 'COPIED'; })
+            .catch(function(){ pCopy.textContent = 'COPY FAILED'; });
+          setTimeout(function(){ pCopy.textContent = 'COPY LINK'; }, 1600);
+        });
+
+        // reset to folders whenever the motion tab is (re)entered
+        function resetMotion(){ currentFolder = null; deckMode = 'slide'; slideIndex = 0; show('folders'); }
+
+        // Hook into existing desktop tab switching: show layer only when motion active.
+        var motionContainer = $('motionContainer');
+        var folderBody = document.querySelector('.folder-body');
+        function sync(){
+          var active = motionContainer && motionContainer.classList.contains('active');
+          layer.classList.toggle('visible', !!active);
+          if(active){
+            if(folderBody) folderBody.classList.remove('visible');
+            resetMotion();
+          } else {
+            pauseAll(views.slide); pauseAll(views.grid); pMedia.innerHTML = '';
+          }
+        }
+        // observe class changes on the motion container
+        var mo = new MutationObserver(sync);
+        mo.observe(motionContainer, { attributes:true, attributeFilter:['class'] });
+        sync();
+      })();
+
+      /* ---------------- MOBILE ---------------- */
+      (function(){
+        var layer = $('moMLayer'); if(!layer) return;
+        var views = { folders:$('moMFolders'), slide:$('moMSlide'), grid:$('moMGrid'), player:$('moMPlayer') };
+        var sw = $('moMSwitch'), back = $('moMBack');
+        var mode = 'slide', currentFolder = null, slideIndex = 0;
+
+        function list(){ return currentFolder === 'edits' ? EDITS_VIDEOS : MOTION_VIDEOS; }
+        function pauseAll(root){ if(!root) return; root.querySelectorAll('video').forEach(function(v){ v.pause(); }); root.querySelectorAll('.mo-media.playing').forEach(function(m){ m.classList.remove('playing'); }); }
+        function show(name){
+          Object.keys(views).forEach(function(k){ views[k].classList.toggle('on', k === name); });
+          sw.style.display = (name === 'slide' || name === 'grid') ? 'block' : 'none';
+          back.style.display = (name === 'folders') ? 'none' : 'flex';
+          if(name !== 'slide') pauseAll(views.slide);
+          if(name !== 'grid') pauseAll(views.grid);
+          if(name !== 'player') pMedia.innerHTML = '';
+        }
+        layer.querySelectorAll('#moMFolders .mo-m-folder').forEach(function(f){
+          f.addEventListener('click', function(){ currentFolder = f.getAttribute('data-folder'); slideIndex = 0; openMode(mode); });
+        });
+        function openMode(m){
+          mode = m; sw.classList.toggle('slide', m === 'slide'); sw.classList.toggle('grid', m === 'grid');
+          if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); show('grid'); }
+        }
+        sw.querySelectorAll('.mo-m-vs').forEach(function(b){ b.addEventListener('click', function(){ openMode(b.getAttribute('data-mode')); }); });
+        back.addEventListener('click', function(){
+          if(views.player.classList.contains('on')){ openMode(mode); return; }
+          currentFolder = null; show('folders');
+        });
+
+        // simple single-card slide (mobile): front plays, arrows change index
+        var scard = views.slide.querySelector('.mo-m-scard');
+        function renderSlide(){
+          var v = list(), media = scard.querySelector('.mo-media'), img = scard.querySelector('img.mo-thumb'), vid = scard.querySelector('video');
+          media.classList.remove('playing');
+          if(!v.length){ img.removeAttribute('src'); vid.removeAttribute('src'); return; }
+          var item = v[mod(slideIndex, v.length)];
+          img.src = thumb(item.n);
+          if(vid.dataset.n !== String(item.n)){ vid.src = src(item.n); vid.dataset.n = item.n; }
+          vid.currentTime = 0; vid.play().then(function(){ media.classList.add('playing'); }).catch(function(){});
+        }
+        $('moMNext').addEventListener('click', function(){ var v=list(); if(!v.length) return; slideIndex = mod(slideIndex+1, v.length); renderSlide(); });
+        $('moMPrev').addEventListener('click', function(){ var v=list(); if(!v.length) return; slideIndex = mod(slideIndex-1, v.length); renderSlide(); });
+        scard.addEventListener('click', function(){ var v=list(); if(!v.length) return; openPlayer(v[mod(slideIndex, v.length)]); });
+
+        // grid
+        var gridwrap = $('moMGridwrap');
+        function renderGrid(){
+          gridwrap.innerHTML = '';
+          var v = list(), items = v.length ? v : [null,null,null,null];
+          items.forEach(function(item){
+            var card = document.createElement('div'); card.className = 'mo-m-gcard mo-gstroke' + (item?'':' empty');
+            var media = document.createElement('div'); media.className = 'mo-media'; media.style.position='absolute'; card.appendChild(media);
+            if(item){
+              var img = document.createElement('img'); img.className='mo-thumb'; img.src = thumb(item.n);
+              var vd = document.createElement('video'); vd.muted=true; vd.loop=true; vd.playsInline=true; vd.preload='none';
+              media.appendChild(vd); media.appendChild(img);
+              card.addEventListener('click', function(){
+                if(!vd.src){ vd.src = src(item.n); vd.play().then(function(){ media.classList.add('playing'); setTimeout(function(){ openPlayer(item); }, 120); }).catch(function(){ openPlayer(item); }); }
+                else openPlayer(item);
+              });
+            }
+            gridwrap.appendChild(card);
+          });
+        }
+
+        // player
+        var pMedia = $('moMPmedia'), pTitle = $('moMPtitle'), pDesc = $('moMPdesc'), pCopy = $('moMPcopy');
+        var currentLink = CHANNEL;
+        function renderPlayer(item){
+          pMedia.innerHTML = '';
+          pTitle.textContent = item.n + '. ' + item.title; pDesc.textContent = item.desc;
+          currentLink = videoLink(item); pCopy.textContent = 'COPY LINK';
+          if(item.yt){
+            var f = document.createElement('iframe');
+            f.src = 'https://www.youtube.com/embed/' + item.yt + '?autoplay=1&rel=0&playsinline=1';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; pMedia.appendChild(f);
+          } else {
+            var vd = document.createElement('video'); vd.src = src(item.n); vd.poster = thumb(item.n);
+            vd.controls = true; vd.autoplay = true; vd.loop = true; vd.playsInline = true; pMedia.appendChild(vd);
+          }
+        }
+        function openPlayer(item){ renderPlayer(item); show('player'); }
+        pCopy.addEventListener('click', function(){
+          navigator.clipboard.writeText(currentLink).then(function(){ pCopy.textContent='COPIED'; }).catch(function(){ pCopy.textContent='COPY FAILED'; });
+          setTimeout(function(){ pCopy.textContent='COPY LINK'; }, 1600);
+        });
+
+        function resetMotion(){ currentFolder = null; mode = 'slide'; slideIndex = 0; show('folders'); }
+
+        // Hook into existing mobile tab switching: show layer when mMotionC active.
+        var mMotion = $('mMotionC');
+        function sync(){
+          var active = mMotion && mMotion.classList.contains('active');
+          layer.classList.toggle('visible', !!active);
+          if(active) resetMotion();
+          else { pauseAll(views.slide); pauseAll(views.grid); pMedia.innerHTML=''; }
+        }
+        if(mMotion){
+          var mo = new MutationObserver(sync);
+          mo.observe(mMotion, { attributes:true, attributeFilter:['class'] });
+          sync();
+        }
+      })();
+    })();
+    /* ===================== END MOTION TAB ===================== */
+
