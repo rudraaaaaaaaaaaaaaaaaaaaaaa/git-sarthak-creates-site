@@ -1066,6 +1066,7 @@ function isMobile() { return window.innerWidth <= 768; }
           Object.keys(views).forEach(function(k){ views[k].classList.toggle('on', k === name); });
           sw.style.display = (name === 'slide' || name === 'grid') ? 'block' : 'none';
           back.style.display = (name === 'folders') ? 'none' : 'flex';
+          if(dotsEl) dotsEl.classList.toggle('show', name === 'grid');
           if(name !== 'slide') pauseAll(views.slide);
           if(name !== 'grid') pauseAll(views.grid);
           if(name !== 'player') pMedia.innerHTML = '';
@@ -1075,7 +1076,7 @@ function isMobile() { return window.innerWidth <= 768; }
         });
         function openMode(m){
           mode = m; sw.classList.toggle('slide', m === 'slide'); sw.classList.toggle('grid', m === 'grid');
-          if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); show('grid'); }
+          if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); buildDots(); show('grid'); }
         }
         sw.querySelectorAll('.mo-m-vs').forEach(function(b){ b.addEventListener('click', function(){ openMode(b.getAttribute('data-mode')); }); });
         back.addEventListener('click', function(){
@@ -1156,6 +1157,24 @@ function isMobile() { return window.innerWidth <= 768; }
             gridwrap.appendChild(card);
           });
         }
+        // dots rail (20 dots) tracking scroll position in grid
+        var dotsEl=$('moMDots');
+        var gridScroll=views.grid.querySelector('.mo-m-grid');
+        function buildDots(){
+          if(!dotsEl) return;
+          var v=list(); dotsEl.innerHTML='';
+          v.forEach(function(){ var d=document.createElement('i'); dotsEl.appendChild(d); });
+          updDots();
+        }
+        function updDots(){
+          if(!dotsEl||!gridScroll) return;
+          var dots=dotsEl.children; if(!dots.length) return;
+          var max=gridScroll.scrollHeight-gridScroll.clientHeight;
+          var ratio=max>0?gridScroll.scrollTop/max:0;
+          var active=Math.round(ratio*(dots.length-1));
+          for(var i=0;i<dots.length;i++) dots[i].classList.toggle('on', i===active);
+        }
+        if(gridScroll) gridScroll.addEventListener('scroll', updDots, {passive:true});
 
         // player
         var pMedia = $('moMPmedia'), pTitle = $('moMPtitle'), pDesc = $('moMPdesc'), pCopy = $('moMPcopy');
