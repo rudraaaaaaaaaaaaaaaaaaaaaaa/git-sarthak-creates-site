@@ -1482,7 +1482,7 @@
     .mo-m-layer.visible{ display:block; }
     .mo-m-view{ position:absolute; inset:0; display:none; pointer-events:none; }
     .mo-m-view.on{ display:block; pointer-events:auto; animation:moFade .3s ease both; }
-    .mo-m-folders{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; gap:26px; padding-top:24px; }
+    .mo-m-folders{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; }
     .mo-m-folder{ position:relative; width:300px; height:206px; cursor:pointer; }
     .mo-m-fcard{ position:absolute; border-radius:12px; background:var(--mo-glass); }
     .mo-m-fcard .mo-in{ position:absolute; inset:4px; border-radius:9px; border:.6px solid rgba(255,255,255,.14); background:#2a2a2a; overflow:hidden; }
@@ -1509,10 +1509,18 @@
     .mo-m-back{ position:absolute; left:14px; top:-2px; width:40px; height:28px; border-radius:14px; background:#000;
       border:1px solid rgba(168,168,168,.4); color:var(--mo-gold); cursor:pointer; z-index:10; display:none; align-items:center; justify-content:center; }
     .mo-m-slide{ position:absolute; inset:0; padding-top:44px; }
-    .mo-m-scard{ position:absolute; left:50%; top:56px; width:320px; height:200px; transform:translateX(-50%); border-radius:20px;
-      background:var(--mo-glass); cursor:pointer; }
-    .mo-m-scard .mo-media{ inset:7px; border-radius:14px; }
-    .mo-m-snav{ position:absolute; left:50%; transform:translateX(-50%); top:280px; display:flex; gap:12px; }
+    .mo-m-deck{ position:absolute; left:50%; top:70px; transform:translateX(-50%); width:340px; height:360px; }
+    .mo-m-dcard{ position:absolute; left:50%; transform:translateX(-50%); border-radius:18px; background:var(--mo-glass);
+      cursor:pointer; overflow:hidden;
+      transition:transform .55s cubic-bezier(0.34,1.56,0.64,1), width .55s cubic-bezier(0.34,1.56,0.64,1),
+        height .55s cubic-bezier(0.34,1.56,0.64,1), top .55s cubic-bezier(0.34,1.56,0.64,1), opacity .45s ease; }
+    .mo-m-dcard .mo-media{ inset:7px; border-radius:12px; }
+    .mo-m-dcard.d0{ top:64px; width:320px; height:200px; z-index:3; }
+    .mo-m-dcard.d1{ top:34px; width:296px; height:185px; z-index:2; }
+    .mo-m-dcard.d2{ top:8px;  width:272px; height:170px; z-index:1; }
+    .mo-m-dcard.dhide{ top:64px; width:320px; height:200px; opacity:0; pointer-events:none; z-index:0; }
+    .mo-m-dcard.dropping{ transform:translateX(-50%) translateY(360px) rotate(-6deg); opacity:0; z-index:5; }
+    .mo-m-snav{ position:absolute; left:50%; transform:translateX(-50%); top:440px; display:flex; gap:12px; z-index:6; }
     .mo-m-snav button{ width:40px; height:28px; border-radius:14px; background:#000; border:1px solid rgba(168,168,168,.4); color:var(--mo-gold); cursor:pointer; }
     .mo-m-grid{ position:absolute; inset:0; padding-top:44px; overflow-y:auto; scrollbar-width:none; }
     .mo-m-grid::-webkit-scrollbar{ display:none; }

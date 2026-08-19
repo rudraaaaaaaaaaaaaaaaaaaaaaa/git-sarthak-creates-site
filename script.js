@@ -1083,20 +1083,58 @@ function isMobile() { return window.innerWidth <= 768; }
           currentFolder = null; show('folders');
         });
 
-        // simple single-card slide (mobile): front plays, arrows change index
-        var scard = views.slide.querySelector('.mo-m-scard');
-        function renderSlide(){
-          var v = list(), media = scard.querySelector('.mo-media'), img = scard.querySelector('img.mo-thumb'), vid = scard.querySelector('video');
+        // fanned stacked deck (mobile), same feel as the product cards
+        var mDeckEl = $('moMDeck');
+        var mCards = mDeckEl ? [].slice.call(mDeckEl.querySelectorAll('.mo-m-dcard')) : [];
+        var MPOS = ['d0','d1','d2','dhide'];      // d0 = front
+        var MOFF = [0,1,2,3];
+        var mRoles = [];
+        var mAnim = false;
+        function mSetCard(card, item, instant){
+          var media=card.querySelector('.mo-media'), img=card.querySelector('img.mo-thumb'), vid=card.querySelector('video');
           media.classList.remove('playing');
-          if(!v.length){ img.removeAttribute('src'); vid.removeAttribute('src'); return; }
-          var item = v[mod(slideIndex, v.length)];
-          img.src = thumb(item.n);
-          if(vid.dataset.n !== String(item.n)){ vid.src = src(item.n); vid.dataset.n = item.n; }
-          vid.currentTime = 0; vid.play().then(function(){ media.classList.add('playing'); }).catch(function(){});
+          if(instant) card.style.transition='none';
+          if(!item){ img.removeAttribute('src'); vid.removeAttribute('src'); }
+          else { img.src=thumb(item.n); if(vid.dataset.n!==String(item.n)){ vid.src=src(item.n); vid.dataset.n=item.n; } }
+          if(instant){ void card.offsetWidth; card.style.transition=''; }
         }
-        $('moMNext').addEventListener('click', function(){ var v=list(); if(!v.length) return; slideIndex = mod(slideIndex+1, v.length); renderSlide(); });
-        $('moMPrev').addEventListener('click', function(){ var v=list(); if(!v.length) return; slideIndex = mod(slideIndex-1, v.length); renderSlide(); });
-        scard.addEventListener('click', function(){ var v=list(); if(!v.length) return; openPlayer(v[mod(slideIndex, v.length)]); });
+        function mItemAt(off){ var v=list(); return v.length? v[mod(slideIndex+off, v.length)] : null; }
+        function mApply(){ mRoles.forEach(function(card,i){ MPOS.forEach(function(c){ card.classList.remove(c); }); card.classList.add(MPOS[i]); }); }
+        function mPlayFront(){ if(!mRoles.length) return; var f=mRoles[0], vid=f.querySelector('video'), media=f.querySelector('.mo-media'); if(!vid.src) return; vid.currentTime=0; vid.play().then(function(){ media.classList.add('playing'); }).catch(function(){}); }
+        function mStop(card){ card.querySelector('video').pause(); card.querySelector('.mo-media').classList.remove('playing'); }
+        function renderSlide(){
+          if(!mCards.length) return;
+          mRoles = mCards.slice();
+          mRoles.forEach(function(card,i){ mSetCard(card, mItemAt(MOFF[i]), true); });
+          mApply(); mCards.forEach(mStop); mPlayFront();
+        }
+        function mNext(){
+          var v=list(); if(!v.length||mAnim) return; mAnim=true;
+          var front=mRoles[0]; mStop(front); front.classList.add('dropping');
+          setTimeout(function(){
+            slideIndex=mod(slideIndex+1, v.length);
+            front.classList.remove('dropping');
+            mRoles=[mRoles[1],mRoles[2],mRoles[3],front];
+            mSetCard(front, mItemAt(3), true);
+            mApply(); mPlayFront(); mAnim=false;
+          },420);
+        }
+        function mPrev(){
+          var v=list(); if(!v.length||mAnim) return; mAnim=true;
+          slideIndex=mod(slideIndex-1, v.length);
+          var back=mRoles[3]; mSetCard(back, mItemAt(0), true);
+          mRoles=[back,mRoles[0],mRoles[1],mRoles[2]];
+          mApply(); setTimeout(function(){ mPlayFront(); mAnim=false; },420);
+        }
+        $('moMNext').addEventListener('click', mNext);
+        $('moMPrev').addEventListener('click', mPrev);
+        mCards.forEach(function(card){
+          card.addEventListener('click', function(){
+            var i=mRoles.indexOf(card), v=list(); if(!v.length) return;
+            if(i===0){ openPlayer(v[mod(slideIndex, v.length)]); }
+            else if(i>0){ mNext(); }
+          });
+        });
 
         // grid
         var gridwrap = $('moMGridwrap');
