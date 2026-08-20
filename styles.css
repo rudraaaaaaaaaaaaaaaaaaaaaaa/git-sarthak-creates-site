@@ -1632,6 +1632,9 @@
 }
 .design-nav{ overflow:visible !important; }
 .dn-selector{ background:rgba(0,0,0,.10) !important; box-shadow:none !important; border-radius:0 !important; left:-100px !important; width:301px !important; }
+/* close the last sliver: pull the clip boundary to the drawn edge on the design tab */
+.folder-body:has(.design-nav.visible){ left:7px !important; padding-left:0 !important; }
+.folder-body:has(.design-nav.visible) .design-nav{ left:4px !important; }
 .dn-item{ color:#e8e6e2 !important; text-shadow:none; }
 .dn-item.active{ color:#2f2a22 !important; text-shadow:none; }
 .mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
