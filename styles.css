@@ -1375,6 +1375,12 @@
     .mo-fc2{ left:84.6px; top:0; width:455.1px; height:290.4px; border-radius:17.8px; z-index:2; }
     .mo-fc2 .mo-in{ inset:6.2px; border-radius:13.4px; }
     .mo-fc1{ left:20.3px; top:35.5px; width:375.9px; height:239.8px; z-index:3; border-radius:14.7px; transform:rotate(-11.67deg); }
+    .mo-folder-blur{ position:absolute; left:25.6px; top:111.2px; width:574.9px; height:310.5px; z-index:3;
+      -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+      -webkit-clip-path:path('M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z'); clip-path:path('M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z');
+      transform-origin:50% 100%; transition:transform .5s var(--mo-ease); pointer-events:none; }
+    .mo-folder:hover .mo-folder-blur{ transform:rotateX(-12deg) translateY(4px); }
+    .mo-folder.opening .mo-folder-blur{ transform:rotateX(-28deg) translateY(10px); }
     .mo-folder-front{ position:absolute; left:25.6px; top:111.2px; width:574.9px; height:310.5px; z-index:4;
       transform-origin:50% 100%; transition:transform .5s var(--mo-ease); }
     .mo-folder-label{ position:absolute; bottom:36px; z-index:5; font-family:'Manrope',sans-serif; font-weight:800; font-size:13.09px;
