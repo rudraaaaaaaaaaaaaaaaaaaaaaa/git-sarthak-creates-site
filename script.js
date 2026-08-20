@@ -1058,7 +1058,7 @@ function isMobile() { return window.innerWidth <= 768; }
         var layer = $('moMLayer'); if(!layer) return;
         var views = { folders:$('moMFolders'), slide:$('moMSlide'), grid:$('moMGrid'), player:$('moMPlayer') };
         var sw = $('moMSwitch'), back = $('moMBack');
-        var mode = 'slide', currentFolder = null, slideIndex = 0;
+        var mode = 'grid', currentFolder = null, slideIndex = 0;
 
         function list(){ return currentFolder === 'edits' ? EDITS_VIDEOS : MOTION_VIDEOS; }
         function pauseAll(root){ if(!root) return; root.querySelectorAll('video').forEach(function(v){ v.pause(); }); root.querySelectorAll('.mo-media.playing').forEach(function(m){ m.classList.remove('playing'); }); }
@@ -1067,6 +1067,7 @@ function isMobile() { return window.innerWidth <= 768; }
           sw.style.display = (name === 'slide' || name === 'grid') ? 'block' : 'none';
           back.style.display = (name === 'folders') ? 'none' : 'flex';
           if(dotsEl) dotsEl.classList.toggle('show', name === 'grid');
+          layer.classList.toggle('gridmode', name === 'grid');
           if(name !== 'slide') pauseAll(views.slide);
           if(name !== 'grid') pauseAll(views.grid);
           if(name !== 'player') pMedia.innerHTML = '';
@@ -1076,6 +1077,7 @@ function isMobile() { return window.innerWidth <= 768; }
         });
         function openMode(m){
           mode = m; sw.classList.toggle('slide', m === 'slide'); sw.classList.toggle('grid', m === 'grid');
+          layer.classList.toggle('gridmode', m === 'grid');
           if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); buildDots(); show('grid'); }
         }
         sw.querySelectorAll('.mo-m-vs').forEach(function(b){ b.addEventListener('click', function(){ openMode(b.getAttribute('data-mode')); }); });
@@ -1198,7 +1200,7 @@ function isMobile() { return window.innerWidth <= 768; }
           setTimeout(function(){ pCopy.textContent='COPY LINK'; }, 1600);
         });
 
-        function resetMotion(){ currentFolder = null; mode = 'slide'; slideIndex = 0; show('folders'); }
+        function resetMotion(){ currentFolder = null; mode = 'grid'; slideIndex = 0; show('folders'); }
 
         // Hook into existing mobile tab switching: show layer when mMotionC active.
         var mMotion = $('mMotionC');
