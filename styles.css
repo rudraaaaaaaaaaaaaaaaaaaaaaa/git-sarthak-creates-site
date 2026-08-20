@@ -1478,7 +1478,7 @@
     .mo-layer, .mo-layer *{ }
 
     /* ===================== MOBILE MOTION TAB (contained) ===================== */
-    .mo-m-layer{ position:absolute; left:0; right:0; top:110px; bottom:0; z-index:6; display:none; overflow:hidden; }
+    .mo-m-layer{ position:absolute; left:0; right:0; top:150px; bottom:14px; z-index:6; display:none; overflow:hidden; }
     .mo-m-layer.visible{ display:block; }
     .mo-m-view{ position:absolute; inset:0; display:none; pointer-events:none; }
     .mo-m-view.on{ display:block; pointer-events:auto; animation:moFade .3s ease both; }
@@ -1523,7 +1523,7 @@
     .mo-m-dcard.dropping{ transform:translateX(-50%) translateY(360px) rotate(-6deg); opacity:0; z-index:5; }
     .mo-m-snav{ position:absolute; left:50%; transform:translateX(-50%); top:440px; display:flex; gap:12px; z-index:6; }
     .mo-m-snav button{ width:40px; height:28px; border-radius:14px; background:#000; border:1px solid rgba(168,168,168,.4); color:var(--mo-gold); cursor:pointer; }
-    .mo-m-grid{ position:absolute; inset:0; padding-top:58px; overflow-y:auto; scrollbar-width:none; }
+    .mo-m-grid{ position:absolute; inset:0; padding-top:58px; padding-bottom:30px; overflow-y:auto; scrollbar-width:none; }
     .mo-m-grid::-webkit-scrollbar{ display:none; }
     .mo-m-gcard{ position:relative; width:320px; height:180px; margin:0 auto 18px; border-radius:16px; background:var(--mo-glass); cursor:pointer; }
     .mo-m-gcard .mo-media{ inset:5px; border-radius:12px; }
@@ -1543,11 +1543,5 @@
         /* grid layout: switch top-right, back top-left */
     .mo-m-layer.gridmode .mo-m-switch{ left:auto; right:12px; transform:none; }
     .mo-m-layer.gridmode .mo-m-back{ left:12px; }
-    /* header blur maker (mobile), mirrors desktop .work-blur */
-    .mo-m-headblur{ position:absolute; top:0; left:0; right:0; height:70px; z-index:9; pointer-events:none;
-      -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-      background:linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 40%,transparent 100%);
-      mask-image:linear-gradient(to bottom,#000 0%,#000 40%,transparent 100%); }
     /* ===================== END MOTION TAB ===================== */
 
