@@ -1629,15 +1629,14 @@
 
 /* V2: sidebars (APPROACH + design nav) light */
 .mc-approach, .design-nav{
-  background:rgba(214,207,194,.55) !important; /* closer to body tone */
-  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
-  border-radius:18px; box-shadow:0 4px 12px rgba(0,0,0,.12);
-  top:16px !important; bottom:16px !important; left:14px !important;
+  background:none !important; box-shadow:none !important; border-radius:0 !important;
+  border-right:1px solid rgba(255,255,255,.35) !important;
 }
-.dn-selector{ background:rgba(94,78,46,.18) !important; box-shadow:none !important; border-radius:10px; }
-.dn-item.active{ color:#2f2a22 !important; }
-.mc-approach-title{ color:#3a342a !important; }
-.mc-approach-list li{ color:#4a443a !important; }
+.dn-selector{ background:rgba(255,255,255,.14) !important; box-shadow:none !important; border-radius:10px; }
+.dn-item{ color:rgba(255,255,255,.55) !important; }
+.dn-item.active{ color:#ffffff !important; }
+.mc-approach-title{ color:#ffffff !important; }
+.mc-approach-list li{ color:rgba(255,255,255,.92) !important; }
 .dn-item{ color:#8a8378 !important; }
 .dn-item.active{ color:#2f2a22 !important; }
 #dnSel, .dn-sel{ background:rgba(94,78,46,.12) !important; }
