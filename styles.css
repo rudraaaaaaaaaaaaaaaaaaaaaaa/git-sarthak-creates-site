@@ -1629,10 +1629,13 @@
 
 /* V2: sidebars (APPROACH + design nav) light */
 .mc-approach, .design-nav{
-  background:rgba(250,247,240,.92) !important;
-  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-  border-radius:18px; box-shadow:0 4px 14px rgba(0,0,0,.15);
+  background:rgba(214,207,194,.55) !important; /* closer to body tone */
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-radius:18px; box-shadow:0 4px 12px rgba(0,0,0,.12);
+  top:16px !important; bottom:16px !important; left:14px !important;
 }
+.dn-selector{ background:rgba(94,78,46,.18) !important; box-shadow:none !important; border-radius:10px; }
+.dn-item.active{ color:#2f2a22 !important; }
 .mc-approach-title{ color:#3a342a !important; }
 .mc-approach-list li{ color:#4a443a !important; }
 .dn-item{ color:#8a8378 !important; }
@@ -1646,4 +1649,13 @@
 .mt-arrow{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; box-shadow:0 2px 8px rgba(0,0,0,.18) !important; }
 .mt-arrow:hover{ background:#fff !important; }
 .mt-arrow svg{ stroke:#3a3a3a !important; }
+
+/* V2: player side chevrons plain dark, bigger player */
+.mo-p-arrow{ background:none !important; border:none !important; box-shadow:none !important; width:40px !important; height:56px !important; }
+.mo-p-arrow svg{ stroke:#2f2a22 !important; width:24px !important; height:24px !important; stroke-width:2.6 !important; }
+.mo-p-arrow:hover{ background:none !important; transform:translateY(-50%) scale(1.15) !important; }
+.mo-p-arrow.prev{ left:-52px !important; } .mo-p-arrow.next{ right:-52px !important; }
+.mo-p-card{ width:1120px !important; height:630px !important; }
+.mo-p-meta{ width:1120px !important; }
+.mo-player-wrap{ padding-top:44px !important; }
 /* ===================== END WORK V2 THEME ===================== */
