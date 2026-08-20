@@ -1630,7 +1630,7 @@
   background:none !important; box-shadow:none !important; border-radius:0 !important;
   border-right:1px solid rgba(0,0,0,.18) !important;
 }
-.dn-selector{ background:rgba(0,0,0,.10) !important; box-shadow:none !important; border-radius:10px; }
+.dn-selector{ background:rgba(0,0,0,.10) !important; box-shadow:none !important; border-radius:0 !important; left:0 !important; width:201px !important; }
 .dn-item{ color:#e8e6e2 !important; text-shadow:none; }
 .dn-item.active{ color:#2f2a22 !important; text-shadow:none; }
 .mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
