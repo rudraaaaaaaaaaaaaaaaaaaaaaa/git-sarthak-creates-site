@@ -1613,8 +1613,6 @@
 .scrub-track{ background:rgba(0,0,0,0.15) !important; }
 .scrub-fill, .scrub-thumb{ background:#5E4E2E !important; box-shadow:0 0 8px rgba(0,0,0,0.2) !important; }
 /* V2: product APPROACH text white */
-.mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
-.mc-approach-list li{ color:#f2efe9 !important; }
 
 /* V2: product tab buttons light */
 .mc-btn, .mc-back{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important;
@@ -1637,8 +1635,6 @@
 .dn-item.active{ color:#2f2a22 !important; text-shadow:none; }
 .mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
 .mc-approach-list li{ color:#e8e6e2 !important; text-shadow:none; }
-.dn-item{ color:#8a8378 !important; }
-.dn-item.active{ color:#2f2a22 !important; }
 #dnSel, .dn-sel{ background:rgba(94,78,46,.12) !important; }
 /* V2: product carousel */
 .d-card-label{ color:#ffffff !important; text-shadow:0 1px 6px rgba(0,0,0,.35); }
