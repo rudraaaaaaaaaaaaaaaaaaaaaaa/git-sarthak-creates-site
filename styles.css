@@ -1626,4 +1626,24 @@
 .device-pill{ background:#FBF3E2 !important; border:none !important; }
 .device-toggle button svg{ stroke:#c9c7c3 !important; }
 .device-toggle button.active svg{ stroke:#B5A179 !important; }
+
+/* V2: sidebars (APPROACH + design nav) light */
+.mc-approach, .design-nav{
+  background:rgba(250,247,240,.92) !important;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-radius:18px; box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+.mc-approach-title{ color:#3a342a !important; }
+.mc-approach-list li{ color:#4a443a !important; }
+.dn-item{ color:#8a8378 !important; }
+.dn-item.active{ color:#2f2a22 !important; }
+#dnSel, .dn-sel{ background:rgba(94,78,46,.12) !important; }
+/* V2: product carousel */
+.d-card-label{ color:#ffffff !important; text-shadow:0 1px 6px rgba(0,0,0,.35); }
+.desktop-tile.center .d-card{ box-shadow:0 10px 40px rgba(0,0,0,.35), 0 0 0 1.4px rgba(255,255,255,.75); }
+.desktop-tile.left{ transform:translate(calc(-50% - 470px),-50%) scale(0.5) !important; }
+.desktop-tile.right{ transform:translate(calc(-50% + 470px),-50%) scale(0.5) !important; }
+.mt-arrow{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; box-shadow:0 2px 8px rgba(0,0,0,.18) !important; }
+.mt-arrow:hover{ background:#fff !important; }
+.mt-arrow svg{ stroke:#3a3a3a !important; }
 /* ===================== END WORK V2 THEME ===================== */
