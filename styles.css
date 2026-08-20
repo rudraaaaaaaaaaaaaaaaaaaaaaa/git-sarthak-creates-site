@@ -1613,7 +1613,7 @@
 .scrub-track{ background:rgba(0,0,0,0.15) !important; }
 .scrub-fill, .scrub-thumb{ background:#5E4E2E !important; box-shadow:0 0 8px rgba(0,0,0,0.2) !important; }
 /* V2: product APPROACH text white */
-.mc-approach-title{ color:#2f2a22 !important; text-shadow:0 0 8px rgba(255,255,255,.45); }
+.mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
 .mc-approach-list li{ color:#f2efe9 !important; }
 
 /* V2: product tab buttons light */
@@ -1633,10 +1633,10 @@
   border-right:1px solid rgba(0,0,0,.18) !important;
 }
 .dn-selector{ background:rgba(0,0,0,.10) !important; box-shadow:none !important; border-radius:10px; }
-.dn-item{ color:rgba(47,42,34,.5) !important; text-shadow:0 0 8px rgba(255,255,255,.4); }
-.dn-item.active{ color:#2f2a22 !important; text-shadow:0 0 8px rgba(255,255,255,.55); }
-.mc-approach-title{ color:#2f2a22 !important; text-shadow:0 0 8px rgba(255,255,255,.45); }
-.mc-approach-list li{ color:#332e26 !important; text-shadow:0 0 8px rgba(255,255,255,.4); }
+.dn-item{ color:#e8e6e2 !important; text-shadow:none; }
+.dn-item.active{ color:#2f2a22 !important; text-shadow:none; }
+.mc-approach-title{ color:#e8e6e2 !important; text-shadow:none; }
+.mc-approach-list li{ color:#e8e6e2 !important; text-shadow:none; }
 .dn-item{ color:#8a8378 !important; }
 .dn-item.active{ color:#2f2a22 !important; }
 #dnSel, .dn-sel{ background:rgba(94,78,46,.12) !important; }
