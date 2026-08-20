@@ -520,7 +520,13 @@
     }
     body.m-show-work .nav-toggle-pill{transform:translateX(64px);}
     body.m-show-work{background:radial-gradient(ellipse 120% 70% at 55% 12%, #ffffff 0%, #ffffff 38%, #fff0d9 68%, #ffcd84 115%);}
-    body.m-show-work .mobile-blur{display:block;}
+    body.m-show-work .mobile-blur{
+      display:block; top:-40px; height:130px;
+      backdrop-filter:blur(38px) saturate(1.2); -webkit-backdrop-filter:blur(38px) saturate(1.2);
+      background:linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%);
+      mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+      -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+    }
     body.m-show-work .mobile-logo-text{color:#000;}
     body.m-show-work .mobile-logo img{filter:none;}
     .nt-item{position:absolute;transition:opacity .3s ease .1s;}
