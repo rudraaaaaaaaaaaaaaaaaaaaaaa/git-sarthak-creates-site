@@ -1563,3 +1563,67 @@
     .mo-m-play svg{ width:11px; height:12px; fill:#fff; margin-left:1px; }
     /* ===================== END MOTION TAB ===================== */
 
+    /* ===================== WORK V2 THEME ===================== */
+/* recolor the prod container SVGs to the V2 greige palette */
+.folder-svg linearGradient[id^="paint0"] stop:nth-child(1){ stop-color:#F5F2ED; stop-opacity:1; }
+.folder-svg linearGradient[id^="paint0"] stop:nth-child(2){ stop-color:#574933; stop-opacity:1; }
+.folder-svg linearGradient[id^="paint1"] stop:nth-child(1){ stop-color:#ffffff; }
+.folder-svg linearGradient[id^="paint1"] stop:nth-child(2){ stop-color:#FFF2D5; }
+/* inactive tabs: light, slightly dimmed instead of near-black */
+.folder-svg{ filter:grayscale(.5) brightness(.9) !important; }
+.folder-svg.active{ filter:none !important; }
+/* tab label text */
+.folder-svg g[id$="TextClick"] path{ fill:#595959 !important; }
+.folder-svg.active g[id$="TextClick"] path{ fill:#000 !important; }
+/* motion folder: olive-brown front */
+#moFoldg stop:nth-child(1), #moFoldg2 stop:nth-child(1){ stop-color:rgba(255,255,255,.55); }
+#moFoldg stop:nth-child(2), #moFoldg2 stop:nth-child(2){ stop-color:#83714E; stop-opacity:.85; }
+#moFoldg stop:nth-child(3), #moFoldg2 stop:nth-child(3){ stop-color:#5E4E2E; stop-opacity:.97; }
+#moFoldg stop:nth-child(4), #moFoldg2 stop:nth-child(4){ stop-color:#4A3E28; stop-opacity:1; }
+/* fan cards: white inner, gold-olive glass outer */
+.mo-fcard{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,1) 0%, rgba(59,54,41,.27) 72%) !important; }
+.mo-fcard .mo-in{ background:#ffffff !important; }
+.mo-folder-label{ color:#ffffff !important; }
+/* deck/grid media chrome on light body */
+.mo-deck-card, .mo-g-card{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,.9) 0%, rgba(59,54,41,.25) 72%) !important; }
+.mo-media{ background:#e8e5df !important; border-color:rgba(255,255,255,.5) !important; }
+/* player text on taupe body */
+.mo-p-title{ color:#fff !important; } .mo-p-desc{ color:#f0ede8 !important; } .mo-p-note{ color:#d8d3ca !important; }
+
+/* V2 light controls */
+.mo-back, .mo-sl-nav button{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important;
+  color:#3a3a3a !important; box-shadow:0 2px 8px rgba(0,0,0,.18) !important; }
+.mo-back:hover, .mo-sl-nav button:hover{ background:#ffffff !important; }
+.mo-p-arrow{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; }
+.mo-p-arrow svg{ stroke:#3a3a3a !important; }
+.mo-p-arrow:hover{ background:#ffffff !important; }
+.mo-vswitch{ background:rgba(255,255,255,.35) !important; }
+.mo-vswitch .mo-pill{ background:radial-gradient(120% 160% at 30% 20%, #ffffff 0%, #e2ddd3 70%) !important; border:1px solid rgba(0,0,0,.08) !important; }
+.mo-icon-grid i, .mo-icon-slide i{ background:#8a8378 !important; }
+.mo-vswitch.grid .mo-icon-grid i, .mo-vswitch.slide .mo-icon-slide i{ background:#2f2a22 !important; }
+.mo-p-copy{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; color:#3a3a3a !important; }
+.mo-p-copy:hover{ background:#fff !important; }
+
+/* V2: view switch per reference — gray track, cream active pill, tan icons */
+.mo-vswitch{ background:#8f8d89 !important; }
+.mo-vswitch .mo-pill{ background:#FBF3E2 !important; border:none !important; }
+.mo-icon-grid i, .mo-icon-slide i{ background:#c9c7c3 !important; }
+.mo-vswitch.grid .mo-icon-grid i, .mo-vswitch.slide .mo-icon-slide i{ background:#B5A179 !important; }
+/* V2: design scrubber visible on light body */
+.scrub-track{ background:rgba(0,0,0,0.15) !important; }
+.scrub-fill, .scrub-thumb{ background:#5E4E2E !important; box-shadow:0 0 8px rgba(0,0,0,0.2) !important; }
+/* V2: product APPROACH text white */
+.mc-approach-title{ color:#ffffff !important; }
+.mc-approach-list li{ color:#f2efe9 !important; }
+
+/* V2: product tab buttons light */
+.mc-btn, .mc-back{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important;
+  color:#3a3a3a !important; box-shadow:0 2px 8px rgba(0,0,0,.18) !important; }
+.mc-btn:hover, .mc-back:hover{ background:#ffffff !important; }
+.mc-btn svg, .mc-back svg{ stroke:#3a3a3a !important; }
+/* V2: device toggle same colors as motion switch */
+.device-toggle{ background:#8f8d89 !important; }
+.device-pill{ background:#FBF3E2 !important; border:none !important; }
+.device-toggle button svg{ stroke:#c9c7c3 !important; }
+.device-toggle button.active svg{ stroke:#B5A179 !important; }
+/* ===================== END WORK V2 THEME ===================== */
