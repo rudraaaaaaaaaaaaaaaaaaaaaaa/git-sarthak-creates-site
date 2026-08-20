@@ -1550,5 +1550,10 @@
         /* grid layout: switch top-right, back top-left */
     .mo-m-layer.gridmode .mo-m-switch{ left:auto; right:12px; transform:none; }
     .mo-m-layer.gridmode .mo-m-back{ left:12px; }
+        .mo-m-play{ position:absolute; left:10px; bottom:10px; width:30px; height:30px; border-radius:50%;
+      background:rgba(255,255,255,0.12); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,0.35); display:flex; align-items:center; justify-content:center;
+      z-index:4; pointer-events:none; }
+    .mo-m-play svg{ width:11px; height:12px; fill:#fff; margin-left:1px; }
     /* ===================== END MOTION TAB ===================== */
 

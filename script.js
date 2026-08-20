@@ -1078,7 +1078,7 @@ function isMobile() { return window.innerWidth <= 768; }
         function openMode(m){
           mode = m; sw.classList.toggle('slide', m === 'slide'); sw.classList.toggle('grid', m === 'grid');
           layer.classList.toggle('gridmode', m === 'grid');
-          if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); buildDots(); show('grid'); }
+          if(m === 'slide'){ renderSlide(); show('slide'); } else { renderGrid(); buildDots(); show('grid'); setTimeout(updGridPlay,60); }
         }
         sw.querySelectorAll('.mo-m-vs').forEach(function(b){ b.addEventListener('click', function(){ openMode(b.getAttribute('data-mode')); }); });
         back.addEventListener('click', function(){
@@ -1141,8 +1141,9 @@ function isMobile() { return window.innerWidth <= 768; }
 
         // grid
         var gridwrap = $('moMGridwrap');
+        var mGridCards=[];
         function renderGrid(){
-          gridwrap.innerHTML = '';
+          gridwrap.innerHTML = ''; mGridCards=[];
           var v = list(), items = v.length ? v : [null,null,null,null];
           items.forEach(function(item){
             var card = document.createElement('div'); card.className = 'mo-m-gcard mo-gstroke' + (item?'':' empty');
@@ -1151,12 +1152,32 @@ function isMobile() { return window.innerWidth <= 768; }
               var img = document.createElement('img'); img.className='mo-thumb'; img.src = thumb(item.n);
               var vd = document.createElement('video'); vd.muted=true; vd.loop=true; vd.playsInline=true; vd.preload='none';
               media.appendChild(vd); media.appendChild(img);
-              card.addEventListener('click', function(){
-                if(!vd.src){ vd.src = src(item.n); vd.play().then(function(){ media.classList.add('playing'); setTimeout(function(){ openPlayer(item); }, 120); }).catch(function(){ openPlayer(item); }); }
-                else openPlayer(item);
-              });
+              var badge=document.createElement('button'); badge.className='mo-m-play';
+              badge.innerHTML='<svg viewBox="0 0 12 14"><polygon points="1,1 11,7 1,13"/></svg>';
+              media.appendChild(badge);
+              card.addEventListener('click', function(){ openPlayer(item); });
+              mGridCards.push({card:card, media:media, vid:vd, item:item});
             }
             gridwrap.appendChild(card);
+          });
+        }
+        // autoplay the card nearest the viewport centre, pause the rest
+        function updGridPlay(){
+          if(!gridScroll || !mGridCards.length) return;
+          var mid = gridScroll.scrollTop + gridScroll.clientHeight/2;
+          var best=null, bestD=1e9;
+          mGridCards.forEach(function(c){
+            var cy = c.card.offsetTop + c.card.offsetHeight/2;
+            var d = Math.abs(cy - mid);
+            if(d<bestD){ bestD=d; best=c; }
+          });
+          mGridCards.forEach(function(c){
+            if(c===best){
+              if(!c.vid.src) c.vid.src = src(c.item.n);
+              c.vid.play().then(function(){ c.media.classList.add('playing'); }).catch(function(){});
+            } else {
+              c.vid.pause(); c.media.classList.remove('playing');
+            }
           });
         }
         // dots rail (20 dots) tracking scroll position in grid
@@ -1176,7 +1197,7 @@ function isMobile() { return window.innerWidth <= 768; }
           var active=Math.round(ratio*(dots.length-1));
           for(var i=0;i<dots.length;i++) dots[i].classList.toggle('on', i===active);
         }
-        if(gridScroll) gridScroll.addEventListener('scroll', updDots, {passive:true});
+        if(gridScroll){ gridScroll.addEventListener('scroll', updDots, {passive:true}); gridScroll.addEventListener('scroll', updGridPlay, {passive:true}); }
 
         // player
         var pMedia = $('moMPmedia'), pTitle = $('moMPtitle'), pDesc = $('moMPdesc'), pCopy = $('moMPcopy');
