@@ -297,7 +297,7 @@
       border-radius:35px; overflow:hidden; box-shadow:0 20px 44px rgba(0,0,0,0.09);
     }
     .work-bg { position:absolute; top:0; left:0.01px; width:1212px; height:319px; }
-    .work-bg img { width:1242.2px; height:349.2px; }
+    .work-bg img { width:1212px; height:319px; }
     .work-content {
       position:relative; display:flex; gap:141px; align-items:center;
       height:168px; padding:0 7px; width:1113.541px; z-index:1;
