@@ -45,14 +45,86 @@
 
   <div class="about-page"><div class="page-wrapper">
     <div class="hero-container">
-      <div class="hero-bg-layer" id="heroBg">
-        <img src="assets/fx/fx-herobg.png" alt="">
-      </div>
+      <div class="back-ribbon rib-wrap windA" id="heroRibBack"><svg width="100%" height="100%" viewBox="-20 -60 1768 570" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#grain_bk)">
+<path stroke="url(#grad_bk)" stroke-width="46">
+  <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+    keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+    values="M-89.5 357.156C-0.833336 416.156 219.879 488.511 415 332.156C641.5 150.656 691 40.656 924.5 40.656C1172.4 40.656 1313.5 217.656 1506.5 176.156C1660.9 142.956 1745.17 52.3226 1768 11.1559;M-85.52 369.99C11.19 437.61 223.41 518.33 401.24 351.06C643.53 143.98 698.45 28.36 932.62 11.34C1158.48 19.27 1306.87 210.84 1519.15 191.65C1670.09 170.47 1745.29 82.24 1765.45 41.15;M-84.10 375.95C-3.36 428.60 210.30 480.55 421.05 310.57C648.21 129.08 693.62 21.57 913.62 41.01C1179.16 60.93 1324.08 241.66 1502.97 193.35C1649.92 147.28 1737.20 48.60 1761.62 5.28;M-89.5 357.156C-0.833336 416.156 219.879 488.511 415 332.156C641.5 150.656 691 40.656 924.5 40.656C1172.4 40.656 1313.5 217.656 1506.5 176.156C1660.9 142.956 1745.17 52.3226 1768 11.1559"/>
+</path>
+</g>
+<defs>
+<filter id="grain_bk" x="-5%" y="-10%" width="110%" height="125%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.8333 0.8333" stitchTiles="stitch" numOctaves="3" result="noise" seed="3988"/>
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+<feFlood flood-color="rgba(255,255,255,0.25)" result="color1Flood"/>
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+<feMerge><feMergeNode in="shape"/><feMergeNode in="color1"/></feMerge>
+</filter>
+<linearGradient id="grad_bk" x1="-24.5" y1="458.656" x2="1768" y2="218.755" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F89620">
+  <animate attributeName="stop-color" values="#F89620;#FFC93C;#E0631A;#F89620" dur="8.1s" repeatCount="indefinite"/>
+</stop>
+<stop offset="0.52" stop-color="#FFCD84">
+  <animate attributeName="offset" values="0.52;0.25;0.78;0.52" dur="10.3s" repeatCount="indefinite"/>
+</stop>
+<stop offset="1" stop-color="#F7931A">
+  <animate attributeName="stop-color" values="#F7931A;#D65A00;#FFB13C;#F7931A" dur="9.5s" repeatCount="indefinite"/>
+</stop>
+<animateTransform attributeName="gradientTransform" type="translate" values="0 0;420 -60;0 0" dur="11.7s" repeatCount="indefinite"/>
+</linearGradient>
+</defs>
+</svg></div>
       <div class="hero-fg-layer" id="heroFg">
-        <img src="assets/fx/fx-herofg.png" alt="">
+        <img src="assets/fx/fx-hero-character.png" alt="">
       </div>
+      <div class="hero-bg-layer" id="heroBg">
+        <img src="assets/fx/fx-hero-city.png" alt="">
+      </div>
+      <div class="front-ribbon rib-wrap windC" id="heroRibFront"><svg width="100%" height="100%" viewBox="-20 -60 1241 567" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#grain_fr)">
+<path stroke="url(#grad_fr)" stroke-width="46">
+  <animate attributeName="d" dur="11s" repeatCount="indefinite" calcMode="spline"
+    keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+    values="M15.7803 354.218C78.3124 413.189 233.969 485.51 371.578 329.229C531.317 147.816 566.227 37.8681 730.903 37.8681C905.731 37.8681 1005.24 214.784 1141.36 173.304C1250.25 140.119 1309.68 49.5292 1325.78 8.38214;M28.68 377.01C92.20 440.10 235.87 515.10 359.65 351.87C521.47 154.26 559.68 40.17 741.84 21.38C915.54 9.12 1004.41 184.96 1128.30 149.48C1238.29 126.21 1302.66 42.27 1320.46 3.01;M11.79 365.27C69.72 418.62 225.10 476.29 373.96 309.78C542.32 123.82 576.79 14.15 729.86 21.34C894.73 36.42 997.80 222.74 1145.65 191.84C1260.89 163.36 1320.35 73.53 1336.00 32.35;M15.7803 354.218C78.3124 413.189 233.969 485.51 371.578 329.229C531.317 147.816 566.227 37.8681 730.903 37.8681C905.731 37.8681 1005.24 214.784 1141.36 173.304C1250.25 140.119 1309.68 49.5292 1325.78 8.38214"/>
+</path>
+</g>
+<defs>
+<filter id="grain_fr" x="-5%" y="-10%" width="110%" height="125%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.8333 0.8333" stitchTiles="stitch" numOctaves="3" result="noise" seed="3988"/>
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+<feFlood flood-color="rgba(255,255,255,0.25)" result="color1Flood"/>
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+<feMerge><feMergeNode in="shape"/><feMergeNode in="color1"/></feMerge>
+</filter>
+<linearGradient id="grad_fr" x1="61.6" y1="455.7" x2="1337" y2="335.2" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F89620">
+  <animate attributeName="stop-color" values="#F89620;#FFC93C;#E0631A;#F89620" dur="9.9s" repeatCount="indefinite"/>
+</stop>
+<stop offset="0.52" stop-color="#FFCD84">
+  <animate attributeName="offset" values="0.52;0.25;0.78;0.52" dur="12.6s" repeatCount="indefinite"/>
+</stop>
+<stop offset="1" stop-color="#F7931A">
+  <animate attributeName="stop-color" values="#F7931A;#D65A00;#FFB13C;#F7931A" dur="11.6s" repeatCount="indefinite"/>
+</stop>
+<animateTransform attributeName="gradientTransform" type="translate" values="0 0;-360 50;0 0" dur="14.3s" repeatCount="indefinite"/>
+</linearGradient>
+</defs>
+</svg></div>
       <div class="hero-text" id="heroText">
-        <div class="hero-intro"><span class="intro-word" style="animation-delay:2.4s">HI</span><br><span class="intro-word" style="animation-delay:2.55s">I'M </span><span class="intro-word" style="animation-delay:2.65s">SARTHAK</span><br><span class="intro-word" style="animation-delay:2.8s">AND </span><span class="intro-word" style="animation-delay:2.9s">I</span></div>
+        <div class="hero-intro"><span class="intro-word" style="animation-delay:2.4s">HI </span><span class="intro-word" style="animation-delay:2.55s">I&rsquo;M </span><span class="intro-word" style="animation-delay:2.65s">SARTHAK </span><span class="intro-word" style="animation-delay:2.8s">AND </span><span class="intro-word" style="animation-delay:2.9s">I</span></div>
         <div class="hero-heading"><span class="hero-word" style="animation-delay:2.9s">turn </span><span class="hero-word" style="animation-delay:3.0s">complexity </span><span class="hero-word" style="animation-delay:3.1s">into </span><span class="hero-word" style="animation-delay:3.2s">beautiful </span><span class="hero-word" style="animation-delay:3.3s">digital </span><span class="hero-word" style="animation-delay:3.4s">experience.</span></div>
         <div class="hero-stats">
           <div class="stat-left">AS ONE<br>MAN<br>STUDIO</div>
@@ -78,7 +150,23 @@
 
           <!-- Experience -->
           <div class="experience-section">
-            <div class="experience-bg"><img src="assets/fx/fx-experience-bg.png" alt=""></div>
+            <div class="experience-bg"><svg class="shape" viewBox="0 0 1242.21 614.2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="expGrad" x1="622.1" y1="14.1" x2="622.1" y2="715.56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#F09612"/>
+    </linearGradient>
+    <filter id="expGrain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 .55  0 0 0 0 .55  0 0 0 0 .55  .34 .34 .34 0 -.5"/>
+    </filter>
+    <path id="expPath" d="M16.1001 36.1C16.1001 23.9498 25.9498 14.1 38.1001 14.1L1206.11 14.1C1218.26 14.1 1228.11 23.9497 1228.11 36.1L1228.11 576.1C1228.11 588.25 1218.26 598.1 1206.11 598.1L236.739 598.1C217.202 598.1 205.481 572.45 212.595 554.254C218.275 539.726 221.395 523.923 221.395 507.395C221.395 435.987 163.163 378.1 91.7553 378.1C78.7826 378.1 66.2448 380.01 54.4119 383.566C37.2455 388.723 16.1001 377.464 16.1001 359.54L16.1001 36.1Z"/>
+    <mask id="expOuter"><rect width="100%" height="100%" fill="#fff"/><use href="#expPath" fill="#000"/></mask>
+    <clipPath id="expClip"><use href="#expPath"/></clipPath>
+  </defs>
+  <use href="#expPath" fill="url(#expGrad)"/>
+  <rect width="100%" height="100%" clip-path="url(#expClip)" filter="url(#expGrain)" opacity=".22"/>
+  <use href="#expPath" fill="none" stroke="#fff" stroke-opacity=".19" stroke-width="22" mask="url(#expOuter)"/>
+</svg></div>
             <div class="experience-content">
               <div class="experience-title">
                 <div class="section-label">My Experiences</div>
@@ -132,18 +220,28 @@
 
           <!-- Work Section -->
           <div class="work-section">
-            <div class="work-bg"><img src="assets/fx/fx-work-bg.png" alt=""></div>
+            <div class="work-cards"><div class="wcard-w wc-product"><div class="wcard"><p class="lbl">PRODUCT</p><div class="shp" style="left:10.37px;top:1.42px;width:136px;height:136px"><svg viewBox="0 0 136 136" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M59.555 127.397L65.3556 76.7941L43.8062 122.945C43.1384 124.375 41.3127 124.808 40.0747 123.83L19.9106 107.915C18.6725 106.937 18.6695 105.061 19.9048 104.08L59.7884 72.3996L11.9165 89.7955C10.4339 90.3342 8.83663 89.3493 8.65217 87.7826L5.64827 62.2706C5.46379 60.7039 6.78866 59.375 8.35583 59.5549L58.959 65.3556L12.8079 43.8055C11.3785 43.1383 10.9456 41.3127 11.9227 40.074L27.8387 19.9105C28.8159 18.6725 30.6922 18.6695 31.6737 19.9048L63.3533 59.7884L45.9577 11.9165C45.4187 10.4339 46.4041 8.83658 47.9702 8.65218L73.4824 5.64826C75.049 5.4638 76.378 6.78866 76.1983 8.35579L70.3974 58.959L91.9473 12.8079C92.6147 11.3785 94.4406 10.9455 95.6788 11.9228L115.843 27.8387C117.081 28.8159 117.084 30.6921 115.848 31.6737L75.9651 63.3532L123.837 45.9577C125.319 45.4187 126.917 46.4035 127.101 47.9702L130.105 73.4823C130.289 75.0489 128.964 76.3779 127.397 76.1982L76.7942 70.3974L122.945 91.9472C124.375 92.6146 124.808 94.4405 123.83 95.6787L107.915 115.842C106.937 117.081 105.061 117.084 104.08 115.848L72.3997 75.9646L89.7955 123.837C90.3343 125.319 89.3494 126.917 87.7828 127.101L62.2706 130.105C60.7039 130.289 59.375 128.964 59.555 127.397ZM67.0594 60.9362C63.2264 61.3875 60.4849 64.8607 60.9362 68.6938C61.3875 72.5267 64.8607 75.2681 68.6938 74.8167C72.5267 74.3654 75.2681 70.8923 74.8168 67.0594C74.3655 63.2264 70.8923 60.4849 67.0594 60.9362Z" fill="url(#sgP)"/><defs><radialGradient id="sgP" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(69.8054 65.9563) rotate(-143.783) scale(68.8993)"><stop offset="0.379808" stop-color="#FFA524"/><stop offset="1" stop-color="#FFF0DB"/></radialGradient></defs></svg></div><div class="glass" style="left:2.07px;top:3.44px;width:152.23px;height:131.96px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="wcard-w wc-design"><div class="wcard"><p class="lbl">DESIGN</p><div class="shp" style="left:21.33px;top:15.33px;width:104px;height:104px"><svg viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M26.3714 0H0.371431V26C0.371431 39.2402 10.2682 50.169 23.0677 51.7921C10.0888 53.249 2.19453e-06 64.2606 1.1365e-06 77.6287L0 103.629H26C39.2402 103.629 50.169 93.7316 51.7921 80.9323C53.249 93.9115 64.2606 104 77.6287 104H103.629V78C103.629 64.7598 93.7316 53.8309 80.9323 52.208C93.9115 50.7512 104 39.7394 104 26.3714V0.371429L78 0.371428C64.7598 0.371427 53.8309 10.2682 52.208 23.0677C50.7512 10.0888 39.7394 0 26.3714 0Z" fill="url(#sgD)"/><defs><radialGradient id="sgD" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45.89 50.31) rotate(47.6282) scale(116.89)"><stop stop-color="#FF9900"/><stop offset="0.567631" stop-color="#FFFAF6"/></radialGradient></defs></svg></div><div class="glass" style="left:2px;top:3.33px;width:147.33px;height:127.71px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="wcard-w wc-motion"><div class="wcard"><p class="lbl">MOTION</p><div class="shp" style="left:13.41px;top:4.69px;width:126px;height:126px"><svg viewBox="0 0 126 126" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.44124 0L48.1864 3.14708L45.0393 41.8922L6.29416 38.7452L9.44124 0ZM83.7842 45.0393L45.0393 41.8922L41.8923 80.6372L3.1471 77.4901L0 116.235L38.7452 119.383L41.8923 80.6372L80.6372 83.7842L77.4901 122.53L116.235 125.677L119.383 86.9313L80.6372 83.7842L83.7842 45.0393ZM83.7842 45.0393L122.53 48.1864L125.677 9.44124L86.9313 6.29414L83.7842 45.0393Z" fill="url(#sgM)"/><defs><radialGradient id="sgM" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(56.1629 60.3948) rotate(53.6542) scale(92.1893)"><stop stop-color="#FFA524"/><stop offset="1" stop-color="#FFF5F1"/></radialGradient></defs></svg></div><div class="glass" style="left:2.01px;top:3.35px;width:148.12px;height:128.4px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="wcard-w wc-merch"><div class="wcard"><p class="lbl">MERCH</p><div class="shp" style="left:8.1px;top:-0.89px;width:140px;height:140px"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M72.5281 61.3982C71.2026 64.954 66.4978 65.6913 64.148 62.7115L31.4487 21.2442C29.1445 18.3222 30.8398 14.0003 34.5161 13.4242L85.6618 5.40914C89.3386 4.83294 92.2743 8.42908 90.9744 11.9159L72.5281 61.3982ZM62.7114 74.8634C65.6912 72.5137 64.9539 67.8088 61.3982 66.4833L11.9158 48.0367C8.42899 46.7369 4.83291 49.6729 5.40904 53.3493L13.4241 104.495C14.0003 108.172 18.3221 109.867 21.2441 107.562L62.7114 74.8634ZM74.8633 76.3002C72.5136 73.3199 67.8089 74.0578 66.4833 77.6134L48.0368 127.096C46.7369 130.583 49.673 134.178 53.3493 133.602L104.495 125.587C108.172 125.011 109.867 120.689 107.562 117.767L74.8633 76.3002ZM76.3001 64.1481C73.3198 66.4979 74.0571 71.2027 77.6133 72.5281L127.096 90.9744C130.583 92.2743 134.178 89.3387 133.602 85.6618L125.587 34.5162C125.011 30.8399 120.689 29.1446 117.767 31.4488L76.3001 64.1481Z" fill="url(#sgR)"/><defs><radialGradient id="sgR" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(69.5057 69.5057) rotate(81.0936) scale(60.8224 60.8224)"><stop stop-color="#FFAB33"/><stop offset="1" stop-color="#FFDBB0"/></radialGradient></defs></svg></div><div class="glass" style="left:2.07px;top:3.46px;width:152.75px;height:132.41px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+            <div class="work-bg"><svg class="shape" viewBox="0 0 1242.2 349.2" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wkGrad" x1="622.1" y1="449.56" x2="622.1" y2="-50.06" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#F09612"/>
+          </linearGradient>
+          <path id="wkPath" d="M16.1001 311.1C16.1001 323.25 25.9498 333.1 38.1001 333.1L1206.1 333.1C1218.25 333.1 1228.1 323.25 1228.1 311.1L1228.1 36.1C1228.1 23.9498 1218.25 14.1 1206.1 14.1L148.508 14.1C145.216 14.1 141.98 14.8675 138.957 16.1709C123.652 22.7714 106.789 26.429 89.0933 26.429C70.8454 26.429 53.4827 22.5396 37.8013 15.5444C35.7329 14.6218 33.5029 14.1 31.2382 14.1C22.8777 14.1 16.1001 20.8775 16.1001 29.238L16.1001 311.1Z"/>
+          <mask id="wkOuter"><rect width="100%" height="100%" fill="#fff"/><use href="#wkPath" fill="#000"/></mask>
+          <clipPath id="wkClip"><use href="#wkPath"/></clipPath>
+        </defs>
+        <use href="#wkPath" fill="url(#wkGrad)"/>
+        <rect width="100%" height="100%" clip-path="url(#wkClip)" filter="url(#expGrain)" opacity=".22"/>
+        <use href="#wkPath" fill="none" stroke="#fff" stroke-opacity=".19" stroke-width="22" mask="url(#wkOuter)"/>
+      </svg></div>
             <div class="work-content">
               <div class="work-title">
                 <div class="section-label">WORK</div>
                 <div class="section-heading">Explore what I<br>have crafted*</div>
                 <div class="so-far">*So far</div>
-              </div>
-              <div class="work-buttons">
-                <button class="work-btn">PRODUCT</button>
-                <button class="work-btn">MOTION</button>
-                <button class="work-btn">DESIGN</button>
-                <button class="work-btn">MERCH</button>
               </div>
             </div>
           </div>
