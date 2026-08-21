@@ -1073,7 +1073,14 @@ function isMobile() { return window.innerWidth <= 768; }
           if(name !== 'player') pMedia.innerHTML = '';
         }
         layer.querySelectorAll('#moMFolders .mo-m-folder').forEach(function(f){
-          f.addEventListener('click', function(){ currentFolder = f.getAttribute('data-folder'); slideIndex = 0; openMode(mode); });
+          f.addEventListener('click', function(){
+            if(f.classList.contains('opening')) return;
+            f.classList.add('opening');
+            setTimeout(function(){
+              f.classList.remove('opening');
+              currentFolder = f.getAttribute('data-folder'); slideIndex = 0; openMode(mode);
+            }, 380);
+          });
         });
         function openMode(m){
           mode = m; sw.classList.toggle('slide', m === 'slide'); sw.classList.toggle('grid', m === 'grid');

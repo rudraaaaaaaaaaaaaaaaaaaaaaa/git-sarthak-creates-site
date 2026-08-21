@@ -1658,3 +1658,70 @@
 .mo-p-meta{ width:1120px !important; }
 .mo-player-wrap{ padding-top:44px !important; }
 /* ===================== END WORK V2 THEME ===================== */
+
+    /* ===================== MOBILE WORK V2 THEME ===================== */
+/* mobile motion folder front: same coffee gradient as desktop */
+#moMFoldg stop:nth-child(1){ stop-color:rgba(255,255,255,.55); }
+#moMFoldg stop:nth-child(2){ stop-color:#83714E; stop-opacity:.85; }
+#moMFoldg stop:nth-child(3){ stop-color:#5E4E2E; stop-opacity:.97; }
+#moMFoldg stop:nth-child(4){ stop-color:#4A3E28; stop-opacity:1; }
+.mo-m-fcard{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,1) 0%, rgba(59,54,41,.27) 72%) !important; }
+.mo-m-fcard .mo-in{ background:#ffffff !important; }
+.mo-m-label{ color:#ffffff !important; }
+/* mobile motion controls light */
+.mo-m-back, .mo-m-snav button{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; color:#3a3a3a !important; box-shadow:0 2px 8px rgba(0,0,0,.18) !important; }
+.mo-m-back svg{ stroke:#3a3a3a !important; }
+.mo-m-switch{ background:#8f8d89 !important; }
+.mo-m-switch .mo-pill{ background:#FBF3E2 !important; }
+.mo-m-igrid i, .mo-m-islide i{ background:#c9c7c3 !important; }
+.mo-m-switch.grid .mo-m-igrid i, .mo-m-switch.slide .mo-m-islide i{ background:#B5A179 !important; }
+.mo-m-dots i{ background:rgba(0,0,0,.22) !important; }
+.mo-m-dots i.on{ background:#4A3E28 !important; }
+.mo-m-play{ background:rgba(255,255,255,.35) !important; border:1px solid rgba(255,255,255,.6) !important; }
+.mo-m-play svg{ fill:#3a3a3a !important; }
+.mo-m-deck .mo-m-dcard, .mo-m-gcard{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,.9) 0%, rgba(59,54,41,.25) 72%) !important; }
+.mo-m-pcard{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,.9) 0%, rgba(59,54,41,.25) 72%) !important; }
+.mo-m-ptitle{ color:#2f2a22 !important; }
+.mo-m-pdesc{ color:#4a443a !important; }
+.mo-m-pcopy{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; color:#3a3a3a !important; }
+/* mobile product deck + design + catalog chrome on light */
+.mobile-view .m-card{ background:radial-gradient(130% 170% at 6% -18%, rgba(129,114,49,.9) 0%, rgba(59,54,41,.25) 72%) !important; }
+.mobile-view .m-card-label, .mobile-view .m-card-title{ color:#ffffff !important; }
+.m-mc-back, .m-mc-btn{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; }
+.m-mc-back svg, .m-mc-btn svg{ stroke:#3a3a3a !important; }
+.m-dn-item{ color:#e8e6e2 !important; }
+.m-dn-item.active{ color:#2f2a22 !important; }
+
+/* inactive mobile tabs light like desktop */
+.m-folder-svg{ filter:grayscale(.5) brightness(.9) !important; }
+.m-folder-svg.active{ filter:none !important; }
+/* mobile DESIGN filter bar light */
+.m-design-nav{ background:#8f8d89 !important; border:1px solid rgba(255,255,255,.35) !important; }
+.m-dn-sel{ background:#FBF3E2 !important; box-shadow:0 2px 8px rgba(0,0,0,.15) !important; }
+.m-dn-item{ color:#e8e6e2 !important; }
+.m-dn-item.active{ color:#2f2a22 !important; }
+/* mobile catalogue page light (was black) */
+.m-catalog{ background:linear-gradient(133deg,#F2F0EC 0%,#8d8172 55%,#4E4130 100%) !important; }
+.m-mc-title{ color:#2f2a22 !important; }
+.m-mc-back, .m-mc-btn, .m-mc-info{ background:rgba(255,255,255,.85) !important; border:1px solid rgba(255,255,255,.9) !important; color:#3a3a3a !important; }
+.m-mc-back svg, .m-mc-btn svg{ stroke:#3a3a3a !important; }
+.m-coming-soon{ color:#4a443a !important; }
+.mo-m-fblur{ position:absolute; left:12px; top:54px; width:575px; height:310.5px; z-index:3; pointer-events:none;
+  transform:scale(0.4887,0.4895); transform-origin:top left;
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  -webkit-clip-path:path('M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z'); clip-path:path('M 30 0 H 268 Q 282 0 288 12 L 312 52 Q 318 64 332 64 H 545 Q 575 64 575 94 V 280.5 Q 575 310.5 545 310.5 H 30 Q 0 310.5 0 280.5 V 30 Q 0 0 30 0 Z'); }
+/* mobile folder recolor via same stops */
+#moMFoldg stop:nth-child(1){ stop-color:rgba(255,255,255,.5) !important; }
+#moMFoldg stop:nth-child(2){ stop-color:#96835F !important; stop-opacity:.68; }
+#moMFoldg stop:nth-child(3){ stop-color:#6F5D3B !important; stop-opacity:.92; }
+#moMFoldg stop:nth-child(4){ stop-color:#5C4E33 !important; stop-opacity:1; }
+.mo-m-folder.opening{ perspective:800px; }
+.mo-m-fcard, .mo-m-front, .mo-m-fblur{ transition:transform .5s cubic-bezier(.34,1.08,.42,1); }
+.mo-m-front{ transform-origin:50% 100%; }
+.mo-m-folder.opening .mo-m-fc1{ transform:translate(-20px,-45px) rotate(-18deg); }
+.mo-m-folder.opening .mo-m-fc2{ transform:translateY(-55px) scale(1.04); }
+.mo-m-folder.opening .mo-m-fc3{ transform:translate(21px,-42px) rotate(12deg); }
+.mo-m-folder.opening .mo-m-front{ transform:rotateX(-28deg) translateY(5px); }
+.mo-m-folder.opening .mo-m-fblur{ transform:scale(0.4887,0.4895) translateY(10px); opacity:.6; }
+/* ===================== END MOBILE WORK V2 THEME ===================== */
+
