@@ -133,6 +133,11 @@
     .rib-wrap{will-change:transform}
     @keyframes windA{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-4px) rotate(.2deg)}100%{transform:translateY(3px) rotate(-.25deg)}}
     @keyframes windC{0%{transform:translateY(2px) rotate(-.2deg)}50%{transform:translateY(-5px) rotate(.18deg)}100%{transform:translateY(0) rotate(0deg)}}
+    /* ribbons draw themselves in (trim-path), after the loader */
+    .back-ribbon use, .front-ribbon use { stroke-dasharray:1; stroke-dashoffset:1; animation:ribDraw 2.4s cubic-bezier(.65,0,.25,1) forwards; }
+    .back-ribbon use { animation-delay:2.7s; }
+    .front-ribbon use { animation-delay:3.1s; }
+    @keyframes ribDraw { to { stroke-dashoffset:0; } }
     .windA{animation:windA 9s ease-in-out infinite alternate}
     .windC{animation:windC 11s ease-in-out infinite alternate}
 
@@ -249,7 +254,7 @@
 
     /* Ball Element */
     .ball-element {
-      position:absolute; top:365px; left:-45px;
+      position:absolute; top:363px; left:-45px;
       width:237px; height:237px; z-index:6;
     }
     .ball-element img {
