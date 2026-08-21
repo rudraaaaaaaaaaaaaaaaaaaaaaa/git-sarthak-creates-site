@@ -123,10 +123,10 @@
     .hero-bg-layer img { display:block; width:100%; height:100%; object-fit:cover; filter:blur(3.05px); }
 
     .hero-fg-layer {
-      position:absolute; top:334px; left:422.38px; width:972.5px; height:831px;
+      position:absolute; top:514px; left:-8px; width:1952px; height:1668px;
       z-index:1; will-change:transform; pointer-events:none;
     }
-    .hero-fg-layer img { display:block; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
+    .hero-fg-layer img { display:block; width:100%; height:100%; object-fit:cover; }
 
     .back-ribbon{position:absolute;left:-111px;top:472.6px;width:1900.5px;height:525.9px;z-index:0;pointer-events:none}
     .front-ribbon{position:absolute;left:521.2px;top:833.3px;width:1353.6px;height:526.4px;z-index:3;pointer-events:none}
