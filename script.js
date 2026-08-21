@@ -111,6 +111,9 @@ function isMobile() { return window.innerWidth <= 768; }
           killIntroAnimations();
           document.body.classList.add('show-work');
           resetToProduct();
+          var tab=btn.getAttribute('data-tab');
+          var target=tab&&document.getElementById(tab+'Container');
+          if(target&&tab!=='product'&&window.__activateContainer){ window.__activateContainer(target,true); }
           window.scrollTo(0,0);
         });
       });
@@ -845,7 +848,7 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
       hook('motionTextClick','motion'); hook('merchTextClick','merch');
       var pill=document.querySelector('.desktop-view .navigation');
       if(pill)pill.addEventListener('click',function(){ setTimeout(function(){ window.__setRoute(document.body.classList.contains('show-work')?'product':'about'); },0); });
-      document.querySelectorAll('.work-btn, .wcard-w').forEach(function(b){ b.addEventListener('click',function(){ window.__setRoute('product'); }); });
+      document.querySelectorAll('.work-btn, .wcard-w').forEach(function(b){ b.addEventListener('click',function(){ window.__setRoute(b.getAttribute('data-tab')||'product'); }); });
     })();
 
     /* ===================== MOTION TAB (contained) ===================== */

@@ -249,7 +249,7 @@
 
     /* Ball Element */
     .ball-element {
-      position:absolute; top:508px; right:1286px;
+      position:absolute; top:372px; left:-37px;
       width:237px; height:237px; z-index:6;
     }
     .ball-element img {
@@ -347,7 +347,7 @@
     .tech-stack-desc { font-family:'Inter',sans-serif; font-weight:400; font-size:16px; color:rgba(255,255,255,0.5); line-height:22.84px; width:290.571px; }
     .tech-stack-icons { display:flex; gap:26.646px; flex:1; position:relative; }
     .tech-icon-box { width:76.132px; height:76.132px; background:rgba(0,0,0,0.14); border:1.269px solid rgba(255,255,255,0.2); border-radius:10.151px; display:flex; align-items:center; justify-content:center; padding:12.689px; flex-shrink:0; }
-    .tech-icon-box img { display:block; object-fit:contain; }
+    .tech-icon-box img { display:block; max-width:none; max-height:none; }
     .tech-icon-plain { width:76.132px; height:76.132px; flex-shrink:0; position:relative; }
     .tech-icon-plain img { position:absolute; inset:0; width:100%; height:100%; }
 
