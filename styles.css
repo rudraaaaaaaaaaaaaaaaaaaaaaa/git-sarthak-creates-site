@@ -23,6 +23,8 @@
       --gradient-green: linear-gradient(122deg, #c6fca6 0%, rgba(167,252,238,0.74) 100%);
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    * { -webkit-tap-highlight-color:transparent; }
+    button, a, [role=button] { touch-action:manipulation; }
     html { scroll-behavior: auto; }
     body { background:#fff; overflow-x:hidden; font-family:'Inter',sans-serif; }
 
