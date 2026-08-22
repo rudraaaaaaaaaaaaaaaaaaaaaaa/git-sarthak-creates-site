@@ -1177,6 +1177,9 @@
       overflow:hidden; border-radius:20px; cursor:grab; user-select:none; -webkit-user-select:none;
     }
     .brand-marquee.visible { display:block; }
+    .merch-marquee { position:absolute; left:40px; right:40px; top:10px; bottom:10px; z-index:4; display:none; overflow:hidden; border-radius:20px; cursor:grab; user-select:none; -webkit-user-select:none; }
+    .merch-marquee.visible { display:block; }
+    .merch-marquee.holding { cursor:grabbing; }
     .brand-marquee.holding { cursor:grabbing; }
     .brand-track { position:absolute; top:0; left:0; right:0; will-change:transform; }
     .brand-track img { display:block; width:100%; height:auto; pointer-events:none; }

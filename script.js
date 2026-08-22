@@ -219,7 +219,10 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
         // Show marquee body for design AND product tabs
         var isDesign = target === designContainer;
         var isProduct = target === productContainer;
-        folderBody.classList.toggle('visible', isDesign || isProduct);
+        var isMerch = target === merchContainer;
+        folderBody.classList.toggle('visible', isDesign || isProduct || isMerch);
+        var mm = document.getElementById('merchMarquee');
+        if (mm) { mm.classList.toggle('visible', isMerch); if (isMerch && window.__merchReset) window.__merchReset(); }
         var dm = document.getElementById('designMarquee');
         var ps = document.getElementById('productShell');
         var dtg = document.getElementById('deviceToggle');
@@ -233,7 +236,7 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
         // Force reflow then add bounce
         void target.offsetWidth;
         target.classList.add('bounce');
-        if (target === designContainer || target === productContainer) {
+        if (target === designContainer || target === productContainer || target === merchContainer) {
           folderBody.classList.remove('bounce');
           void folderBody.offsetWidth;
           folderBody.classList.add('bounce');
@@ -409,7 +412,9 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
       (function initTabs(){
         var isD = designContainer.classList.contains('active');
         var isP = productContainer.classList.contains('active');
-        folderBody.classList.toggle('visible', isD || isP);
+        var isM = merchContainer.classList.contains('active');
+        folderBody.classList.toggle('visible', isD || isP || isM);
+        var mm0 = document.getElementById('merchMarquee'); if (mm0) mm0.classList.toggle('visible', isM);
         var dm = document.getElementById('designMarquee');
         var ps = document.getElementById('productShell');
         var dtg = document.getElementById('deviceToggle');
@@ -506,6 +511,22 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
       }
       window.addEventListener('pointerup',function(){ bPaused=false; if(brand)brand.classList.remove('holding'); });
 
+      /* MERCH catalogue: same drag + wheel scroll */
+      (function(){
+        var mq=document.getElementById('merchMarquee'),mt=document.getElementById('merchTrack'),mi=document.getElementById('merchImg');
+        if(!mq||!mt||!mi)return;
+        var mpos=0,mmax=0,mhold=false,mdrag=0;
+        function mMeasure(){ if(mi.complete&&mi.naturalHeight){ mmax=Math.max(0,mi.offsetHeight-mq.clientHeight); if(mpos>mmax)mpos=mmax; mRender(); } }
+        function mRender(){ mt.style.transform='translateY('+(-Math.round(mpos*10)/10)+'px)'; }
+        function mClamp(){ if(mpos<0)mpos=0; else if(mpos>mmax)mpos=mmax; }
+        mi.addEventListener('load',mMeasure); window.addEventListener('resize',mMeasure);
+        mq.addEventListener('pointerdown',function(e){ mhold=true; mq.classList.add('holding'); mdrag=e.clientY; });
+        mq.addEventListener('pointermove',function(e){ if(!mhold)return; var dy=e.clientY-mdrag; mdrag=e.clientY; mpos-=dy; mClamp(); mRender(); });
+        mq.addEventListener('wheel',function(e){ e.preventDefault(); mpos+=e.deltaY; mClamp(); mRender(); },{passive:false});
+        window.addEventListener('pointerup',function(){ mhold=false; mq.classList.remove('holding'); });
+        window.__merchReset=function(){ mpos=0; setTimeout(mMeasure,50); setTimeout(function(){mMeasure();mRender();},400); };
+      })();
+
       /* called by activateContainer on DESIGN tab enter/leave */
       window.__designNav=function(isDesign){
         if(nav)nav.classList.toggle('visible',isDesign);
@@ -558,6 +579,10 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
           }
         }
         if(mTog)mTog.classList.toggle('visible',onProduct);
+        var mv=document.getElementById('mMerchView');
+        if(mv){ var onM=(mTab==='merch'),wasM=mv.classList.contains('active'); mv.classList.toggle('active',onM);
+          if(onM&&!wasM){ mv.scrollTop=0; mv.classList.remove('bounce');void mv.offsetWidth;mv.classList.add('bounce');
+            mv.addEventListener('animationend',function hm(){mv.classList.remove('bounce');mv.removeEventListener('animationend',hm);}); } }
         var deckOn=onProduct;
         var mArts={ftv1:['assets/fx/fx-m-card-teaser-3.png','assets/fx/fx-asset-4.png'],
                    ftv2:['assets/fx/fx-m-card-teaser.png','assets/fx/fx-asset-3.png'],
@@ -606,6 +631,7 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
         if(mDeck)mDeck.classList.remove('active','bounce');
         if(mDesignView)mDesignView.classList.remove('active','bounce');
         var mbv=document.getElementById('mBrandView');if(mbv)mbv.classList.remove('active','bounce');
+        var mmv=document.getElementById('mMerchView');if(mmv)mmv.classList.remove('active','bounce');
         activateM(tab||'product');
       };
       window.__closeMobileWork=function(){
