@@ -182,7 +182,7 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
       function animateBall(now){var dt=(now-lastBallTime)/1000;lastBallTime=now;ballBoost*=0.96;if(Math.abs(ballBoost)<0.1)ballBoost=0;ballAngle+=(ballBaseSpeed+ballBoost)*dt;if(ballImg)ballImg.style.transform='rotate('+ballAngle+'deg)';requestAnimationFrame(animateBall);}
       requestAnimationFrame(animateBall);
       var mHeroBg=document.getElementById('mHeroBg'),mHeroFg=document.getElementById('mHeroFg'),mInfo=document.getElementById('mInfo');var ticking=false,lastScrollY=0;
-      function updateParallax(){var scrollY=window.scrollY;var sd=scrollY-lastScrollY;ballBoost=Math.abs(sd)*18;if(mHeroBg)mHeroBg.style.transform='translateY('+(scrollY*-0.1)+'px)';if(mHeroFg)mHeroFg.style.transform='translateY('+(scrollY*-0.3)+'px)';if(mInfo)mInfo.style.transform='translateY('+(scrollY*-0.2)+'px)';lastScrollY=scrollY;ticking=false;}
+      function updateParallax(){var scrollY=window.scrollY;var sd=scrollY-lastScrollY;ballBoost=Math.abs(sd)*18;if(mHeroBg)mHeroBg.style.transform='translateY('+(scrollY*-0.1)+'px)';if(mHeroFg)mHeroFg.style.transform='translateY('+(scrollY*-0.3)+'px)';var mrb=document.getElementById('mRibBack'),mrf=document.getElementById('mRibFront');if(mrb)mrb.style.transform='translateY('+(scrollY*-0.15)+'px)';if(mrf)mrf.style.transform='translateY('+(scrollY*-0.35)+'px)';if(mInfo)mInfo.style.transform='translateY('+(scrollY*-0.2)+'px)';lastScrollY=scrollY;ticking=false;}
       window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(updateParallax);ticking=true;}},{passive:true});
       /* Size the page so it ends just below the footer AFTER the -0.2x parallax shift:
          solve H = infoBottom + 15 - 0.2*(H - vh)  ->  H = (infoBottom + 15 + 0.2*vh) / 1.2 */
@@ -619,10 +619,10 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
         b.addEventListener('click',function(){activateM(b.getAttribute('data-mtab'));});
       });
       /* Work box buttons: glow lights (CSS :active), then open work page on that tab */
-      var order=['motion','merch','product','design'];
-      document.querySelectorAll('.mobile-work-btn').forEach(function(btn,i){
+      document.querySelectorAll('.mwc-w').forEach(function(btn){
         btn.addEventListener('click',function(){
-          setTimeout(function(){window.__openMobileWork(order[i]);},180);
+          var tab=btn.getAttribute('data-tab');
+          setTimeout(function(){window.__openMobileWork(tab);},180);
         });
       });
       /* Header WORK toggle switches between about and work */
