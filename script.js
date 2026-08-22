@@ -614,6 +614,7 @@ document.querySelectorAll('.wcard-w').forEach(w=>{
         document.body.classList.remove('m-show-work');
         if(mWrap)mWrap.style.display='';
         window.scrollTo(0,0);
+        ['mHeroBg','mHeroFg','mInfo','mRibBack','mRibFront'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.transform='';});
       };
       document.querySelectorAll('.m-tab-label').forEach(function(b){
         b.addEventListener('click',function(){activateM(b.getAttribute('data-mtab'));});
